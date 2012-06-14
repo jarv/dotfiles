@@ -144,8 +144,7 @@ prompt_cmd() {
     fi
 
     history -a  # Save last user cmd to bash_history
-
-    command -v git &>/dev/null || { 
+    command -v git &>/dev/null && {
         GIT=${_RED}$(git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/')
     }
 
