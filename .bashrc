@@ -93,6 +93,11 @@ case `uname -n` in
         MC="\[${_RED}\]" # MC is "my" color.  For logname and hostname
         DC="\[${_BLU}\]" # DC is default color.  For everything else
         ;;
+    lisa)
+        PAREN_COLOR="\[${_BBLU}\]"
+        MC="\[${_BYEL}\]"
+        DC="\[${_BCYN}\]" 
+        ;;
     maggie)
         PAREN_COLOR="\[${_GRN}\]"
         MC="\[${_BGRN}\]"
@@ -101,7 +106,7 @@ case `uname -n` in
     terminus)
         PAREN_COLOR="\[${_BLU}\]"
         MC="\[${_CYN}\]"
-        DC="\[${_BBLU}\]"
+        DC="\[${_BLU}\]"
         ;;
     *)
         PAREN_COLOR="\[${_WHT}\]"
