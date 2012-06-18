@@ -141,6 +141,11 @@ case $TERM in
     *)         TITLE_WINDOW='' ;;
 esac
 
+for script in $HOME/.bashrc.d/*; do
+    echo "processing $script"
+    source $script
+done
+
 # Some things need to be computed.
 prompt_cmd() {
     # Compute RETVAL
@@ -152,18 +157,10 @@ prompt_cmd() {
     fi
 
     history -a  # Save last user cmd to bash_history
-    command -v git &>/dev/null && {
-        GIT=${_RED}$(git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/')
-    }
-
-    PS1="${TITLE_WINDOW}${PS1HOST}${PS1RETVAL}${GIT}${PS1DIR}${PS1END}"
+    PS1="${TITLE_WINDOW}${PS1HOST}${PS1RETVAL}$(__git_ps1)${PS1DIR}${PS1END}"
 }
 
 PROMPT_COMMAND=prompt_cmd
 PS1="${TITLE_WINDOW}${PS1HOST}${PS1RETVAL}${PS1DATE}${PS1TIME}${PS1TTY}${PS1DIR}${PS1END}"
 
 export PATH PS1 EDITOR VISUAL PAGER LESS FCEDIT SEPATH MANPATH TERM GREP_OPTIONS RI HISTFILESIZE HISTFILE HISTIGNORE
-
-for script in "$HOME/.bashrc.d/*"; do
-    . $script
-done
