@@ -142,7 +142,6 @@ case $TERM in
 esac
 
 for script in $HOME/.bashrc.d/*; do
-    echo "processing $script"
     source $script
 done
 
