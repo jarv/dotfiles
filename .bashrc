@@ -14,7 +14,6 @@ join_dirs()
 }
 
 PATHDIRS=(
-    $HOME/bin
     /usr/local/bin
     /usr/local/sbin
 )
