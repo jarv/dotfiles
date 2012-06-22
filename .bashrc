@@ -42,7 +42,7 @@ FIGNORE=.o:~
 
 LESS="-f-R-P?f[%f]:[STDIN].?m(file %i of %m)?x[Next\: %x]. .?lb [line %lb?L/%L]..?e(END) :?pB [%pB\%]..%t"
 RI='--format ansi'
-GREP_OPTIONS='--color=auto'
+GREP_OPTIONS='--color=auto --exclude-dir=.git'
 
 # Source the completion file, if it exists
 if [ -f /etc/bash_completion ]; then 
