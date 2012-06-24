@@ -11,7 +11,7 @@ abspath () {
 }
 
 DIR=$(dirname $0)
-DOTLINKS=$(find $DIR -maxdepth 1 -name ".*" -type f | grep -v "swp")
+DOTLINKS=$(find $DIR -maxdepth 1 -name ".*" -type f | egrep -v "swp|~")
 DOTDIRS=$(find $DIR -maxdepth 1 -name ".*.d" -type d)
 LINKS="$DOTLINKS $DOTDIRS"
 for file in $LINKS; do
