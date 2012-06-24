@@ -6,6 +6,7 @@ set smarttab
 set laststatus=2
 set statusline=%F%m%r%h%w\ ~%Y~%=%4l,%2v\ [%L]
 set tags=~/.TAGS
+set nobackup
 nmap ,p :w\|!python %
 nmap ,t :!(find ~/src  -type f \( -name '*.py' -o -name "*.c" -o -name "*.cpp" -o -name "*.h" -o -name "*.js" -o -name "*.pl" -o -name "*.pm" -o -name "*.html" -o -name "*.css" -o -name "*.htm" -o -name "*.php" -o -name "*.py" \) -exec ctags -o ~/.TAGS -a {} \;)&
 nmap ,q  :tabdo q!<cr>
