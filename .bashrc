@@ -140,7 +140,7 @@ case $TERM in
     *)         TITLE_WINDOW='' ;;
 esac
 
-for script in $HOME/.bashrc.d/*; do
+for script in $HOME/.bashrc.d/*.bash; do
     source $script
 done
 
