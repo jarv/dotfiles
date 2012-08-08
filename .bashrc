@@ -100,14 +100,9 @@ case `uname -n` in
         MC="\[${_BYEL}\]"
         DC="\[${_BCYN}\]" 
         ;;
-    maggie)
+    maggie|terminus)
         PAREN_COLOR="\[${_GRN}\]"
         MC="\[${_BGRN}\]"
-        DC="\[${_BLU}\]"
-        ;;
-    terminus)
-        PAREN_COLOR="\[${_BLU}\]"
-        MC="\[${_CYN}\]"
         DC="\[${_BLU}\]"
         ;;
     *)
@@ -162,3 +157,5 @@ PROMPT_COMMAND=prompt_cmd
 PS1="${TITLE_WINDOW}${PS1HOST}${PS1RETVAL}${PS1DATE}${PS1TIME}${PS1TTY}${PS1DIR}${PS1END}"
 
 export PATH PS1 EDITOR VISUAL PAGER LESS FCEDIT SEPATH MANPATH TERM GREP_OPTIONS RI HISTFILESIZE HISTFILE HISTIGNORE
+
+PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
