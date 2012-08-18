@@ -27,3 +27,5 @@ let ruby_fold=1               " Ruby
 let sh_fold_enabled=1         " sh
 let vimsyn_folding='af'       " Vim script
 let xml_syntax_folding=1      " XML
+
+autocmd FileType html setlocal shiftwidth=2 tabstop=2
