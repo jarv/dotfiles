@@ -11,11 +11,12 @@ abspath () {
 }
 
 DIR=$(dirname $0)
-DOTLINKS=$(find $DIR -maxdepth 1 -name ".*" -type f | egrep -v "swp|~")
-DOTDIRS=$(find $DIR -maxdepth 1 -name ".*.d" -type d)
+DOTLINKS=$(find $DIR -maxdepth 1 -name "dotfile.*" -type f | grep -v "swp")
+DOTDIRS=$(find $DIR -maxdepth 1 -name "dotfile.*.d" -type d)
 LINKS="$DOTLINKS $DOTDIRS"
 for file in $LINKS; do
-    link="$HOME/$(basename $file)"
+    link="$HOME/$(echo $(basename $file) | sed s/dotfile//)"
+    echo $link
     if [[ -L "$link" ]];then
         echo "skipping $file"
     else
@@ -23,7 +24,7 @@ for file in $LINKS; do
             echo "backing up ${link}"
             mv $link{,.bak}
         fi
-        ln -s $(abspath $file) $link
         echo "creating symlink $link"
+        ln -s $(abspath $file) $link
     fi
 done
