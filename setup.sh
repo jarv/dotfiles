@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 abspath () { 
     case "$1" in 
@@ -9,12 +9,9 @@ abspath () {
             printf "%s\n" "$PWD/$1"
             ;; esac; 
 }
-
 DIR=$(dirname $0)
-DOTLINKS=$(find $DIR -maxdepth 1 -name "dotfile.*" -type f | grep -v "swp")
-DOTDIRS=$(find $DIR -maxdepth 1 -name "dotfile.*.d" -type d)
-LINKS="$DOTLINKS $DOTDIRS"
-for file in $LINKS; do
+DOTLINKS=$(find $DIR -maxdepth 1 -name "dotfile.*")
+for file in $DOTLINKS; do
     link="$HOME/$(echo $(basename $file) | sed s/dotfile//)"
     echo $link
     if [[ -r "$link" ]];then
@@ -24,3 +21,4 @@ for file in $LINKS; do
     echo "creating symlink $link"
     ln -s $(abspath $file) $link
 done
+bash -c "cd $DIR && git submodule update --init"
