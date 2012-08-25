@@ -14,7 +14,10 @@ DOTLINKS=$(find $DIR -maxdepth 1 -name "dotfile.*")
 for file in $DOTLINKS; do
     link="$HOME/$(echo $(basename $file) | sed s/dotfile//)"
     echo $link
-    if [[ -r "$link" ]];then
+    if [[ -L "$link" ]]; then
+        echo "removing $link"
+        rm -f "$link"
+    elif [[ -r "$link" ]];then
         echo "backing up ${link}"
         mv $link{,.bak}
     fi
