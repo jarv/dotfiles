@@ -17,14 +17,10 @@ LINKS="$DOTLINKS $DOTDIRS"
 for file in $LINKS; do
     link="$HOME/$(echo $(basename $file) | sed s/dotfile//)"
     echo $link
-    if [[ -L "$link" ]];then
-        echo "skipping $file"
-    else
-        if [[ -r "$link" ]];then
-            echo "backing up ${link}"
-            mv $link{,.bak}
-        fi
-        echo "creating symlink $link"
-        ln -s $(abspath $file) $link
+    if [[ -r "$link" ]];then
+        echo "backing up ${link}"
+        mv $link{,.bak}
     fi
+    echo "creating symlink $link"
+    ln -s $(abspath $file) $link
 done

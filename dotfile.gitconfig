@@ -5,3 +5,5 @@
     email = jrjarvis@mitx.mit.edu
 [diff]
     external = /home/jarv/.gitdiff_wrapper
+[core]
+	excludesfile = ~/.cvsignore

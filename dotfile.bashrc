@@ -23,6 +23,7 @@ unset PATHDIRS
 
 case `uname -s` in
     [Ll]inux)
+        TERM="xterm-256color"
         ;;
     Darwin)
         ;;

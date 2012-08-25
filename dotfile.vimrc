@@ -1,14 +1,36 @@
+call pathogen#infect()
 syntax on
-filetype indent on
+filetype plugin indent on
+
+" Powerline configuration https://github.com/Lokaltog/vim-powerline
+
+set nocompatible   " Disable vi-compatibility
+set laststatus=2   " Always show the statusline
+set encoding=utf-8 " Necessary to show Unicode glyphs
+let g:Powerline_symbols = 'fancy'
+
+" Syntastic configuration
+
+let g:syntastic_stl_format = '[%E{Err: %fe #%e}%B{, }%W{Warn: %fw #%w}]'
+let g:syntastic_mode_map = { 'mode': 'active',
+                            \ 'passive_filetypes': ['puppet', 'python'] }
+nmap ,s :SyntasticCheck<cr>
+nmap ,t :SyntasticToggleMode<cr>
+nmap ,e :Errors<cr>
+
+" Ctrlp configuration
+nmap \b :CtrlPBuffer<cr>
+nmap \f :CtrlPBuffer<cr>
+nmap \h :help ctrlp.txt<cr>
+
+
 set et
 set sw=4
 set smarttab
-set laststatus=2
-set statusline=%F%m%r%h%w\ ~%Y~%=%4l,%2v\ [%L]
 set tags=~/.TAGS
 set nobackup
+
 nmap ,p :w\|!python %
-nmap ,t :!(find ~/src  -type f \( -name '*.py' -o -name "*.c" -o -name "*.cpp" -o -name "*.h" -o -name "*.js" -o -name "*.pl" -o -name "*.pm" -o -name "*.html" -o -name "*.css" -o -name "*.htm" -o -name "*.php" -o -name "*.py" \) -exec ctags -o ~/.TAGS -a {} \;)&
 nmap ,q  :tabdo q!<cr>
 nmap ,wq :tabdo wq<cr>
 nmap ,p  :set paste<cr>
