@@ -1,0 +1,12 @@
+[submodule "dotfile.vim/bundle/ctrlp.vim"]
+	path = dotfile.vim/bundle/ctrlp.vim
+	url = git://github.com/kien/ctrlp.vim.git
+[submodule "dotfile.vim/bundle/syntastic"]
+	path = dotfile.vim/bundle/syntastic
+	url = git://github.com/scrooloose/syntastic
+[submodule "dotfile.vim/bundle/vim-fugitive"]
+	path = dotfile.vim/bundle/vim-fugitive
+	url = git://github.com/tpope/vim-fugitive
+[submodule "dotfile.vim/bundle/vim-powerline"]
+	path = dotfile.vim/bundle/vim-powerline
+	url = git://github.com/Lokaltog/vim-powerline
