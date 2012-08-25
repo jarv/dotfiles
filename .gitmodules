@@ -10,3 +10,6 @@
 [submodule "dotfile.vim/bundle/vim-powerline"]
 	path = dotfile.vim/bundle/vim-powerline
 	url = git://github.com/Lokaltog/vim-powerline
+[submodule "dotfile.fonts/ubuntu-mono-powerline"]
+	path = dotfile.fonts/ubuntu-mono-powerline
+	url = git://github.com/scotu/ubuntu-mono-powerline
