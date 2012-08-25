@@ -6,4 +6,4 @@
 [diff]
     external = /home/jarv/.gitdiff_wrapper
 [core]
-	excludesfile = ~/.cvsignore
+    excludesfile = ~/.cvsignore
