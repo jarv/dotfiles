@@ -2,8 +2,6 @@
 
 umask 022
 
-
-
 join_dirs()
 {
     for STRING in $*; do
@@ -90,6 +88,9 @@ _BCYN="\033[1;36m"
 _BWHT="\033[1;37m"
 
 
+PROJ_COLOR="\[${_RED}\]"
+GIT_COLOR="\[${_BBLK}\]"
+
 case `uname -n` in
     krusty)
         PAREN_COLOR="\[${_BWHT}\]"
@@ -101,11 +102,13 @@ case `uname -n` in
         MC="\[${_BYEL}\]"
         DC="\[${_BCYN}\]" 
         ;;
+
     maggie|terminus)
-        PAREN_COLOR="\[${_GRN}\]"
-        MC="\[${_BGRN}\]"
-        DC="\[${_BLU}\]"
+        PAREN_COLOR="\[${_BLU}\]"
+        MC="\[${_BCYN}\]"
+        DC="\[${_CYN}\]"
         ;;
+
     *)
         PAREN_COLOR="\[${_WHT}\]"
         MC="\[${_BCYN}\]"
@@ -117,6 +120,16 @@ esac
 OP="${PAREN_COLOR}("
 # CP is Close Paren
 CP="${PAREN_COLOR})"
+# OB is Open Bracket
+OB="${PAREN_COLOR}["
+# CB is Close Bracket
+CB="${PAREN_COLOR}]"
+# RA is Right angle
+RA="${PAREN_COLOR}>"
+# LA is Left angle
+LA="${PAREN_COLOR}<"
+
+
 
 # Root Overrides
 if [ `id | cut -b5` = 0 ]; then
@@ -130,18 +143,13 @@ PS1TTY="${OP}${DC}$(tty)${CP}"
 PS1DIR="${OP}${DC}\w${CP}"
 PS1RETVAL="${OP}${DC}\${?}${CP}"
 PS1END="\[$_NORM\]\r\n\[$_WHT\]\\$ "
-
-case $TERM in
-    [Ex]term*) TITLE_WINDOW="\[\033]0;\h :: \w\007\]" ;;
-    *)         TITLE_WINDOW='' ;;
-esac
-
 for script in $HOME/.bashrc.d/*.bash; do
     source $script
 done
 
 # Some things need to be computed.
 prompt_cmd() {
+
     # Compute RETVAL
     FAIL=$?
     if [[ $FAIL -eq 0 ]]; then
@@ -150,13 +158,23 @@ prompt_cmd() {
         PS1RETVAL="${OP}\[${_BRED}\]${FAIL}${CP}"
     fi
 
+    if [[ $prompt_proj != '' ]]; then
+        PS1PROJ="${RA}${OP}${PROJ_COLOR}${prompt_proj}${CP}${LA}"
+    else
+        PS1PROJ=''
+    fi
+
+    GITBRANCH=$(__git_ps1 '%s')
+    if [[ $GITBRANCH != '' ]]; then
+        PS1GIT="${OB}${GIT_COLOR}${GITBRANCH}${CB}"
+    else
+        PS1GIT=''
+    fi
+
     history -a  # Save last user cmd to bash_history
-    PS1="${TITLE_WINDOW}${PS1HOST}${PS1RETVAL}$(__git_ps1)${PS1DIR}${PS1END}"
+    PS1="${PS1HOST}${PS1PROJ}${PS1RETVAL}${PS1GIT}${PS1DIR}${PS1END}"
 }
 
 PROMPT_COMMAND=prompt_cmd
-PS1="${TITLE_WINDOW}${PS1HOST}${PS1RETVAL}${PS1DATE}${PS1TIME}${PS1TTY}${PS1DIR}${PS1END}"
 
 export PATH PS1 EDITOR VISUAL PAGER LESS FCEDIT SEPATH MANPATH TERM GREP_OPTIONS RI HISTFILESIZE HISTFILE HISTIGNORE
-
-PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting

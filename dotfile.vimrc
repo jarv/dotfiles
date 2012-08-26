@@ -2,6 +2,10 @@ call pathogen#infect()
 syntax on
 filetype plugin indent on
 
+" Indexer options
+
+let g:indexer_disableCtagsWarning=1
+
 " Powerline configuration https://github.com/Lokaltog/vim-powerline
 
 set nocompatible   " Disable vi-compatibility
@@ -23,12 +27,20 @@ nmap \b :CtrlPBuffer<cr>
 nmap \f :CtrlPBuffer<cr>
 nmap \h :help ctrlp.txt<cr>
 
+" Turn on omni completion
+
+set ofu=syntaxcomplete#Complete
+
+" Sane handling of tabs
 
 set et
 set sw=4
 set smarttab
-set tags=~/.TAGS
 set nobackup
+" HTML uses 2 space indent
+autocmd FileType html setlocal shiftwidth=2 tabstop=2
+
+" Additional shortcuts
 
 nmap ,p :w\|!python %
 nmap ,q  :tabdo q!<cr>
@@ -37,6 +49,9 @@ nmap ,p  :set paste<cr>
 nmap ,n :set nopaste<cr>
 nmap <C-k> :tabn<cr>
 nmap <C-j> :tabp<cr>
+
+
+" Fold behavior
 
 set foldmethod=syntax
 set foldlevelstart=1
@@ -50,4 +65,3 @@ let sh_fold_enabled=1         " sh
 let vimsyn_folding='af'       " Vim script
 let xml_syntax_folding=1      " XML
 
-autocmd FileType html setlocal shiftwidth=2 tabstop=2
