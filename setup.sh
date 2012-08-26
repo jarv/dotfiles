@@ -42,6 +42,5 @@ case `uname -s` in
         command -v pep8  &>/dev/null || {
             sudo apt-get install -y pep8 
         }
-        break
         ;;
 esac
