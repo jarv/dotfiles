@@ -42,5 +42,11 @@ case `uname -s` in
         command -v pep8  &>/dev/null || {
             sudo apt-get install -y pep8 
         }
+        command -v pip  &>/dev/null || {
+            sudo apt-get install -y python-pip
+        }
+        command -v flake8 &>/dev/null || {
+            sudo pip install flake8
+        }
         ;;
 esac

@@ -22,6 +22,7 @@ let g:Powerline_symbols = 'fancy'
 let g:syntastic_stl_format = '[%E{Err: %fe #%e}%B{, }%W{Warn: %fw #%w}]'
 let g:syntastic_mode_map = { 'mode': 'active',
                             \ 'passive_filetypes': ['puppet', 'python'] }
+let g:syntastic_python_checker = 'flake8'
 nmap ,s :SyntasticCheck<cr>
 nmap ,t :SyntasticToggleMode<cr>
 nmap ,e :Errors<cr>
