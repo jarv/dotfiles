@@ -25,3 +25,23 @@ for file in $DOTLINKS; do
     ln -s $(abspath $file) $link
 done
 bash -c "cd $DIR && git submodule update --init"
+
+# some utiltiies 
+
+case `uname -s` in
+    [Ll]inux)
+        command -v puppet-lint &>/dev/null || {
+            sudo apt-get install -y puppet-lint
+        }
+        command -v vim  &>/dev/null || {
+            sudo apt-get install -y vim 
+        }
+        command -v ctags  &>/dev/null || {
+            sudo apt-get install -y ctags 
+        }
+        command -v pep8  &>/dev/null || {
+            sudo apt-get install -y pep8 
+        }
+        break
+        ;;
+esac

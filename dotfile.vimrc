@@ -2,6 +2,10 @@ call pathogen#infect()
 syntax on
 filetype plugin indent on
 
+" Update helpfiles
+
+Helptags
+
 " Indexer options
 
 let g:indexer_disableCtagsWarning=1
