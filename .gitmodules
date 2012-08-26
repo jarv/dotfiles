@@ -13,3 +13,6 @@
 [submodule "dotfile.fonts/ubuntu-mono-powerline"]
 	path = dotfile.fonts/ubuntu-mono-powerline
 	url = git://github.com/scotu/ubuntu-mono-powerline
+[submodule "dotfile.vim/bundle/TagHighlight"]
+	path = dotfile.vim/bundle/TagHighlight
+	url = git://github.com/vim-scripts/TagHighlight
