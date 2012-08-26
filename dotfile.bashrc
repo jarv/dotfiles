@@ -33,10 +33,6 @@ esac
 [[ -n "`ls --version 2> /dev/null`" ]] && alias ls=`which ls`" --color=tty -F"
 [[ -x "`which dircolors`" ]] && eval `dircolors`
 
-# alias for vim so that tags runs in the background
-
-alias vim="vim --servername $HOSTNAME"
-
 EDITOR=`which vim`
 VISUAL=$EDITOR
 FCEDIT=$EDITOR
