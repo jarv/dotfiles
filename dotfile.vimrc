@@ -6,6 +6,9 @@ filetype plugin indent on
 
 Helptags
 
+" Beter colors for omnicomplete popup
+highlight Pmenu ctermbg=238 gui=bold
+
 " Indexer options
 
 let g:indexer_disableCtagsWarning=1

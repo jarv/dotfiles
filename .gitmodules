@@ -16,3 +16,6 @@
 [submodule "dotfile.vim/bundle/TagHighlight"]
 	path = dotfile.vim/bundle/TagHighlight
 	url = git://github.com/vim-scripts/TagHighlight
+[submodule "dotfile.vim/bundle/supertab"]
+	path = dotfile.vim/bundle/supertab
+	url = https://github.com/ervandew/supertab
