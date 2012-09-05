@@ -35,6 +35,11 @@ nmap \b :CtrlPBuffer<cr>
 nmap \f :CtrlPBuffer<cr>
 nmap \h :help ctrlp.txt<cr>
 
+" Fugitive (git) configuration
+
+nmap ,g :Gstatus<cr>
+nmap ,p :Git push<cr>
+
 " Turn on omni completion
 
 set ofu=syntaxcomplete#Complete
@@ -49,7 +54,7 @@ set nobackup
 autocmd FileType html setlocal shiftwidth=2 tabstop=2
 
 " Additional shortcuts
-
+nmap ,c :q<cr>
 nmap ,p :w\|!python %
 nmap ,q  :tabdo q!<cr>
 nmap ,wq :tabdo wq<cr>
