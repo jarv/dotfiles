@@ -113,3 +113,4 @@ if version >= 508 || !exists("did_puppet_syn_inits")
 endif
 
 let b:current_syntax = "puppet"
+set iskeyword=-,:,@,48-57,_,192-255

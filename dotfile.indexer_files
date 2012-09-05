@@ -1,7 +1,9 @@
-[ sys ]
-/home/jarv/sys/python
-/home/jarv/sys/configuration
-/home/jarv/sys/sysadmin
+[ configuration ]
+/home/jarv/edx/configuration
+
+[ sysadmin ]
+/home/jarv/edx/python
+/home/jarv/edx/sysadmin
 
 [ mitx_all ]
 /home/jarv/mitx_all/python

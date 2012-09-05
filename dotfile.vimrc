@@ -34,11 +34,12 @@ nmap ,e :Errors<cr>
 nmap \b :CtrlPBuffer<cr>
 nmap \f :CtrlPBuffer<cr>
 nmap \h :help ctrlp.txt<cr>
+let g:ctrlp_custom_ignore = '\v[\/](\.git|\.hg|\.svn)$'
 
 " Fugitive (git) configuration
 
 nmap ,g :Gstatus<cr>
-nmap ,p :Git push<cr>
+nmap ,P :Git push<cr>
 
 " Turn on omni completion
 
@@ -55,7 +56,6 @@ autocmd FileType html setlocal shiftwidth=2 tabstop=2
 
 " Additional shortcuts
 nmap ,c :q<cr>
-nmap ,p :w\|!python %
 nmap ,q  :tabdo q!<cr>
 nmap ,wq :tabdo wq<cr>
 nmap ,p  :set paste<cr>
