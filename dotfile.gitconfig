@@ -7,3 +7,6 @@
     external = /home/jarv/.gitdiff_wrapper
 [core]
     excludesfile = ~/.cvsignore
+[branch]
+    autosetupmerge = true
+    autosetuprebase = always

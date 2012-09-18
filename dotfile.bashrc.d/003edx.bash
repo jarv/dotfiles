@@ -1,6 +1,6 @@
 function workon() {
 
-    projects="mitx_all sys"
+    projects="mitx_all edx"
     . $HOME/.rvmrc
     if [[ -r "$rvm_path/scripts/rvm" ]]; then
         . "$rvm_path/scripts/rvm"
