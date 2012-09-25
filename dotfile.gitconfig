@@ -2,9 +2,7 @@
     default = current
 [user]
     name = John Jarvis
-    email = jrjarvis@mitx.mit.edu
-[diff]
-    external = /home/jarv/.gitdiff_wrapper
+    email = jarv@edx.org
 [core]
     excludesfile = ~/.cvsignore
 [branch]
