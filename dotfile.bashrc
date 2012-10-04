@@ -158,10 +158,18 @@ prompt_cmd() {
         PS1RETVAL="${OP}\[${_BRED}\]${FAIL}${CP}"
     fi
 
-    if [[ $prompt_proj != '' ]]; then
+    if [[ -n $VIRTUAL_ENV ]]; then
+        prompt_proj=$(basename $VIRTUAL_ENV)
         PS1PROJ="${RA}${OP}${PROJ_COLOR}${prompt_proj}${CP}${LA}"
     else
-        PS1PROJ=''
+        if type -t workon > /dev/null; then
+            V=$(workon)
+            for venv in $V; do
+                joined="$joined | ${_BLU}${venv}${_BBLK}"
+            done
+            joined=$(echo $joined | sed -e 's/^| //')
+            PS1VENV="$_BBLK[ $joined ${_BBLK}]${_NORM} "
+        fi
     fi
 
     GITBRANCH=$(__git_ps1 '%s')
@@ -172,7 +180,7 @@ prompt_cmd() {
     fi
 
     history -a  # Save last user cmd to bash_history
-    PS1="${PS1HOST}${PS1PROJ}${PS1RETVAL}${PS1GIT}${PS1DIR}${PS1END}"
+    PS1="${PS1VENV}${PS1HOST}${PS1PROJ}${PS1RETVAL}${PS1GIT}${PS1DIR}${PS1END}"
 }
 
 PROMPT_COMMAND=prompt_cmd
