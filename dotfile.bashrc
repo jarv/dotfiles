@@ -158,18 +158,25 @@ prompt_cmd() {
         PS1RETVAL="${OP}\[${_BRED}\]${FAIL}${CP}"
     fi
 
-    if [[ -n $VIRTUAL_ENV ]]; then
-        prompt_proj=$(basename $VIRTUAL_ENV)
-        PS1PROJ="${RA}${OP}${PROJ_COLOR}${prompt_proj}${CP}${LA}"
-    else
-        if type -t workon > /dev/null; then
-            V=$(workon)
-            for venv in $V; do
-                joined="$joined | ${_BLU}${venv}${_BBLK}"
-            done
-            joined=$(echo $joined | sed -e 's/^| //')
-            PS1VENV="$_BBLK[ $joined ${_BBLK}]${_NORM} "
-        fi
+        #prompt_proj=$(basename $VIRTUAL_ENV)
+        #PS1PROJ="${RA}${OP}${PROJ_COLOR}${prompt_proj}${CP}${LA}"
+    if type -t workon > /dev/null; then
+        V=$(workon)
+        joined=''
+        for venv in $V; do
+            venv="${venv%\\n}"
+            if [[ -n $VIRTUAL_ENV ]]; then
+                if [[ $venv == $(basename $VIRTUAL_ENV) ]]; then
+                    joined="$joined | ${_BBLU}${venv}${_BBLK}"
+                else
+                    joined="$joined | ${_BLK}${venv}${_BBLK}"
+                fi
+            else
+                joined="$joined | ${_BLK}${venv}${_BBLK}"
+            fi
+        done
+        joined=$(echo $joined | sed -e 's/^| //')
+        PS1VENV="$_BBLK[ $joined ${_BBLK}]${_NORM} "
     fi
 
     GITBRANCH=$(__git_ps1 '%s')
