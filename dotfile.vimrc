@@ -78,3 +78,7 @@ let sh_fold_enabled=1         " sh
 let vimsyn_folding='af'       " Vim script
 let xml_syntax_folding=1      " XML
 
+
+" Remove trailing whitespace automatically for python files
+autocmd BufWritePre *.py :%s/\s\+$//e
+
