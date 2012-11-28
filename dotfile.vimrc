@@ -2,6 +2,17 @@ call pathogen#infect()
 syntax on
 filetype plugin indent on
 
+
+if has("multi_byte")
+  if &termencoding == ""
+    let &termencoding = &encoding
+  endif
+  set encoding=utf-8
+  setglobal fileencoding=utf-8
+  "setglobal bomb
+  set fileencodings=ucs-bom,utf-8,latin1
+endif
+
 " Update helpfiles
 
 Helptags
@@ -53,6 +64,8 @@ set smarttab
 set nobackup
 " HTML uses 2 space indent
 autocmd FileType html setlocal shiftwidth=2 tabstop=2
+" puppet uses 2 space indent
+autocmd FileType puppet setlocal shiftwidth=2 tabstop=2
 
 " Additional shortcuts
 nmap ,c :q<cr>
@@ -60,6 +73,9 @@ nmap ,q  :tabdo q!<cr>
 nmap ,wq :tabdo wq<cr>
 nmap ,p  :set paste<cr>
 nmap ,n :set nopaste<cr>
+nmap ,# :s/^/#
+nmap ,3 :s/^#//
+
 nmap <C-k> :tabn<cr>
 nmap <C-j> :tabp<cr>
 
