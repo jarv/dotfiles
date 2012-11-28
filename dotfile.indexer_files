@@ -2,9 +2,13 @@
 /home/jarv/edx/configuration
 
 [ sysadmin ]
-/home/jarv/edx/python
+/home/jarv/.virtualenvs/sys
 /home/jarv/edx/sysadmin
 
 [ mitx_all ]
-/home/jarv/mitx_all/python
+/home/jarv/.virtualenvs/mitx
 /home/jarv/mitx_all/mitx
+
+[ xserver ]
+/home/jarv/.virtualenvs/mitx
+/home/jarv/mitx_all/xserver
