@@ -2,7 +2,6 @@ call pathogen#infect()
 syntax on
 filetype plugin indent on
 
-
 if has("multi_byte")
   if &termencoding == ""
     let &termencoding = &encoding
@@ -37,6 +36,7 @@ let g:syntastic_stl_format = '[%E{Err: %fe #%e}%B{, }%W{Warn: %fw #%w}]'
 let g:syntastic_mode_map = { 'mode': 'active',
                             \ 'passive_filetypes': ['puppet', 'python'] }
 let g:syntastic_python_checker = 'flake8'
+let g:syntastic_python_checker = 'jslint'
 nmap ,s :SyntasticCheck<cr>
 nmap ,t :SyntasticToggleMode<cr>
 nmap ,e :Errors<cr>
@@ -62,9 +62,9 @@ set et
 set sw=4
 set smarttab
 set nobackup
-" HTML uses 2 space indent
+" yaml, puppet, HTML uses 2 space indent
 autocmd FileType html setlocal shiftwidth=2 tabstop=2
-" puppet uses 2 space indent
+autocmd FileType yaml setlocal shiftwidth=2 tabstop=2
 autocmd FileType puppet setlocal shiftwidth=2 tabstop=2
 
 " Additional shortcuts
@@ -79,6 +79,8 @@ nmap ,3 :s/^#//
 nmap <C-k> :tabn<cr>
 nmap <C-j> :tabp<cr>
 
+" Reverse join
+nnoremap ,j ddpgkJ 
 
 " Fold behavior
 
