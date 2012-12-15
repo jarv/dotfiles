@@ -36,7 +36,7 @@ let g:syntastic_stl_format = '[%E{Err: %fe #%e}%B{, }%W{Warn: %fw #%w}]'
 let g:syntastic_mode_map = { 'mode': 'active',
                             \ 'passive_filetypes': ['puppet', 'python'] }
 let g:syntastic_python_checker = 'flake8'
-let g:syntastic_python_checker = 'jslint'
+let g:syntastic_javascript_checker = 'jslint'
 nmap ,s :SyntasticCheck<cr>
 nmap ,t :SyntasticToggleMode<cr>
 nmap ,e :Errors<cr>
