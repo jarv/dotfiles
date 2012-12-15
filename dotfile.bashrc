@@ -1,7 +1,14 @@
 # .bashrc
 
 umask 022
-
+# Generate a random password
+#  $1 = number of characters; defaults to 32
+#  $2 = include special characters; 1 = yes, 0 = no; defaults to 1
+function randpass() {
+    CHAR="[:alnum:]"
+    cat /dev/urandom | tr -cd "$CHAR" | head -c ${1:-16}
+    echo
+}
 join_dirs()
 {
     for STRING in $*; do
@@ -195,3 +202,6 @@ PROMPT_COMMAND=prompt_cmd
 export PATH PS1 EDITOR VISUAL PAGER LESS FCEDIT SEPATH MANPATH TERM GREP_OPTIONS RI HISTFILESIZE HISTFILE HISTIGNORE
 
 set -o vi
+
+### Added by the Heroku Toolbelt
+export PATH="/usr/local/heroku/bin:$PATH"

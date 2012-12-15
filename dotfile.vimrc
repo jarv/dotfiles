@@ -66,6 +66,7 @@ set nobackup
 autocmd FileType html setlocal shiftwidth=2 tabstop=2
 autocmd FileType yaml setlocal shiftwidth=2 tabstop=2
 autocmd FileType puppet setlocal shiftwidth=2 tabstop=2
+autocmd FileType ruby setlocal shiftwidth=2 tabstop=2
 
 " Additional shortcuts
 nmap ,c :q<cr>
@@ -99,4 +100,5 @@ let xml_syntax_folding=1      " XML
 
 " Remove trailing whitespace automatically for python files
 autocmd BufWritePre *.py :%s/\s\+$//e
+autocmd BufWritePre *.pp :%s/\s\+$//e
 
