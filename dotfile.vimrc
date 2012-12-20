@@ -102,3 +102,10 @@ let xml_syntax_folding=1      " XML
 autocmd BufWritePre *.py :%s/\s\+$//e
 autocmd BufWritePre *.pp :%s/\s\+$//e
 
+" backups
+
+set backup 
+set backupdir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp 
+set backupskip=/tmp/*,/private/tmp/*,~/.ssh/*
+set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp 
+set writebackup
