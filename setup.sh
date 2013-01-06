@@ -26,31 +26,35 @@ for file in $DOTLINKS; do
 done
 bash -c "cd $DIR && git submodule update --init"
 
-# some utiltiies 
+# some utiltiies and environment setup
 
 case `uname -s` in
     [Ll]inux)
-        command -v puppet-lint &>/dev/null || {
-            sudo apt-get install -y puppet-lint
-        }
-        command -v vim  &>/dev/null || {
-            sudo apt-get install -y vim 
-        }
-        command -v ctags  &>/dev/null || {
-            sudo apt-get install -y ctags 
-        }
-        command -v pep8  &>/dev/null || {
-            sudo apt-get install -y pep8 
-        }
-        command -v pip  &>/dev/null || {
-            sudo apt-get install -y python-pip
-        }
-        command -v flake8 &>/dev/null || {
-            sudo pip install flake8
-        }
-        command -v gvim &>/dev/null || {
-            sudo apt-get install vim-gtk 
-        }
-
+        mkdir -p $HOME/tmp
+        mkdir -p $HOME/src
+        cinnamon_list="/etc/apt/sources.list.d/"
+        cinnamon_list+="gwendal-lebihan-dev-cinnamon-stable-quantal.list"
+        if [[ ! -f $cinnamon_list ]]; then
+            sudo add-apt-repository -y ppa:gwendal-lebihan-dev/cinnamon-stable
+        fi
+        # install apt packages
+        cat $DIR/apt-packages.txt | xargs sudo apt-get install -y
+        # install node
+        if [[ ! -x $HOME/bin/node ]]; then
+            cd $HOME/src
+            git clone git://github.com/ry/node.git
+            cd node
+            ./configure --prefix=$HOME
+            make
+            make install
+        fi
+        if [[ ! -x $HOME/bin/npm ]]; then
+            curl https://npmjs.org/install.sh | sh
+        fi
+        for pkg in jshint js-yaml jslint; do
+            if [[ ! -d $HOME/lib/node_modules/$pkg ]]; then
+                $HOME/bin/npm install $pkg -g 
+            fi
+        done
         ;;
 esac
