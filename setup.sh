@@ -48,5 +48,9 @@ case `uname -s` in
         command -v flake8 &>/dev/null || {
             sudo pip install flake8
         }
+        command -v gvim &>/dev/null || {
+            sudo apt-get install vim-gtk 
+        }
+
         ;;
 esac

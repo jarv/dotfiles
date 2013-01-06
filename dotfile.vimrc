@@ -61,7 +61,6 @@ set ofu=syntaxcomplete#Complete
 set et
 set sw=4
 set smarttab
-set nobackup
 " yaml, puppet, HTML uses 2 space indent
 autocmd FileType html setlocal shiftwidth=2 tabstop=2
 autocmd FileType yaml setlocal shiftwidth=2 tabstop=2
