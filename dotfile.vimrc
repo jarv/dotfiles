@@ -1,5 +1,8 @@
 call pathogen#infect()
-syntax on
+syntax enable
+set background=dark
+let g:solarized_termcolors=256
+colorscheme solarized
 filetype plugin indent on
 
 if has("multi_byte")
