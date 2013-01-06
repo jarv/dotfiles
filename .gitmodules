@@ -19,3 +19,6 @@
 [submodule "dotfile.vim/bundle/supertab"]
 	path = dotfile.vim/bundle/supertab
 	url = https://github.com/ervandew/supertab
+[submodule "dotfile.vim/vim-colors-solarized"]
+	path = dotfile.vim/vim-colors-solarized
+	url = git://github.com/altercation/vim-colors-solarized.git
