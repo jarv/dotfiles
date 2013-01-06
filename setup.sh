@@ -26,7 +26,8 @@ for file in $DOTLINKS; do
 done
 bash -c "cd $DIR && git submodule update --init"
 
-# some utiltiies and environment setup
+# some utiltiies and environment setup for a new
+# Ubuntu workstation
 
 case `uname -s` in
     [Ll]inux)
@@ -56,5 +57,13 @@ case `uname -s` in
                 $HOME/bin/npm install $pkg -g 
             fi
         done
+        # importing keyboard shortcuts
+        # only tested against 12.10
+        if [[ $(lsb_release -d) =~ Ubuntu\ 12.10$ ]]; then
+            perl $DIR/dump-keybindings.pl -i $DIR/keyboard.txt
+        fi
+        # firewall
+        sudo ufw allow ssh
+        sudo ufw enable
         ;;
 esac
