@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+set -e
 
 abspath () { 
     case "$1" in 
@@ -39,7 +40,7 @@ case `uname -s` in
             sudo add-apt-repository -y ppa:gwendal-lebihan-dev/cinnamon-stable
         fi
         tweak_list="/etc/apt/sources.list.d/"
-        tweak+list+="tualatrix-ppa-quantal.list"
+        tweak_list+="tualatrix-ppa-quantal.list"
         if [[ ! -f $tweak_list ]]; then
             sudo add-apt-repository -y ppa:tualatrix/ppa
         fi
@@ -60,7 +61,7 @@ case `uname -s` in
         fi
         for pkg in jshint js-yaml jslint; do
             if [[ ! -d $HOME/lib/node_modules/$pkg ]]; then
-                $HOME/bin/npm install $pkg -g 
+                sudo $HOME/bin/node $HOME/bin/npm install $pkg -g 
             fi
         done
         # importing keyboard shortcuts
