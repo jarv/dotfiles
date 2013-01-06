@@ -1,3 +1,4 @@
+screen
 python-software-properties
 pkg-config
 curl
@@ -39,3 +40,4 @@ xscreensaver-gl-extra
 xscreensaver-screensaver-bsod
 xscreensaver-screensaver-dizzy
 xscreensaver-screensaver-webcollage
+ubuntu-tweak

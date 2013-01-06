@@ -38,7 +38,13 @@ case `uname -s` in
         if [[ ! -f $cinnamon_list ]]; then
             sudo add-apt-repository -y ppa:gwendal-lebihan-dev/cinnamon-stable
         fi
+        tweak_list="/etc/apt/sources.list.d/"
+        tweak+list+="tualatrix-ppa-quantal.list"
+        if [[ ! -f $tweak_list ]]; then
+            sudo add-apt-repository -y ppa:tualatrix/ppa
+        fi
         # install apt packages
+        sudo apt-get update
         cat $DIR/apt-packages.txt | xargs sudo apt-get install -y
         # install node
         if [[ ! -x $HOME/bin/node ]]; then
