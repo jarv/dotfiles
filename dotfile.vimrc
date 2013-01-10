@@ -68,6 +68,7 @@ autocmd FileType html setlocal shiftwidth=2 tabstop=2
 autocmd FileType yaml setlocal shiftwidth=2 tabstop=2
 autocmd FileType puppet setlocal shiftwidth=2 tabstop=2
 autocmd FileType ruby setlocal shiftwidth=2 tabstop=2
+autocmd FileType javascript setlocal shiftwidth=2 tabstop=2
 
 " Additional shortcuts
 nmap ,c :q<cr>
@@ -83,6 +84,13 @@ nmap <C-j> :tabp<cr>
 
 " Reverse join
 nnoremap ,j ddpgkJ 
+
+" Copy and paste to the system clipboard
+
+nnoremap <C-y> "+y
+vnoremap <C-y> "+y
+" nnoremap <C-T> "+p
+" vnoremap <C-T> "+p
 
 " Fold behavior
 
