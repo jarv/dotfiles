@@ -63,7 +63,8 @@ set ofu=syntaxcomplete#Complete
 set et
 set sw=4
 set smarttab
-" yaml, puppet, HTML uses 2 space indent
+
+" 2 space indents :(
 autocmd FileType html setlocal shiftwidth=2 tabstop=2
 autocmd FileType yaml setlocal shiftwidth=2 tabstop=2
 autocmd FileType puppet setlocal shiftwidth=2 tabstop=2
@@ -89,8 +90,8 @@ nnoremap ,j ddpgkJ
 
 nnoremap <C-y> "+y
 vnoremap <C-y> "+y
-" nnoremap <C-T> "+p
-" vnoremap <C-T> "+p
+nnoremap <C-T> "+p
+vnoremap <C-T> "+p
 
 " Fold behavior
 
