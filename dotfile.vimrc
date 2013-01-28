@@ -88,10 +88,10 @@ nnoremap ,j ddpgkJ
 
 " Copy and paste to the system clipboard
 
-nnoremap <C-y> "+y
-vnoremap <C-y> "+y
-nnoremap <C-T> "+p
-vnoremap <C-T> "+p
+" nnoremap <C-y> "+y
+" vnoremap <C-y> "+y
+" nnoremap <C-p> "+p
+" vnoremap <C-p> "+p
 
 " Fold behavior
 

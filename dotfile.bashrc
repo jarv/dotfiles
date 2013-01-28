@@ -4,7 +4,7 @@ umask 022
 # Generate a random password
 #  $1 = number of characters; defaults to 32
 #  $2 = include special characters; 1 = yes, 0 = no; defaults to 1
-function randpass() {
+function gen_passwd() {
     CHAR="[:alnum:]"
     cat /dev/urandom | tr -cd "$CHAR" | head -c ${1:-16}
     echo
@@ -205,3 +205,5 @@ set -o vi
 
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
+
+PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
