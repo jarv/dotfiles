@@ -14,6 +14,8 @@ if has("multi_byte")
   "setglobal bomb
   set fileencodings=ucs-bom,utf-8,latin1
 endif
+" change the mapleader from \ to ,
+let mapleader=","
 
 " Update helpfiles
 
@@ -39,14 +41,14 @@ let g:syntastic_stl_format = '[%E{Err: %fe #%e}%B{, }%W{Warn: %fw #%w}]'
 let g:syntastic_mode_map = { 'mode': 'active',
                             \ 'passive_filetypes': 
                             \    ['puppet', 'python', 'javascript'] }
-nmap ,s :SyntasticCheck<cr>
-nmap ,t :SyntasticToggleMode<cr>
-nmap ,e :Errors<cr>
+nmap <leader>s :SyntasticCheck<cr>
+nmap <leader>t :SyntasticToggleMode<cr>
+nmap <leader>e :Errors<cr>
 
 " Ctrlp configuration
-nmap \b :CtrlPBuffer<cr>
-nmap \f :CtrlPBuffer<cr>
-nmap \h :help ctrlp.txt<cr>
+nmap <leader>b :CtrlPBuffer<cr>
+nmap <leader>f :CtrlPBuffer<cr>
+nmap <leader>h :help ctrlp.txt<cr>
 let g:ctrlp_custom_ignore = '\v[\/](\.git|\.hg|\.svn)$'
 " Open new files in tabs
 let g:ctrlp_prompt_mappings = {
@@ -56,8 +58,8 @@ let g:ctrlp_prompt_mappings = {
 
 " Fugitive (git) configuration
 
-nmap ,g :Gstatus<cr>
-nmap ,P :Git push<cr>
+nmap <leader>g :Gstatus<cr>
+nmap <leader>P :Git push<cr>
 
 " Turn on omni completion
 
@@ -77,13 +79,13 @@ autocmd FileType ruby setlocal shiftwidth=2 tabstop=2
 autocmd FileType javascript setlocal shiftwidth=2 tabstop=2
 
 " Additional shortcuts
-nmap ,c :q<cr>
-nmap ,q  :tabdo q!<cr>
-nmap ,wq :tabdo wq<cr>
-nmap ,p  :set paste<cr>
-nmap ,n :set nopaste<cr>
-nmap ,# :s/^/#
-nmap ,3 :s/^#//
+nmap <leader>c :q<cr>
+nmap <leader>q  :tabdo q!<cr>
+nmap <leader>wq :tabdo wq<cr>
+nmap <leader>p  :set paste<cr>
+nmap <leader>n :set nopaste<cr>
+nmap <leader># :s/^/#
+nmap <leader>3 :s/^#//
 
 nmap <C-k> :tabn<cr>
 nmap <C-j> :tabp<cr>
