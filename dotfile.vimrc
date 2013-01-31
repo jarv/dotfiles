@@ -48,6 +48,11 @@ nmap \b :CtrlPBuffer<cr>
 nmap \f :CtrlPBuffer<cr>
 nmap \h :help ctrlp.txt<cr>
 let g:ctrlp_custom_ignore = '\v[\/](\.git|\.hg|\.svn)$'
+" Open new files in tabs
+let g:ctrlp_prompt_mappings = {
+    \ 'AcceptSelection("e")': ['<c-t>'],
+    \ 'AcceptSelection("t")': ['<cr>', '<2-LeftMouse>'],
+    \ }
 
 " Fugitive (git) configuration
 
