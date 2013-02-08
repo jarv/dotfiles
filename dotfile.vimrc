@@ -47,7 +47,7 @@ nmap <leader>e :Errors<cr>
 
 " Ctrlp configuration
 nmap <leader>b :CtrlPBuffer<cr>
-nmap <leader>f :CtrlPBuffer<cr>
+nmap <leader>m :CtrlPMRU<cr>
 nmap <leader>h :help ctrlp.txt<cr>
 let g:ctrlp_custom_ignore = '\v[\/](\.git|\.hg|\.svn)$'
 " Open new files in tabs
