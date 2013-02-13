@@ -4,7 +4,7 @@ syntax enable
 " let g:solarized_termcolors=256
 " colorscheme solarized
 filetype plugin indent on
-
+au BufRead,BufNewFile *.config set filetype=yaml
 if has("multi_byte")
   if &termencoding == ""
     let &termencoding = &encoding
