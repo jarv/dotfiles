@@ -86,6 +86,12 @@ nmap <leader>p  :set paste<cr>
 nmap <leader>n :set nopaste<cr>
 nmap <leader># :s/^/#
 nmap <leader>3 :s/^#//
+" Quote a word
+nnoremap qw :silent! normal mpea'<Esc>bi'<Esc>`pl
+" double quote a word
+nnoremap qd :silent! normal mpea"<Esc>bi"<Esc>`pl
+" remove quotes from a word
+nnoremap wq :silent! normal mpeld bhd `ph<CR>
 
 nmap <C-k> :tabn<cr>
 nmap <C-j> :tabp<cr>
