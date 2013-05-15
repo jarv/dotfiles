@@ -5,6 +5,8 @@ syntax enable
 " colorscheme solarized
 filetype plugin indent on
 au BufRead,BufNewFile *.config set filetype=yaml
+au BufRead,BufNewFile *.scss set filetype=sass
+au BufRead,BufNewFile *.j2 set filetype=jinja
 if has("multi_byte")
   if &termencoding == ""
     let &termencoding = &encoding
