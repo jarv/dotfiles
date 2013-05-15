@@ -8,3 +8,5 @@
 [branch]
     autosetupmerge = true
     autosetuprebase = always
+[merge]
+	tool = meld
