@@ -192,9 +192,13 @@ prompt_cmd() {
     else
         PS1GIT=''
     fi
-
+    if [[ $BOTO_NAME != '' ]]; then
+        PS1BOTO="$_BBLK- ${_GRN}${BOTO_NAME} $_BBLK-${_NORM}"
+    else
+        PS1BOTO=''
+    fi
     history -a  # Save last user cmd to bash_history
-    PS1="${PS1VENV}${PS1HOST}${PS1PROJ}${PS1RETVAL}${PS1GIT}${PS1DIR}${PS1END}"
+    PS1="${PS1VENV}\n${PS1BOTO}${PS1HOST}${PS1PROJ}${PS1RETVAL}${PS1GIT}${PS1DIR}${PS1END}"
 }
 
 PROMPT_COMMAND=prompt_cmd
