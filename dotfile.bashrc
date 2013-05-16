@@ -192,8 +192,12 @@ prompt_cmd() {
     else
         PS1GIT=''
     fi
-    if [[ $BOTO_NAME != '' ]]; then
-        PS1BOTO="$_BBLK- ${_GRN}${BOTO_NAME} $_BBLK-${_NORM}"
+    if [[ $AWS_NAME != '' ]]; then
+        if [[ $AWS_NAME == 'prod' ]];then
+            PS1BOTO="$_BLK- ${_RED}<<${_BRED}${AWS_NAME}${_RED}>> $_BBLK-${_NORM}"
+        else
+            PS1BOTO="$_BBLK- ${_GRN}${AWS_NAME} $_BBLK-${_NORM}"
+        fi
     else
         PS1BOTO=''
     fi
