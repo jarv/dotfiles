@@ -40,6 +40,8 @@ let g:Powerline_symbols = 'fancy'
 " Syntastic configuration
 
 let g:syntastic_stl_format = '[%E{Err: %fe #%e}%B{, }%W{Warn: %fw #%w}]'
+let g:syntastic_python_flake8_args='--ignore=E501'
+let g:syntastic_python_pep8_args='--ignore=E501'
 let g:syntastic_mode_map = { 'mode': 'active',
                             \ 'passive_filetypes': 
                             \    ['puppet', 'python', 'javascript'] }

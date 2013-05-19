@@ -21,4 +21,6 @@
 /home/jarv/.virtualenvs/mitx
 /home/jarv/edx/xqueue
 
-
+[ ansible ]
+/home/jarv/src/configuration/playbooks
+/home/jarv/src/configuration-secure/ansible
