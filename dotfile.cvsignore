@@ -2,3 +2,4 @@ tags
 *.sw[op]
 *.pyc
 *.bak
+*.orig
