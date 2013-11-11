@@ -55,6 +55,7 @@ nmap <leader>m :CtrlPMRU<cr>
 nmap <leader>h :help ctrlp.txt<cr>
 let g:ctrlp_custom_ignore = '\v[\/](\.git|\.hg|\.svn)$'
 " Open new files in tabs
+set tabpagemax=50
 let g:ctrlp_prompt_mappings = {
     \ 'AcceptSelection("e")': ['<c-t>'],
     \ 'AcceptSelection("t")': ['<cr>', '<2-LeftMouse>'],
@@ -127,6 +128,8 @@ let xml_syntax_folding=1      " XML
 
 " Remove trailing whitespace automatically for python files
 autocmd BufWritePre *.py :%s/\s\+$//e
+autocmd BufWritePre *.yml :%s/\s\+$//e
+autocmd BufWritePre *.yaml :%s/\s\+$//e
 autocmd BufWritePre *.pp :%s/\s\+$//e
 
 " backups
