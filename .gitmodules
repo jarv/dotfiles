@@ -22,3 +22,6 @@
 [submodule "dotfile.vim/bundle/vim-colors-solarized"]
 	path = dotfile.vim/bundle/vim-colors-solarized
 	url = git://github.com/altercation/vim-colors-solarized.git
+[submodule "dotfile.vim/bundle/vim-coffee-script"]
+	path = dotfile.vim/bundle/vim-coffee-script
+	url = https://github.com/kchmck/vim-coffee-script.git
