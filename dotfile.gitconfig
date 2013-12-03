@@ -1,5 +1,6 @@
 [push]
     default = current
+	default = current
 [user]
     name = John Jarvis
     email = john@jarv.org
@@ -8,5 +9,7 @@
 [branch]
     autosetupmerge = true
     autosetuprebase = always
+	autosetupmerge = true
+	autosetuprebase = always
 [merge]
 	tool = meld
