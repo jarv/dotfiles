@@ -7,8 +7,6 @@ python-virtualenv
 virtualenvwrapper
 build-essential
 python-dev
-gfortran
-liblapack-dev
 libfreetype6-dev
 libpng12-dev
 libxml2-dev
@@ -28,7 +26,6 @@ ctags
 pep8
 python-pip
 vim-gtk
-cinnamon
 chromium-browser
 chromium-browser-l10n
 chromium-codecs-ffmpeg
@@ -40,6 +37,5 @@ xscreensaver-gl-extra
 xscreensaver-screensaver-bsod
 xscreensaver-screensaver-dizzy
 xscreensaver-screensaver-webcollage
-ubuntu-tweak
 terminator
 meld

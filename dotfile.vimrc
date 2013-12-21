@@ -4,6 +4,8 @@ syntax enable
 " let g:solarized_termcolors=256
 " colorscheme solarized
 filetype plugin indent on
+
+au BufRead,BufNewFile *.md set filetype=markdown
 au BufRead,BufNewFile *.config set filetype=yaml
 au BufRead,BufNewFile *.scss set filetype=sass
 au BufRead,BufNewFile *.j2 set filetype=jinja
@@ -77,6 +79,7 @@ set smarttab
 
 " 2 space indents :(
 autocmd FileType html setlocal shiftwidth=2 tabstop=2
+autocmd FileType htmldjango setlocal shiftwidth=2 tabstop=2
 autocmd FileType yaml setlocal shiftwidth=2 tabstop=2
 autocmd FileType puppet setlocal shiftwidth=2 tabstop=2
 autocmd FileType ruby setlocal shiftwidth=2 tabstop=2
