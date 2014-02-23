@@ -3,4 +3,6 @@ tags
 *.pyc
 *.bak
 *.orig
+playbooks/roles/test*
+playbooks/test.yml
 .sass-cache

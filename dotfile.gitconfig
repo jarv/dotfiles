@@ -9,4 +9,4 @@
     autosetupmerge = true
     autosetuprebase = always
 [merge]
-	tool = meld
+    tool = meld

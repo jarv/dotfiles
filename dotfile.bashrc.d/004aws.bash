@@ -1,4 +1,4 @@
-aws() {
+aws-activate() {
     unset BOTO_NAME
     unset BOTO_CONFIG
     unset AWS_CREDENTIAL_FILE

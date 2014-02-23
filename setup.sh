@@ -71,6 +71,9 @@ case `uname -s` in
         fi
         # firewall
         sudo ufw allow ssh
+        sudo ufw allow from 192.168.33.0/16
+        sudo ufw allow out from 192.168.0.0/16
         sudo ufw enable
+
         ;;
 esac
