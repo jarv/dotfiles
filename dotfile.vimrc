@@ -82,9 +82,11 @@ set smarttab
 autocmd FileType html setlocal shiftwidth=2 tabstop=2
 autocmd FileType htmldjango setlocal shiftwidth=2 tabstop=2
 autocmd FileType yaml setlocal shiftwidth=2 tabstop=2
+autocmd FileType yml setlocal shiftwidth=2 tabstop=2
 autocmd FileType puppet setlocal shiftwidth=2 tabstop=2
 autocmd FileType ruby setlocal shiftwidth=2 tabstop=2
 autocmd FileType javascript setlocal shiftwidth=2 tabstop=2
+autocmd FileType coffee setlocal shiftwidth=2 tabstop=2
 
 " Additional shortcuts
 nmap <leader>c :q<cr>
@@ -116,6 +118,7 @@ nnoremap ,j ddpgkJ
 
 " Fold behavior
 
+autocmd BufNewFile,BufReadPost *.coffee setl foldmethod=indent nofoldenable
 set foldmethod=syntax
 set foldlevelstart=1
 
