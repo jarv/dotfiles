@@ -1,26 +1,26 @@
-[ configuration ]
-/home/jarv/edx/configuration
-
-[ sysadmin ]
-/home/jarv/.virtualenvs/sys
-/home/jarv/edx/sysadmin
-
-[ mitx ]
-/home/jarv/.virtualenvs/mitx
-/home/jarv/edx/mitx
-
-[ xserver ]
-/home/jarv/.virtualenvs/mitx
-/home/jarv/edx/xserver
-
-[ certificates ]
-/home/jarv/.virtualenvs/certificates
-/home/jarv/edx/certificates
-
-[ xqueue ]
-/home/jarv/.virtualenvs/mitx
-/home/jarv/edx/xqueue
-
+#[ configuration ]
+#/home/jarv/edx/configuration
+#
+## [ sysadmin ]
+#/home/jarv/.virtualenvs/sys
+#/home/jarv/edx/sysadmin
+#
+#[ mitx ]
+#/home/jarv/.virtualenvs/mitx
+#/home/jarv/edx/mitx
+#
+#[ xserver ]
+#/home/jarv/.virtualenvs/mitx
+#/home/jarv/edx/xserver
+#
+#[ certificates ]
+#/home/jarv/.virtualenvs/certificates
+#/home/jarv/edx/certificates
+#
+#[ xqueue ]
+#/home/jarv/.virtualenvs/mitx
+#/home/jarv/edx/xqueue
+#
 [ ansible ]
 /home/jarv/src/configuration/playbooks
 /home/jarv/src/configuration-secure/ansible
