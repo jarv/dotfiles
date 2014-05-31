@@ -37,7 +37,7 @@ case `uname -s` in
         cinnamon_list="/etc/apt/sources.list.d/"
         cinnamon_list+="gwendal-lebihan-dev-cinnamon-stable-quantal.list"
         if [[ ! -f $cinnamon_list ]]; then
-            sudo add-apt-repository -y ppa:gwendal-lebihan-dev/cinnamon-stable
+            sudo add-apt-repository -y ppa:gwendal-lebihan-dev/cinnamon-nightly
         fi
         tweak_list="/etc/apt/sources.list.d/"
         tweak_list+="tualatrix-ppa-quantal.list"

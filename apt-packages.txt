@@ -1,3 +1,5 @@
+build-dep 
+python-imaging
 screen
 python-software-properties
 pkg-config
