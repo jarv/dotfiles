@@ -1,4 +1,3 @@
-build-dep 
 python-imaging
 screen
 python-software-properties

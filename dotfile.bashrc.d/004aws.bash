@@ -16,4 +16,5 @@ aws-activate() {
     export AWS_NAME="$1"
     export BOTO_CONFIG="$config"
     export AWS_CREDENTIAL_FILE="$aws"
+    export AWS_DEFAULT_REGION=us-east-1
 }
