@@ -25,3 +25,6 @@
 [submodule "dotfile.vim/bundle/vim-coffee-script"]
 	path = dotfile.vim/bundle/vim-coffee-script
 	url = https://github.com/kchmck/vim-coffee-script.git
+[submodule "dotfile.vim/bundle/vim-ansible-yaml"]
+	path = dotfile.vim/bundle/vim-ansible-yaml
+	url = git://github.com/chase/vim-ansible-yaml.git
