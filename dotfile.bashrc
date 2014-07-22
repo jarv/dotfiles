@@ -39,7 +39,7 @@ esac
 # Pretty ls colors
 [[ -n "`ls --version 2> /dev/null`" ]] && alias ls=`which ls`" --color=tty -F"
 [[ -x "`which dircolors`" ]] && eval `dircolors`
-alias vim="vim -p --servername $HOSTNAME"
+# alias vim="vim -p --servername $HOSTNAME"
 EDITOR=`which vim`
 VISUAL=$EDITOR
 FCEDIT=$EDITOR

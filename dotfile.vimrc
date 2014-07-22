@@ -28,9 +28,11 @@ Helptags
 " Beter colors for omnicomplete popup
 highlight Pmenu ctermbg=238 gui=bold
 
+" Pydiction options
+let g:pydiction_location = '/home/jarv/.vim/bundle/pydiction/complete-dict'
 " Indexer options
 
-let g:indexer_disableCtagsWarning=1
+" let g:indexer_disableCtagsWarning=1
 
 " Powerline configuration https://github.com/Lokaltog/vim-powerline
 
