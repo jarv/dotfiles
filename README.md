@@ -1,1 +1,3 @@
-first commit
+# Dotfiles
+
+Repo for dotfiles (Ubuntu / bash)
