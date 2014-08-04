@@ -13,21 +13,9 @@
 [submodule "dotfile.fonts/ubuntu-mono-powerline"]
 	path = dotfile.fonts/ubuntu-mono-powerline
 	url = git://github.com/scotu/ubuntu-mono-powerline
-[submodule "dotfile.vim/bundle/TagHighlight"]
-	path = dotfile.vim/bundle/TagHighlight
-	url = git://github.com/vim-scripts/TagHighlight
-[submodule "dotfile.vim/bundle/supertab"]
-	path = dotfile.vim/bundle/supertab
-	url = https://github.com/ervandew/supertab
-[submodule "dotfile.vim/bundle/vim-colors-solarized"]
-	path = dotfile.vim/bundle/vim-colors-solarized
-	url = git://github.com/altercation/vim-colors-solarized.git
 [submodule "dotfile.vim/bundle/vim-coffee-script"]
 	path = dotfile.vim/bundle/vim-coffee-script
 	url = https://github.com/kchmck/vim-coffee-script.git
 [submodule "dotfile.vim/bundle/vim-ansible-yaml"]
 	path = dotfile.vim/bundle/vim-ansible-yaml
 	url = git://github.com/chase/vim-ansible-yaml.git
-[submodule "dotfile.vim/bundle/pydiction"]
-	path = dotfile.vim/bundle/pydiction
-	url = https://github.com/rkulla/pydiction.git
