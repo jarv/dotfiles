@@ -19,3 +19,6 @@
 [submodule "dotfile.vim/bundle/vim-ansible-yaml"]
 	path = dotfile.vim/bundle/vim-ansible-yaml
 	url = git://github.com/chase/vim-ansible-yaml.git
+[submodule "dotfile.vim/bundle/youcompleteme"]
+	path = dotfile.vim/bundle/youcompleteme
+	url = https://github.com/Valloric/YouCompleteMe.git
