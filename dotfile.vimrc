@@ -26,7 +26,7 @@ let mapleader=","
 Helptags
 
 " Beter colors for omnicomplete popup
-highlight Pmenu ctermbg=238 gui=bold
+highlight Pmenu ctermbg=darkblue ctermfg=white
 
 " Pydiction options
 let g:pydiction_location = '/home/jarv/.vim/bundle/pydiction/complete-dict'

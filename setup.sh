@@ -25,7 +25,7 @@ for file in $DOTLINKS; do
     echo "creating symlink $link"
     ln -s $(abspath $file) $link
 done
-bash -c "cd $DIR && git submodule update --init"
+bash -c "cd $DIR && git submodule update --init --recursive"
 
 # some utiltiies and environment setup for a new
 # Ubuntu workstation
