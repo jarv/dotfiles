@@ -25,3 +25,6 @@
 [submodule "dotfile.vim/bundle/super-tab"]
 	path = dotfile.vim/bundle/super-tab
 	url = https://github.com/ervandew/supertab
+[submodule "dotfile.vim/bundle/scss-syntax"]
+	path = dotfile.vim/bundle/scss-syntax
+	url = https://github.com/cakebaker/scss-syntax.vim
