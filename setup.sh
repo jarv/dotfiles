@@ -69,6 +69,9 @@ case `uname -s` in
         if [[ $(lsb_release -d) =~ Ubuntu\ 12.10$ ]]; then
             perl $DIR/dump-keybindings.pl -i $DIR/keyboard.txt
         fi
+        # shellcheck
+        cabal update
+        cabal install shellcheck
         # firewall
         sudo ufw allow ssh
         sudo ufw allow from 192.168.33.0/16
