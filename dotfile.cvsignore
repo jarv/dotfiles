@@ -6,3 +6,5 @@ tags
 playbooks/roles/test*
 playbooks/test.yml
 .sass-cache
+test.j2
+test.yml
