@@ -40,3 +40,9 @@ xscreensaver-screensaver-dizzy
 xscreensaver-screensaver-webcollage
 terminator
 meld
+cabal-install
+cmake
+cmake-data
+postgresql
+postgresql-common
+postgresql-server-dev-all
