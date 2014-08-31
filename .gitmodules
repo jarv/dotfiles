@@ -22,3 +22,6 @@
 [submodule "dotfile.vim/bundle/youcompleteme"]
 	path = dotfile.vim/bundle/youcompleteme
 	url = https://github.com/Valloric/YouCompleteMe.git
+[submodule "dotfile.vim/bundle/super-tab"]
+	path = dotfile.vim/bundle/super-tab
+	url = https://github.com/ervandew/supertab
