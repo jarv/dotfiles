@@ -25,3 +25,6 @@
 [submodule "dotfile.vim/bundle/scss-syntax"]
 	path = dotfile.vim/bundle/scss-syntax
 	url = https://github.com/cakebaker/scss-syntax.vim
+[submodule "dotfile.vim/bundle/vim-airline"]
+	path = dotfile.vim/bundle/vim-airline
+	url = https://github.com/bling/vim-airline
