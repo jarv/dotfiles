@@ -31,6 +31,8 @@ case `uname -s` in
         TERM="xterm-256color"
         ;;
     Darwin)
+        export CLICOLOR=1
+        export LSCOLORS=GxFxCxDxBxegedabagaced
         ;;
     SunOS)
         ;;
@@ -122,6 +124,11 @@ case `uname -n` in
         DC="\[${_CYN}\]"
         ;;
 esac 
+case `uname -s` in
+    [Dd]arwin)
+        alias vim='mvim -v'
+    ;;
+esac
 
 # OP is Open Paren
 OP="${PAREN_COLOR}("
@@ -176,10 +183,10 @@ prompt_cmd() {
                 if [[ $venv == $(basename $VIRTUAL_ENV) ]]; then
                     joined="$joined | ${_BBLU}${venv}${_BBLK}"
                 else
-                    joined="$joined | ${_BLK}${venv}${_BBLK}"
+                    joined="$joined | ${_BBLK}${venv}${_BBLK}"
                 fi
             else
-                joined="$joined | ${_BLK}${venv}${_BBLK}"
+                joined="$joined | ${_BBLK}${venv}${_BBLK}"
             fi
         done
         joined=$(echo $joined | sed -e 's/^| //')
