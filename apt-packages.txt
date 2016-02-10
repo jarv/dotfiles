@@ -46,3 +46,12 @@ cmake-data
 postgresql
 postgresql-common
 postgresql-server-dev-all
+libjack-dev 
+libasound2-dev
+libpulse-dev
+libcue-dev
+libavcodec-dev
+libavformat-dev
+libopusfile-dev
+libsamplerate0-dev
+libroar-dev

@@ -34,23 +34,13 @@ case `uname -s` in
     [Ll]inux)
         mkdir -p $HOME/tmp
         mkdir -p $HOME/src
-        cinnamon_list="/etc/apt/sources.list.d/"
-        cinnamon_list+="gwendal-lebihan-dev-cinnamon-stable-quantal.list"
-        if [[ ! -f $cinnamon_list ]]; then
-            sudo add-apt-repository -y ppa:gwendal-lebihan-dev/cinnamon-nightly
-        fi
-        tweak_list="/etc/apt/sources.list.d/"
-        tweak_list+="tualatrix-ppa-quantal.list"
-        if [[ ! -f $tweak_list ]]; then
-            sudo add-apt-repository -y ppa:tualatrix/ppa
-        fi
         # install apt packages
         sudo apt-get update
         cat $DIR/apt-packages.txt | xargs sudo apt-get install -y
         # install node
         if [[ ! -x $HOME/bin/node ]]; then
             cd $HOME/src
-            git clone git://github.com/ry/node.git
+            git clone git://github.com/nodejs/node.git
             cd node
             ./configure --prefix=$HOME
             make
