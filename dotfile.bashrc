@@ -50,7 +50,6 @@ FIGNORE=.o:~
 
 LESS="-f-R-P?f[%f]:[STDIN].?m(file %i of %m)?x[Next\: %x]. .?lb [line %lb?L/%L]..?e(END) :?pB [%pB\%]..%t"
 RI='--format ansi'
-GREP_OPTIONS='--color=auto --exclude-dir=.git'
 
 # Source the completion file, if it exists
 if [ -f /etc/bash_completion ]; then 
@@ -174,24 +173,6 @@ prompt_cmd() {
 
         #prompt_proj=$(basename $VIRTUAL_ENV)
         #PS1PROJ="${RA}${OP}${PROJ_COLOR}${prompt_proj}${CP}${LA}"
-    if type -t workon > /dev/null; then
-        V=$(workon)
-        joined=''
-        for venv in $V; do
-            venv="${venv%\\n}"
-            if [[ -n $VIRTUAL_ENV ]]; then
-                if [[ $venv == $(basename $VIRTUAL_ENV) ]]; then
-                    joined="$joined | ${_BBLU}${venv}${_BBLK}"
-                else
-                    joined="$joined | ${_BBLK}${venv}${_BBLK}"
-                fi
-            else
-                joined="$joined | ${_BBLK}${venv}${_BBLK}"
-            fi
-        done
-        joined=$(echo $joined | sed -e 's/^| //')
-        PS1VENV="$_BBLK[ $joined ${_BBLK}]${_NORM} "
-    fi
 
     GITBRANCH=$(__git_ps1 '%s')
     if [[ $GITBRANCH != '' ]]; then
@@ -223,4 +204,3 @@ export PATH="/usr/local/heroku/bin:$PATH"
 
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 PATH=$PATH:$HOME/.cabal/bin
-source /Users/johnjarv/perl5/perlbrew/etc/bashrc
