@@ -55,3 +55,13 @@ libavformat-dev
 libopusfile-dev
 libsamplerate0-dev
 libroar-dev
+libao-dev
+ffmpeg
+libmad0-dev
+ffmpeg
+libao-dev
+ubuntu-restricted-extras 
+vlc 
+gnome-mplayer
+gnome-tweak-tool
+aptitude
