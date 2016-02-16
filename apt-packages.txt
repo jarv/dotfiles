@@ -65,3 +65,4 @@ vlc
 gnome-mplayer
 gnome-tweak-tool
 aptitude
+rbenv
