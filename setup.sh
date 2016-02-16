@@ -35,6 +35,7 @@ case `uname -s` in
         mkdir -p $HOME/tmp
         mkdir -p $HOME/src
         # install apt packages
+        cat $DIR/ubuntu-repositories.txt  | xargs -n1 sudo add-apt-repository -y
         sudo apt-get update
         cat $DIR/apt-packages.txt | xargs sudo apt-get install -y
         # install node

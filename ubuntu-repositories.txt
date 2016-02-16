@@ -1,0 +1,6 @@
+ppa:atareao/atareao
+ppa:fossfreedom/indicator-sysmonitor
+ppa:indicator-multiload/stable-daily
+ppa:noobslab/indicators
+ppa:diesch/testing
+

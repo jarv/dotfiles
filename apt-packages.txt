@@ -66,3 +66,11 @@ gnome-mplayer
 gnome-tweak-tool
 aptitude
 rbenv
+my-weather-indicator
+indicator-netspeed-unity
+indicator-sysmonitor
+python-appindicator python-pip
+indicator-multiload
+indicator-sensors 
+lm-sensors
+classicmenu-indicator
