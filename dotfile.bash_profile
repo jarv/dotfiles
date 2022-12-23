@@ -140,9 +140,3 @@ export LESS RI
 ##############
 
 eval "$(direnv hook bash)"
-
-##############
-# fzf
-##############
-
-[[ -r ~/.fzf.bash ]] && . ~/.fzf.bash
