@@ -112,7 +112,7 @@ function git_diff() {
 # Misc exports
 ##############
 
-eval "$(/opt/homebrew/bin/brew shellenv)"
+eval "$(brew shellenv)"
 export BASH_SILENCE_DEPRECATION_WARNING=1
 export DOCKER_HOST=unix://$HOME/.colima/docker.sock
 export SSH_AUTH_SOCK=$HOME/.gnupg/S.gpg-agent.ssh
@@ -133,7 +133,7 @@ export LESS RI
 # asdf
 ##############
 
-. "$(brew --prefix asdf)/asdf.sh"
+. $(brew --prefix asdf)/libexec/asdf.sh
 
 ##############
 # direnv
