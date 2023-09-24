@@ -59,6 +59,8 @@ call plug#end()
 syntax enable
 " minimum number of screen lines that you would like above and below the cursor
 set scrolloff=5
+set mouse-=a
+set mouse=
 
 "Fzf configuration
 if executable('rg')
@@ -146,6 +148,7 @@ let g:ale_linters = {
   \ 'yaml':      ['yamllint'],
   \ 'ruby': ['rubocop'],
   \ 'sh': ['shellcheck'],
+  \ 'bash': ['shellcheck'],
   \ 'javascript': ['eslint'],
 \}
 
@@ -214,7 +217,7 @@ autocmd FileType terraform setlocal expandtab shiftwidth=2 tabstop=2
 autocmd FileType jsonnet setlocal expandtab shiftwidth=2 tabstop=2
 autocmd FileType json setlocal expandtab shiftwidth=2 tabstop=2
 autocmd FileType sh setlocal expandtab shiftwidth=2 tabstop=2
-autocmd FileType bash setlocal expandtab shiftwidth=2 tabstop=2
+autocmd FileType bash setlocal expandtab shiftwidth=2 tabstop=2 list
 autocmd FileType *.gotmpl setlocal expandtab shiftwidth=2 tabstop=2
 autocmd FileType go setlocal autoindent noexpandtab tabstop=4 shiftwidth=4
 autocmd FileType make setlocal autoindent noexpandtab tabstop=4 shiftwidth=4
@@ -222,7 +225,7 @@ autocmd FileType yaml setl iskeyword+=#,-
 
 " Paste images from the clipboard
 autocmd FileType markdown nmap <buffer><silent> <leader>p :call mdip#MarkdownClipboardImage()<CR>
-let g:mdip_imgdir_absolute="/Users/jarv/src/jarv.org/static/img"
+let g:mdip_imgdir_absolute="/Users/jarv/src/jarv/jarv.org/static/img"
 let g:mdip_imdir_intext="/img"
 " let g:mdip_imgdir="/Users/jarv/src/jarv.org/static/img"
 

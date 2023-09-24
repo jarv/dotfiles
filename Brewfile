@@ -77,6 +77,6 @@ brew "universal-ctags/universal-ctags/universal-ctags", args: ["HEAD"]
 cask "1password"
 cask "1password-cli"
 cask "firefox"
-cask "iterm2"
 cask "ngrok"
 cask "slack"
+cask "wezterm"

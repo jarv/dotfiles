@@ -1,10 +1,26 @@
+_complete_ssh_hosts () {
+        COMPREPLY=()
+        cur="${COMP_WORDS[COMP_CWORD]}"
+        comp_ssh_hosts=`cat ~/.ssh/known_hosts | \
+                        cut -f 1 -d ' ' | \
+                         sed -e s/,.*//g | \
+                         grep -v ^# | \
+                         uniq | \
+                         grep -v "\[" ;
+                         cat ~/.ssh/config | \
+                         grep --color=never "^Host " | \
+                         awk '{print $2}'
+                   `
+        COMPREPLY=( $(compgen -W "${comp_ssh_hosts}" -- $cur))
+        return 0
+}
 [[ -r "$HOME/.bashrc" ]] && . "$HOME/.bashrc"
-
 umask 022
 set -o vi
 alias ls="ls --color=tty -F"
 alias ag="rg"
 alias vim="nvim"
+alias k="kubectl"
 
 if [[ -s "$HOME/.rvm/scripts/rvm" ]];then
     source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
@@ -50,7 +66,6 @@ export GOPATH="/Users/jarv/go"
 ##################
 
 source <(kubectl completion bash)
-[[ -r "$(brew --prefix asdf)/etc/bash_completion.d/asdf.bash" ]] && . "$(brew --prefix asdf)/etc/bash_completion.d/asdf.bash"
 [[ -r "$(brew --prefix bash-completion@2)/etc/profile.d/bash_completion.sh" ]] && . "$(brew --prefix bash-completion@2)/etc/profile.d/bash_completion.sh"
 [[ -r '/Users/jarv/Downloads/gcloud/google-cloud-sdk/completion.bash.inc' ]] && . '/Users/jarv/Downloads/gcloud/google-cloud-sdk/completion.bash.inc'
 [[ -r '/Users/jarv/lib/azure-cli/az.completion' ]] && . '/Users/jarv/lib/azure-cli/az.completion'
@@ -59,9 +74,11 @@ source <(kubectl completion bash)
 # Git Prompt
 ##################
 
-if [ -r "$(brew --prefix)/opt/bash-git-prompt/share/gitprompt.sh" ]; then
+  if [ -r "$(brew --prefix)/opt/bash-git-prompt/share/gitprompt.sh" ]; then
   GIT_PROMPT_ONLY_IN_REPO=0
-  GIT_PROMPT_THEME=Solarized # use theme optimized for solarized color scheme
+  GIT_PROMPT_FETCH_REMOTE_STATUS=0   # uncomment to avoid fetching remote status
+  GIT_PROMPT_IGNORE_SUBMODULES=1 # uncomment to avoid searching for changed files in submodules
+    GIT_PROMPT_THEME=Solarized # use theme optimized for solarized color scheme
   __GIT_PROMPT_DIR=$(brew --prefix)/opt/bash-git-prompt/share
   . "$(brew --prefix)/opt/kube-ps1/share/kube-ps1.sh"
   kubeoff
@@ -114,8 +131,10 @@ function git_diff() {
 
 eval "$(brew shellenv)"
 export BASH_SILENCE_DEPRECATION_WARNING=1
-export DOCKER_HOST=unix://$HOME/.colima/docker.sock
-export SSH_AUTH_SOCK=$HOME/.gnupg/S.gpg-agent.ssh
+# export DOCKER_HOST=unix://$HOME/.colima/docker.sock
+SSH_AUTH_SOCK="$(brew --prefix)/var/run/yubikey-agent.sock"
+export SSH_AUTH_SOCK
+# export SSH_AUTH_SOCK=$HOME/.gnupg/S.gpg-agent.ssh
 export VAULT_ADDR=https://vault.ops.gke.gitlab.net
 export VAULT_PROXY_ADDR=socks5://localhost:18200
 export FZF_DEFAULT_OPTS='--bind ctrl-d:page-down,ctrl-u:page-up'
@@ -130,13 +149,21 @@ RI='--format ansi'
 export LESS RI
 
 ##############
-# asdf
+# rtx (was asdf)
 ##############
 
-. $(brew --prefix asdf)/libexec/asdf.sh
+eval "$(/opt/homebrew/bin/rtx activate bash)"
 
 ##############
 # direnv
 ##############
 
 eval "$(direnv hook bash)"
+
+##############
+# fzf
+##############
+
+source "$HOME/.fzf.bash"
+
+complete -F _complete_ssh_hosts ssh
