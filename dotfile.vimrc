@@ -9,7 +9,8 @@ endif
 
 call plug#begin('~/.vim/plugged')
 Plug 'rust-lang/rust.vim'
-Plug 'airblade/vim-gitgutter'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'lewis6991/gitsigns.nvim'
 Plug 'bling/vim-airline'
 Plug 'cakebaker/scss-syntax.vim'
 Plug 'chase/vim-ansible-yaml'
@@ -28,6 +29,7 @@ Plug 'towolf/vim-helm'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
+Plug 'tpope/vim-sleuth'
 Plug 'vim-scripts/AnsiEsc.vim'
 Plug 'z0mbix/vim-shfmt'
 Plug 'zah/nim.vim'
@@ -35,6 +37,7 @@ Plug 'pedrohdz/vim-yaml-folds'
 Plug 'ferrine/md-img-paste.vim'
 Plug 'dense-analysis/ale'
 Plug 'autozimu/LanguageClient-neovim'
+Plug 'neanias/everforest-nvim', { 'branch': 'main' }
 
 " Typescript
 Plug 'pangloss/vim-javascript'    " JavaScript support
@@ -57,6 +60,12 @@ Plug 'hrsh7th/vim-vsnip'
 call plug#end()
 
 syntax enable
+set background=dark
+
+lua vim.cmd([[colorscheme everforest]])
+set termguicolors
+highlight clear SignColumn
+
 " minimum number of screen lines that you would like above and below the cursor
 set scrolloff=5
 set mouse-=a
@@ -69,24 +78,15 @@ endif
 
 nmap <c-p> :Files<cr>
 
-set re=1
-set regexpengine=1
+" set re=1
+" set regexpengine=1
 set ttyfast
 set lazyredraw
-"----------------
-" Git Gutter"
-set updatetime=250
-let g:gitgutter_max_signs = 500
-" No mapping
-let g:gitgutter_map_keys = 0
 
-" Colors
-let g:gitgutter_override_sign_column_highlight = 0
-highlight clear SignColumn
-highlight GitGutterAdd ctermfg=2
-highlight GitGutterChange ctermfg=3
-highlight GitGutterDelete ctermfg=1
-highlight GitGutterChangeDelete ctermfg=4
+
+"----------------
+" Git Signs
+lua require('gitsigns').setup()
 
 filetype plugin indent on
 au BufRead,BufNewFile *.md set filetype=markdown
@@ -227,14 +227,13 @@ autocmd FileType yaml setl iskeyword+=#,-
 autocmd FileType markdown nmap <buffer><silent> <leader>p :call mdip#MarkdownClipboardImage()<CR>
 let g:mdip_imgdir_absolute="/Users/jarv/src/jarv/jarv.org/static/img"
 let g:mdip_imdir_intext="/img"
-" let g:mdip_imgdir="/Users/jarv/src/jarv.org/static/img"
 
 nmap <leader>q :bd<cr>
 nmap <leader>m :ProjectFiles<cr>
 nmap <leader>. :Rg<cr>
 nmap <leader><SPACE> :GF?<cr>
 nmap <leader>s :ALEToggle<cr>
-nmap <leader>g :Gstatus<cr>
+nmap <leader>g :Git status<cr>
 nmap <leader>P :Git push<cr>
 " Quote a word
 " nnoremap qw :silent! normal mpea'<Esc>bi'<Esc>`pl
@@ -248,9 +247,6 @@ nmap <C-k> :bnext<cr>
 nmap <C-j> :bprev<cr>
 set hidden " Don't require saving when switching buffers
 
-" Reverse join
-nnoremap ,j ddpgkJ
-
 " Fold behavior
 let javaScript_fold=1         " JavaScript
 let perl_fold=1               " Perl
@@ -262,29 +258,6 @@ let vimsyn_folding='af'       " Vim script
 let xml_syntax_folding=1      " XML
 let yaml_syntax_folding=1      " XML
 let yaml_syntax_folding=1      " XML
-
-" Remove trailing whitespace automatically for some
-" file types
-autocmd BufWritePre *.py :%s/\s\+$//e
-autocmd BufWritePre *.rb :%s/\s\+$//e
-autocmd BufWritePre *.pp :%s/\s\+$//e
-autocmd BufWritePre *.tf :%s/\s\+$//e
-autocmd BufWritePre *.bash :%s/\s\+$//e
-autocmd BufWritePre *.json :%s/\s\+$//e
-autocmd BufWritePre *.sh :%s/\s\+$//e
-autocmd BufWritePre *.bash :%s/\s\+$//e
-autocmd BufWritePre *.md :%s/\s\+$//e
-autocmd BufWritePre *.html :%s/\s\+$//e
-autocmd BufWritePre *.rake :%s/\s\+$//e
-autocmd BufWritePre *.erb :%s/\s\+$//e
-autocmd BufWritePre *.gotmpl :%s/\s\+$//e
-autocmd BufWritePre *.yaml :%s/\s\+$//e
-autocmd BufWritePre *.yml :%s/\s\+$//e
-autocmd BufWritePre yaml :%s/\s\+$//e
-autocmd BufWritePre Rakefile :%s/\s\+$//e
-autocmd BufWritePre bash :%s/\s\+$//e
-autocmd BufWritePre sh :%s/\s\+$//e
-autocmd BufWritePre gotmpl :%s/\s\+$//e
 
 " backups
 set backup
@@ -398,7 +371,7 @@ lua <<EOF
   -- Set configuration for specific filetype.
   cmp.setup.filetype('gitcommit', {
     sources = cmp.config.sources({
-      { name = 'cmp_git' }, -- You can specify the `cmp_git` source if you were installed it.
+      { name = 'git' }, -- You can specify the `git` source if [you were installed it](https://github.com/petertriho/cmp-git).
     }, {
       { name = 'buffer' },
     })
@@ -422,8 +395,7 @@ lua <<EOF
     })
   })
 
-  -- Set up lspconfig.
-  local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+  local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
   require 'lspconfig'.gopls.setup{
     cmd = {"/Users/jarv/go/bin/gopls", "serve"},
   }
