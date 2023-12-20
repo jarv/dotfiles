@@ -18,7 +18,9 @@ local config = {
   enable_tab_bar = false,
   font = wz.font 'JetBrains Mono',
   font_size = 14.0,
-  color_scheme = 'Solarized Dark (Gogh)',
+  -- color_scheme = 'Solarized Dark (Gogh)',
+  -- color_scheme = 'Rosé Pine (base16)',
+  color_scheme = 'Rosé Pine (Gogh)',
   -- disable most font ligatures
   harfbuzz_features = {"calt=0", "clig=0", "liga=0"},
   keys = {
