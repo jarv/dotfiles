@@ -1,9 +1,9 @@
 vim.cmd([[
-	set scrolloff=5
+	" set scrolloff=5
 	set mouse-=a
 	set mouse=""
 	set nocompatible   " Disable vi-compatibility
-	set laststatus=2   " Always show the statusline
+	" set laststatus=2   " Always show the statusline
 	set encoding=utf-8 " Necessary to show Unicode glyphs
 	set undofile
 	set undodir=~/.vim/undo/
@@ -13,15 +13,15 @@ vim.cmd([[
 	set smarttab
 
 	" Fold behavior
-	let javaScript_fold=1         " JavaScript
-	let perl_fold=1               " Perl
-	let php_folding=1             " PHP
-	let r_syntax_folding=1        " R
-	let ruby_fold=1               " Ruby
-	let sh_fold_enabled=1         " sh
-	let vimsyn_folding='af'       " Vim script
-	let xml_syntax_folding=1      " XML
-	let yaml_syntax_folding=1      " XML
+	" let javaScript_fold=1         " JavaScript
+	" let perl_fold=1               " Perl
+	" let php_folding=1             " PHP
+	" let r_syntax_folding=1        " R
+	" let ruby_fold=1               " Ruby
+	" let sh_fold_enabled=1         " sh
+	" let vimsyn_folding='af'       " Vim script
+	" let xml_syntax_folding=1      " XML
+	" let yaml_syntax_folding=1      " XML
 
 	" Backups
 
@@ -63,4 +63,10 @@ vim.cmd([[
 -- Setting the colorscheme must happen after the airline is loaded
 -- or buffers won't show in the tabline
 -- https://github.com/vim-airline/vim-airline/issues/2548#issuecomment-1786260443
-vim.cmd.colorscheme("rose-pine")
+require('rose-pine').setup({
+    variant = 'main',
+    disable_italics = true,
+    disable_background = true,
+    disable_float_background = false,
+})
+-- vim.cmd.colorscheme("rose-pine")

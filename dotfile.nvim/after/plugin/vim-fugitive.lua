@@ -1,13 +1,24 @@
-vim.cmd([[
-    let g:go_fmt_command = "goimports"
-    let g:go_auto_type_info = 1
-    let g:go_highlight_build_constraints = 1
-    let g:go_highlight_extra_types = 1
-    let g:go_highlight_fields = 1
-    let g:go_highlight_functions = 1
-    let g:go_highlight_methods = 1
-    let g:go_highlight_operators = 1
-    let g:go_highlight_structs = 1
-    let g:go_highlight_types = 1
-    let g:go_addtags_transform = "snakecase"
-]])
+vim.keymap.set("n", "<leader>gs", vim.cmd.Git)
+local JarvFugitive = vim.api.nvim_create_augroup("JarvFugitive", {})
+
+local autocmd = vim.api.nvim_create_autocmd
+autocmd("BufWinEnter", {
+    group = JarvFugitive,
+    pattern = "*",
+    callback = function()
+        if vim.bo.ft ~= "fugitive" then
+            return
+        end
+
+        local bufnr = vim.api.nvim_get_current_buf()
+        local opts = {buffer = bufnr, remap = false}
+        vim.keymap.set("n", "<leader>p", function()
+            vim.cmd.Git('push')
+        end, opts)
+
+        -- rebase always
+        vim.keymap.set("n", "<leader>P", function()
+            vim.cmd.Git({'pull',  '--rebase'})
+        end, opts)
+    end,
+})
