@@ -1,4 +1,5 @@
 local wz = require 'wezterm'
+local act = wz.action
 local config = {
   window_close_confirmation = "NeverPrompt",
   check_for_updates = false,
@@ -37,6 +38,14 @@ local config = {
     { key = "l", mods = "CMD", action=wz.action{ActivatePaneDirection="Right"}},
   },
   mouse_bindings = {
+    -- Change the default click behavior so that it only selects
+    -- text and doesn't open hyperlinks
+    {
+      event = { Up = { streak = 1, button = 'Left' } },
+      mods = 'NONE',
+      action = act.CompleteSelection 'ClipboardAndPrimarySelection',
+    },
+
     -- Ctrl-click will open the link under the mouse cursor
     {
       event = { Up = { streak = 1, button = 'Left' } },

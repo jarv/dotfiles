@@ -11,6 +11,8 @@ vim.cmd([[
 	set et
 	set sw=2
 	set smarttab
+	set relativenumber
+	set number
 
 	" Fold behavior
 	" let javaScript_fold=1         " JavaScript
@@ -69,4 +71,3 @@ require('rose-pine').setup({
     disable_background = true,
     disable_float_background = false,
 })
--- vim.cmd.colorscheme("rose-pine")
