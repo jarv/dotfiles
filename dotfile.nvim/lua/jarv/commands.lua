@@ -60,6 +60,9 @@ vim.cmd([[
 	" When switching buffers, preserve window view.
 	autocmd BufLeave * call AutoSaveWinView()
 	autocmd BufEnter * call AutoRestoreWinView()
+
+	" pip install neovim pillow
+	let g:python3_host_prog = "/opt/homebrew/bin/python3"
 ]])
 
 -- Setting the colorscheme must happen after the airline is loaded

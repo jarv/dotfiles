@@ -74,11 +74,6 @@ end
 time([[try_loadstring definition]], false)
 time([[Defining packer_plugins]], true)
 _G.packer_plugins = {
-  ["AnsiEsc.vim"] = {
-    loaded = true,
-    path = "/Users/jarv/.local/share/nvim/site/pack/packer/start/AnsiEsc.vim",
-    url = "https://github.com/vim-scripts/AnsiEsc.vim"
-  },
   LuaSnip = {
     loaded = true,
     path = "/Users/jarv/.local/share/nvim/site/pack/packer/start/LuaSnip",
@@ -133,21 +128,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/jarv/.local/share/nvim/site/pack/packer/start/fugitive-gitlab.vim",
     url = "https://github.com/shumphrey/fugitive-gitlab.vim"
-  },
-  fzf = {
-    loaded = true,
-    path = "/Users/jarv/.local/share/nvim/site/pack/packer/start/fzf",
-    url = "https://github.com/junegunn/fzf"
-  },
-  ["fzf-mru.vim"] = {
-    loaded = true,
-    path = "/Users/jarv/.local/share/nvim/site/pack/packer/start/fzf-mru.vim",
-    url = "https://github.com/pbogut/fzf-mru.vim"
-  },
-  ["fzf.vim"] = {
-    loaded = true,
-    path = "/Users/jarv/.local/share/nvim/site/pack/packer/start/fzf.vim",
-    url = "https://github.com/junegunn/fzf.vim"
   },
   ["gitsigns.nvim"] = {
     loaded = true,
@@ -249,11 +229,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/jarv/.local/share/nvim/site/pack/packer/start/vim-ansible-yaml",
     url = "https://github.com/chase/vim-ansible-yaml"
-  },
-  ["vim-coffee-script"] = {
-    loaded = true,
-    path = "/Users/jarv/.local/share/nvim/site/pack/packer/start/vim-coffee-script",
-    url = "https://github.com/kchmck/vim-coffee-script"
   },
   ["vim-commentary"] = {
     loaded = true,
