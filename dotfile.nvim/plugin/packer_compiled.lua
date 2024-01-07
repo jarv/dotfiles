@@ -74,6 +74,11 @@ end
 time([[try_loadstring definition]], false)
 time([[Defining packer_plugins]], true)
 _G.packer_plugins = {
+  ["AnsiEsc.vim"] = {
+    loaded = true,
+    path = "/Users/jarv/.local/share/nvim/site/pack/packer/start/AnsiEsc.vim",
+    url = "https://github.com/vim-scripts/AnsiEsc.vim"
+  },
   LuaSnip = {
     loaded = true,
     path = "/Users/jarv/.local/share/nvim/site/pack/packer/start/LuaSnip",
@@ -88,6 +93,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/jarv/.local/share/nvim/site/pack/packer/start/cellular-automaton.nvim",
     url = "https://github.com/eandrju/cellular-automaton.nvim"
+  },
+  ["clipboard-image.nvim"] = {
+    loaded = true,
+    path = "/Users/jarv/.local/share/nvim/site/pack/packer/start/clipboard-image.nvim",
+    url = "https://github.com/dfendr/clipboard-image.nvim"
   },
   ["cloak.nvim"] = {
     loaded = true,
@@ -148,11 +158,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/jarv/.local/share/nvim/site/pack/packer/start/mason.nvim",
     url = "https://github.com/williamboman/mason.nvim"
-  },
-  ["md-img-paste.vim"] = {
-    loaded = true,
-    path = "/Users/jarv/.local/share/nvim/site/pack/packer/start/md-img-paste.vim",
-    url = "https://github.com/ferrine/md-img-paste.vim"
   },
   ["nim.vim"] = {
     loaded = true,

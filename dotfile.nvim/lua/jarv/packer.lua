@@ -29,21 +29,19 @@ return require('packer').startup(function(use)
   })
   use {
 	  'VonHeikemen/lsp-zero.nvim',
-	  branch = 'v1.x',
+	  branch = 'v3.x',
 	  requires = {
 		  -- LSP Support
 		  {'neovim/nvim-lspconfig'},
 		  {'williamboman/mason.nvim'},
 		  {'williamboman/mason-lspconfig.nvim'},
-
 		  -- Autocompletion
 		  {'hrsh7th/nvim-cmp'},
+		  {'hrsh7th/cmp-nvim-lsp'},
 		  {'hrsh7th/cmp-buffer'},
 		  {'hrsh7th/cmp-path'},
 		  {'saadparwaiz1/cmp_luasnip'},
-		  {'hrsh7th/cmp-nvim-lsp'},
 		  {'hrsh7th/cmp-nvim-lua'},
-
 		  -- Snippets
 		  {'L3MON4D3/LuaSnip'},
 		  {'rafamadriz/friendly-snippets'},
@@ -59,7 +57,6 @@ return require('packer').startup(function(use)
   use("fatih/vim-go")
   use("google/vim-jsonnet")
   use("hashivim/vim-terraform")
-  use("rlue/vim-fold-rspec")
   use("shumphrey/fugitive-gitlab.vim")
   use("towolf/vim-helm")
 
@@ -71,6 +68,7 @@ return require('packer').startup(function(use)
   use("vim-scripts/AnsiEsc.vim")
   use("z0mbix/vim-shfmt")
   use("zah/nim.vim")
+  use("rlue/vim-fold-rspec")
   use("pedrohdz/vim-yaml-folds")
   use("dfendr/clipboard-image.nvim")
   use("dense-analysis/ale")

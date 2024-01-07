@@ -5,7 +5,6 @@ vim.cmd([[
         \ 'markdown':      ['mdl', 'writegood'],
         \ 'jsonnet':      ['jsonnset-lint'],
         \ 'yaml':      ['yamllint'],
-        \ 'ruby': ['rubocop'],
         \ 'sh': ['shellcheck'],
         \ 'bash': ['shellcheck'],
         \ 'javascript': ['eslint'],
@@ -19,6 +18,9 @@ vim.cmd([[
         \ 'typescript': ['prettier'],
         \}
 
+    let g:ale_linters_ignore = {
+      \   'ruby': ['rubocop'],
+      \}
     let g:ale_echo_msg_format = '%linter%: %s'
     let g:ale_ruby_rubocop_executable = 'bundle'
     let g:ale_ruby_rubocop_options = '-D'
