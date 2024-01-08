@@ -163,7 +163,25 @@ eval "$(direnv hook bash)"
 ##############
 # fzf
 ##############
+# Setup fzf
+# ---------
+if [[ ! "$PATH" == */opt/homebrew/opt/fzf/bin* ]]; then
+  PATH="${PATH:+${PATH}:}/opt/homebrew/opt/fzf/bin"
+fi
 
-source "$HOME/.fzf.bash"
+# Auto-completion
+# ---------------
+[[ $- == *i* ]] && source "/opt/homebrew/opt/fzf/shell/completion.bash" 2> /dev/null
+
+# Key bindings
+# ------------
+source "/opt/homebrew/opt/fzf/shell/key-bindings.bash"
+
+##############
+# GitLab code suggestions
+# using dummy user for PAT
+##############
+
+source "$HOME/.code_suggestions"
 
 complete -F _complete_ssh_hosts ssh

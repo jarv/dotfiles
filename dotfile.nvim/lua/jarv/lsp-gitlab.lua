@@ -4,7 +4,7 @@ local lspconfig = require("lspconfig")
 local lsp_configurations = require('lspconfig.configs')
 local settings = {
   baseUrl = "https://gitlab.com",
-  token = vim.env.GITLAB_API_TOKEN,
+  token = vim.env.GITLAB_API_TOKEN_CODE_SUGGESTIONS,
 }
 
 if not lsp_configurations.gitlab_lsp then
