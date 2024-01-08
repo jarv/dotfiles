@@ -51,6 +51,3 @@ lspconfig.ruby_ls.setup({
     setup_diagnostics(client, buffer)
   end,
 })
-
--- https://docs.rubocop.org/rubocop/usage/lsp.html
--- require('lspconfig').rubocop.setup({})
