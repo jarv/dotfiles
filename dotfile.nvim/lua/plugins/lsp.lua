@@ -89,6 +89,7 @@ return {
 					'tsserver',
 					'eslint',
 					'lua_ls',
+					'ruby_ls',
 				},
 				handlers = {
 					lsp_zero.default_setup,

@@ -16,8 +16,9 @@ return {
 		\ 'python': ['black'],
 		\ 'go': ['gofmt'],
 		\ '*': ['remove_trailing_lines', 'trim_whitespace'],
-		\ 'javascript': ['prettier'],
+		\ 'javascript': ['prettier', 'eslint'],
 		\ 'typescript': ['prettier'],
+		\ 'ruby': ['rubocop'],
 		\}
 
 		let g:ale_echo_msg_format = '%linter%: %s'
