@@ -1,4 +1,7 @@
 vim.cmd([[
+	set tabstop=2
+	set shiftwidth=2
+	set expandtab
 	" set scrolloff=5
 	set mouse-=a
 	set mouse=""
