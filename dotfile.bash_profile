@@ -152,7 +152,7 @@ export LESS RI
 # rtx (was asdf)
 ##############
 
-eval "$(/opt/homebrew/bin/rtx activate bash)"
+eval "$(/opt/homebrew/bin/mise activate bash)"
 
 ##############
 # direnv
