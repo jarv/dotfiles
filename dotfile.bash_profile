@@ -149,9 +149,10 @@ RI='--format ansi'
 export LESS RI
 
 ##############
-# rtx (was asdf)
+# mise (was rtx (was asdf))
 ##############
 
+export MISE_LEGACY_VERSION_FILE=1
 eval "$(/opt/homebrew/bin/mise activate bash)"
 
 ##############
