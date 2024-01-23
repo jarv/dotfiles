@@ -15,6 +15,7 @@ vim.g.mapleader = " "
 require("lazy").setup("plugins")
 require("jarv.remap")
 require("jarv.commands")
+require("jarv.lsp")
 require("jarv.lsp-ruby")
 require("jarv.lsp-gitlab")
 require("jarv.dos")

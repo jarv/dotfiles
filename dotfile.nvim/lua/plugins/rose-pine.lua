@@ -8,10 +8,17 @@ return {
 			-- or buffers won't show in the tabline
 			-- https://github.com/vim-airline/vim-airline/issues/2548#issuecomment-1786260443
 			require('rose-pine').setup({
-				variant = 'main',
-				disable_italics = true,
-				disable_background = true,
-				disable_float_background = false,
+
+				styles = {
+						bold = true,
+						italic = false,
+						transparency = false,
+				},
+
+				variant = "auto", -- auto, main, moon, or dawn
+				dark_variant = "main", -- main, moon, or dawn
+				dim_inactive_windows = false,
+				extend_background_behind_borders = true,
 			})
 
 			vim.cmd('colorscheme rose-pine')

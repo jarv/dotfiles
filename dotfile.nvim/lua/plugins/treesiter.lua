@@ -1,5 +1,4 @@
 return {
-	{
 		"nvim-treesitter/nvim-treesitter",
 		build = ":TSUpdate",
 		config = function()
@@ -11,7 +10,7 @@ return {
 				auto_install = true,
 				highlight = {
 					-- `false` will disable the whole extension
-					enable = true,
+					enable = false,
 
 					-- Setting this to true will run `:h syntax` and tree-sitter at the same time.
 					-- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
@@ -23,5 +22,4 @@ return {
 			})
 			vim.cmd([[ hi TreesitterContextBottom gui=underline guisp=Grey ]])
 		end
-	},
 }

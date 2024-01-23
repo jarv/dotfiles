@@ -47,6 +47,9 @@ local lspconfig = require("lspconfig")
 
 -- https://github.com/Shopify/ruby-lsp/blob/main/EDITORS.md#neovim-lsp
 lspconfig.ruby_ls.setup({
+  on_init = function(client, _)
+    client.server_capabilities.semanticTokensProvider = nil  -- turn off semantic tokens
+  end,
   on_attach = function(client, buffer)
     setup_diagnostics(client, buffer)
   end,
