@@ -4,7 +4,7 @@ return {
 		vim.cmd([[
 		let g:ale_linters = {
 		\ 'go': ['golangci-lint'],
-		\ 'markdown':      ['mdl', 'writegood'],
+		\ 'markdown':      ['mdl', 'writegood', 'vale'],
 		\ 'jsonnet':      ['jsonnset-lint'],
 		\ 'yaml':      ['yamllint'],
 		\ 'sh': ['shellcheck'],
