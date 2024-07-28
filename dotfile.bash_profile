@@ -32,7 +32,12 @@ shopt -s cmdhist
 shopt -s histappend
 shopt -s checkhash
 shopt -s no_empty_cmd_completion
+shopt -s globstar
 shopt -s execfail
+
+# make less more friendly for non-text input files, see lesspipe(1)
+[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
+
 
 ##############
 # Homedir
@@ -57,6 +62,7 @@ PATH=$PATH:~/.kube/plugins/jordanwilson230
 PATH="/opt/homebrew/opt/coreutils/libexec/gnubin:$PATH"
 PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 PATH="$HOME/.cargo/bin:$PATH"
+PATH="$PATH:/opt/nvim-linux64/bin"
 export PATH
 [[ -r '/Users/jarv/Downloads/gcloud/google-cloud-sdk/path.bash.inc' ]] && . '/Users/jarv/Downloads/gcloud/google-cloud-sdk/path.bash.inc'
 export GOPATH="/Users/jarv/go"
@@ -65,25 +71,31 @@ export GOPATH="/Users/jarv/go"
 # Bash Completions
 ##################
 
-source <(kubectl completion bash)
-[[ -r "$(brew --prefix bash-completion@2)/etc/profile.d/bash_completion.sh" ]] && . "$(brew --prefix bash-completion@2)/etc/profile.d/bash_completion.sh"
-[[ -r '/Users/jarv/Downloads/gcloud/google-cloud-sdk/completion.bash.inc' ]] && . '/Users/jarv/Downloads/gcloud/google-cloud-sdk/completion.bash.inc'
-[[ -r '/Users/jarv/lib/azure-cli/az.completion' ]] && . '/Users/jarv/lib/azure-cli/az.completion'
+if command -v brew &>/dev/null; then
+  source <(kubectl completion bash)
+  [[ -r "$(brew --prefix bash-completion@2)/etc/profile.d/bash_completion.sh" ]] && . "$(brew --prefix bash-completion@2)/etc/profile.d/bash_completion.sh"
+  [[ -r '/Users/jarv/Downloads/gcloud/google-cloud-sdk/completion.bash.inc' ]] && . '/Users/jarv/Downloads/gcloud/google-cloud-sdk/completion.bash.inc'
+  [[ -r '/Users/jarv/lib/azure-cli/az.completion' ]] && . '/Users/jarv/lib/azure-cli/az.completion'
+fi
 
 ##################
 # Git Prompt
 ##################
 
-  if [ -r "$(brew --prefix)/opt/bash-git-prompt/share/gitprompt.sh" ]; then
-  GIT_PROMPT_ONLY_IN_REPO=0
-  GIT_PROMPT_FETCH_REMOTE_STATUS=0   # uncomment to avoid fetching remote status
-  GIT_PROMPT_IGNORE_SUBMODULES=1 # uncomment to avoid searching for changed files in submodules
-    GIT_PROMPT_THEME=Solarized # use theme optimized for solarized color scheme
+GIT_PROMPT_ONLY_IN_REPO=0
+GIT_PROMPT_FETCH_REMOTE_STATUS=0   # uncomment to avoid fetching remote status
+GIT_PROMPT_IGNORE_SUBMODULES=1 # uncomment to avoid searching for changed files in submodules
+GIT_PROMPT_THEME=Solarized # use theme optimized for solarized color scheme
+if command -v brew &>/dev/null && [[ -r "$(brew --prefix)/opt/bash-git-prompt/share/gitprompt.sh" ]]; then
   __GIT_PROMPT_DIR=$(brew --prefix)/opt/bash-git-prompt/share
   . "$(brew --prefix)/opt/kube-ps1/share/kube-ps1.sh"
   kubeoff
   GIT_PROMPT_END=' $(kube_ps1)\n$ '
   . "$(brew --prefix)/opt/bash-git-prompt/share/gitprompt.sh"
+fi
+
+if [[ -f "$HOME/.bash-git-prompt/gitprompt.sh" ]]; then
+  source "$HOME/.bash-git-prompt/gitprompt.sh"
 fi
 
 ##############
@@ -129,12 +141,16 @@ function git_diff() {
 # Misc exports
 ##############
 
-eval "$(brew shellenv)"
+if command -v brew &>/dev/null; then
+  eval "$(brew shellenv)"
+fi
+
 export BASH_SILENCE_DEPRECATION_WARNING=1
 # export DOCKER_HOST=unix://$HOME/.colima/docker.sock
-SSH_AUTH_SOCK="$(brew --prefix)/var/run/yubikey-agent.sock"
-export SSH_AUTH_SOCK
-# export SSH_AUTH_SOCK=$HOME/.gnupg/S.gpg-agent.ssh
+if command -v brew &>/dev/null; then
+  SSH_AUTH_SOCK="$(brew --prefix)/var/run/yubikey-agent.sock"
+  export SSH_AUTH_SOCK
+fi
 export VAULT_ADDR=https://vault.ops.gke.gitlab.net
 export VAULT_PROXY_ADDR=socks5://localhost:18200
 export FZF_DEFAULT_OPTS='--bind ctrl-d:page-down,ctrl-u:page-up'
@@ -153,7 +169,7 @@ export LESS RI
 ##############
 
 export MISE_LEGACY_VERSION_FILE=1
-eval "$(/opt/homebrew/bin/mise activate bash)"
+eval "$(mise activate bash)"
 
 ##############
 # direnv
@@ -176,13 +192,16 @@ fi
 
 # Key bindings
 # ------------
-source "/opt/homebrew/opt/fzf/shell/key-bindings.bash"
+if [[ -f /opt/homebrew/opt/fzf/shell/key-bindings.bash ]]; then
+  source "/opt/homebrew/opt/fzf/shell/key-bindings.bash"
+fi
 
 ##############
 # GitLab code suggestions
 # using dummy user for PAT
 ##############
-
-source "$HOME/.code_suggestions"
+if [[ -f "$HOME/.code_suggestions" ]]; then
+  source "$HOME/.code_suggestions"
+fi
 
 complete -F _complete_ssh_hosts ssh
