@@ -32,10 +32,10 @@ local config = {
     { key = 'Enter', mods = 'CMD|SHIFT', action = wz.action.TogglePaneZoomState, },
     { key = '[', mods = 'CTRL|CMD', action = wz.action.ActivateCopyMode, },
     { key = '[', mods = 'CTRL|CMD', action = wz.action.ActivateCopyMode, },
-    { key = "h", mods = "CMD", action=wz.action{ActivatePaneDirection="Left"}},
-    { key = "j", mods = "CMD", action=wz.action{ActivatePaneDirection="Down"}},
-    { key = "k", mods = "CMD", action=wz.action{ActivatePaneDirection="Up"}},
-    { key = "l", mods = "CMD", action=wz.action{ActivatePaneDirection="Right"}},
+    { key = "h", mods = "ALT", action=wz.action{ActivatePaneDirection="Left"}},
+    { key = "j", mods = "ALT", action=wz.action{ActivatePaneDirection="Down"}},
+    { key = "k", mods = "ALT", action=wz.action{ActivatePaneDirection="Up"}},
+    { key = "l", mods = "ALT", action=wz.action{ActivatePaneDirection="Right"}},
   },
   mouse_bindings = {
     -- Change the default click behavior so that it only selects
