@@ -49,10 +49,54 @@ local config = {
     -- Ctrl-click will open the link under the mouse cursor
     {
       event = { Up = { streak = 1, button = 'Left' } },
-      mods = 'CMD',
+      mods = 'CTRL',
       action = wz.action.OpenLinkAtMouseCursor,
     },
-  }
+  },
+  hyperlink_rules = wz.default_hyperlink_rules(),
+}
+
+-- https://github.com/wez/wezterm/pull/4212
+config.hyperlink_rules = {
+  -- Matches: a URL in parens: (URL)
+  {
+    regex = '\\((\\w+://\\S+)\\)',
+    format = '$1',
+    highlight = 1,
+  },
+  -- Matches: a URL in brackets: [URL]
+  {
+    regex = '\\[(\\w+://\\S+)\\]',
+    format = '$1',
+    highlight = 1,
+  },
+  -- Matches: a URL in curly braces: {URL}
+  {
+    regex = '\\{(\\w+://\\S+)\\}',
+    format = '$1',
+    highlight = 1,
+  },
+  -- Matches: a URL in angle brackets: <URL>
+  {
+    regex = '<(\\w+://\\S+)>',
+    format = '$1',
+    highlight = 1,
+  },
+  -- Then handle URLs not wrapped in brackets
+  {
+    -- Before
+    --regex = '\\b\\w+://\\S+[)/a-zA-Z0-9-]+',
+    --format = '$0',
+    -- After
+    regex = '[^(]\\b(\\w+://\\S+[)/a-zA-Z0-9-]+)',
+    format = '$1',
+    highlight = 1,
+  },
+  -- implicit mailto link
+  {
+    regex = '\\b\\w+@[\\w-]+(\\.[\\w-]+)+\\b',
+    format = 'mailto:$0',
+  },
 }
 
 return config
