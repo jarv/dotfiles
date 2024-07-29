@@ -55,9 +55,8 @@ export C_INCLUDE_PATH LIBRARY_PATH LD_LIBRARY_PATH PKG_CONFIG_PATH
 
 PATH=$PATH:/opt/homebrew/bin
 PATH="$HOME/bin:$PATH"
-PATH=$PATH:/Users/jarv/bin
 PATH=$PATH:$HOME/workspace/gitlab-com-infrastructure/bin
-PATH=/Users/jarv/Downloads/gcloud/google-cloud-sdk/bin:$PATH
+PATH=$HOME/Downloads/gcloud/google-cloud-sdk/bin:$PATH
 PATH=$PATH:~/.kube/plugins/jordanwilson230
 PATH="/opt/homebrew/opt/coreutils/libexec/gnubin:$PATH"
 PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
@@ -65,7 +64,7 @@ PATH="$HOME/.cargo/bin:$PATH"
 PATH="$PATH:/opt/nvim-linux64/bin"
 export PATH
 [[ -r '/Users/jarv/Downloads/gcloud/google-cloud-sdk/path.bash.inc' ]] && . '/Users/jarv/Downloads/gcloud/google-cloud-sdk/path.bash.inc'
-export GOPATH="/Users/jarv/go"
+export GOPATH="$HOME/go"
 
 ##################
 # Bash Completions
