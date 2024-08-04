@@ -1,21 +1,25 @@
-local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-if not vim.loop.fs_stat(lazypath) then
-  vim.fn.system({
-    "git",
-    "clone",
-    "--filter=blob:none",
-    "https://github.com/folke/lazy.nvim.git",
-    "--branch=stable", -- latest stable release
-    lazypath,
-  })
-end
-vim.opt.rtp:prepend(lazypath)
+-- Based on https://github.com/nvim-lua/kickstart.nvim
 
 vim.g.mapleader = " "
-require("lazy").setup("plugins")
-require("jarv.remap")
-require("jarv.commands")
-require("jarv.lsp")
-require("jarv.lsp-ruby")
-require("jarv.lsp-gitlab")
-require("jarv.dos")
+vim.g.maplocalleader = " "
+
+-- Set to true if you have a Nerd Font installed and selected in the terminal
+vim.g.have_nerd_font = true
+
+-- [[ Setting options ]]
+require("options")
+
+-- [[ Basic Keymaps ]]
+require("keymaps")
+
+-- [[ Backup files ]]
+require("backups")
+
+-- [[ Install `lazy.nvim` plugin manager ]]
+require("lazy-bootstrap")
+
+-- [[ Configure and install plugins ]]
+require("lazy-plugins")
+
+-- The line beneath this is called `modeline`. See `:help modeline`
+-- vim: ts=2 sts=2 sw=2 et
