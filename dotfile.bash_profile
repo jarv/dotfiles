@@ -1,18 +1,19 @@
-_complete_ssh_hosts () {
-        COMPREPLY=()
-        cur="${COMP_WORDS[COMP_CWORD]}"
-        comp_ssh_hosts=`cat ~/.ssh/known_hosts | \
-                        cut -f 1 -d ' ' | \
-                         sed -e s/,.*//g | \
-                         grep -v ^# | \
-                         uniq | \
-                         grep -v "\[" ;
-                         cat ~/.ssh/config | \
-                         grep --color=never "^Host " | \
-                         awk '{print $2}'
-                   `
-        COMPREPLY=( $(compgen -W "${comp_ssh_hosts}" -- $cur))
-        return 0
+_complete_ssh_hosts() {
+  COMPREPLY=()
+  cur="${COMP_WORDS[COMP_CWORD]}"
+  comp_ssh_hosts=$(
+    cat ~/.ssh/known_hosts |
+      cut -f 1 -d ' ' |
+      sed -e s/,.*//g |
+      grep -v ^# |
+      uniq |
+      grep -v "\["
+    cat ~/.ssh/config |
+      grep --color=never "^Host " |
+      awk '{print $2}'
+  )
+  COMPREPLY=($(compgen -W "${comp_ssh_hosts}" -- $cur))
+  return 0
 }
 [[ -r "$HOME/.bashrc" ]] && . "$HOME/.bashrc"
 umask 022
@@ -22,8 +23,8 @@ alias ag="rg"
 alias vim="nvim"
 alias k="kubectl"
 
-if [[ -s "$HOME/.rvm/scripts/rvm" ]];then
-    source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
+if [[ -s "$HOME/.rvm/scripts/rvm" ]]; then
+  source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
 fi
 
 shopt -s cdspell
@@ -37,7 +38,6 @@ shopt -s execfail
 
 # make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
-
 
 ##############
 # Homedir
@@ -82,9 +82,9 @@ fi
 ##################
 
 GIT_PROMPT_ONLY_IN_REPO=0
-GIT_PROMPT_FETCH_REMOTE_STATUS=0   # uncomment to avoid fetching remote status
-GIT_PROMPT_IGNORE_SUBMODULES=1 # uncomment to avoid searching for changed files in submodules
-GIT_PROMPT_THEME=Solarized # use theme optimized for solarized color scheme
+GIT_PROMPT_FETCH_REMOTE_STATUS=0 # uncomment to avoid fetching remote status
+GIT_PROMPT_IGNORE_SUBMODULES=1   # uncomment to avoid searching for changed files in submodules
+GIT_PROMPT_THEME=Solarized       # use theme optimized for solarized color scheme
 if command -v brew &>/dev/null && [[ -r "$(brew --prefix)/opt/bash-git-prompt/share/gitprompt.sh" ]]; then
   __GIT_PROMPT_DIR=$(brew --prefix)/opt/bash-git-prompt/share
   . "$(brew --prefix)/opt/kube-ps1/share/kube-ps1.sh"
@@ -109,14 +109,14 @@ HISTFILE="$HISTDIR/$(date +%Y_%m)"
 HISTIGNORE="&:ls:[bf]g:exit"
 export HISTFILESIZE HISTDIR HISTFILE HISTIGNORE
 h() {
-    ls -tr ~/.bash_histories/*/* | xargs grep -i "$1"
+  ls -tr ~/.bash_histories/*/* | xargs grep -i "$1"
 }
 
 #############
 # RG
 ############
 
-if type rg &> /dev/null; then
+if type rg &>/dev/null; then
   FZF_DEFAULT_COMMAND='rg --files'
   FZF_DEFAULT_OPTS='-m --height 50% --border'
   export FZF_DEFAULT_COMMAND FZF_DEFAULT_OPTS
@@ -187,7 +187,7 @@ fi
 
 # Auto-completion
 # ---------------
-[[ $- == *i* ]] && source "/opt/homebrew/opt/fzf/shell/completion.bash" 2> /dev/null
+[[ $- == *i* ]] && source "/opt/homebrew/opt/fzf/shell/completion.bash" 2>/dev/null
 
 # Key bindings
 # ------------
