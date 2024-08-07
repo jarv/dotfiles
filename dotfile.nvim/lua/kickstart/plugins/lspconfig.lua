@@ -30,6 +30,7 @@ return {
 			"hrsh7th/cmp-nvim-lsp",
 		},
 		config = function()
+			local home = os.getenv("HOME")
 			-- Brief aside: **What is LSP?**
 			--
 			-- LSP is an initialism you've probably heard, but might not understand what it is.
@@ -170,11 +171,6 @@ return {
 			--  - settings (table): Override the default settings passed when initializing the server.
 			--        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
 			local servers = {
-				ruby_lsp = {
-					mason = false,
-					-- cmd = { "mise x -- ruby-lsp" },
-					cmd = { "/home/jarv/.local/share/mise/installs/ruby/3.3.4/bin/ruby-lsp" },
-				},
 				-- clangd = {},
 				-- gopls = {},
 				-- pyright = {},

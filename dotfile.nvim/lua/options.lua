@@ -68,4 +68,7 @@ vim.o.completeopt = "menu,menuone"
 -- Toggle Code Suggestions on/off with CTRL-g in normal mode:
 vim.keymap.set("n", "<C-g>", "<Plug>(GitLabToggleCodeSuggestions)")
 
+-- Disable visual mode select with the mouse
+vim.opt.mouse:remove("a")
+
 -- vim: ts=2 sts=2 sw=2 et
