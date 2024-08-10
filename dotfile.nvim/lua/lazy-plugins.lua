@@ -42,6 +42,7 @@ require("lazy").setup({
 	require("kickstart/plugins/treesitter"),
 	require("kickstart/plugins/bufferline"),
 	require("kickstart/plugins/vim-fugitive"),
+	require("kickstart/plugins/clipboard-image"),
 
 	-- require("kickstart/plugins/gitlab-lsp"),
 	-- The following two comments only work if you have downloaded the kickstart repo, not just copy pasted the
