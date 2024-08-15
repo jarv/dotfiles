@@ -1,0 +1,42 @@
+[push]
+    default = current
+[user]
+    name = John Jarvis
+    email = jarv@gitlab.com
+    signingkey = /Users/jarv/.ssh/key.pub
+[core]
+    excludesfile = ~/.cvsignore
+    editor = nvim
+[branch]
+    autosetupmerge = true
+[url "git@gitlab.com:"]
+    insteadOf = https://gitlab.com/
+[filter "lfs"]
+    clean = git-lfs clean -- %f
+    smudge = git-lfs smudge -- %f
+    process = git-lfs filter-process
+    required = true
+[includeIf "gitdir:~/src/*/"]
+    path = .gitconfig-jarv-org
+
+[alias]
+    change-commits = "!f() { VAR=$1; OLD=$2; NEW=$3; shift 3; git filter-branch --env-filter \"if [[ \\\"$`echo $VAR`\\\" = '$OLD' ]]; then export $VAR='$NEW'; fi\" $@; }; f "
+    find-merge = "!sh -c 'commit=$0 && branch=${1:-HEAD} && (git rev-list $commit..$branch --ancestry-path | cat -n; git rev-list $commit..$branch --first-parent | cat -n) | sort -k2 -s | uniq -f1 -d | sort -n | tail -1 | cut -f2'"
+    show-merge = "!sh -c 'merge=$(git find-merge $0 $1) && [ -n \"$merge\" ] && git show $merge'"
+    merge-log = "!f() { git log --stat \"$1^..$1\"; }; f"
+    pushf = push --force-with-lease
+    checkout-bydate = "!f() { git checkout $(git rev-list -n 1 --first-parent --before=\"$1\" master); }; f"
+    recent = branch --sort=-committerdate --format=\"%(committerdate:relative)%09%(refname:short)\"
+    default-branch = "!git symbolic-ref refs/remotes/origin/HEAD --short | sed 's|origin/||'"
+    update-default-branch = remote set-head origin --auto
+
+[merge]
+    ff = false
+[pull]
+    ff = only
+[commit]
+    gpgsign = true
+[gpg]
+    format = ssh
+[init]
+    defaultBranch = master
