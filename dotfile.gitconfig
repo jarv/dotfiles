@@ -3,7 +3,6 @@
 [user]
     name = John Jarvis
     email = jarv@gitlab.com
-    ; signingkey = /home/jarv/.ssh/key.pub
 [core]
     excludesfile = ~/.cvsignore
     editor = nvim
@@ -17,9 +16,11 @@
     process = git-lfs filter-process
     required = true
 [includeIf "gitdir:~/src/*/"]
-    path = .gitconfig-jarv-org
+    path = .gitconfig-jarv
 [include]
     path = .gitconfig-lisa
+[include]
+    path = .gitconfig-milhouse
 [alias]
     change-commits = "!f() { VAR=$1; OLD=$2; NEW=$3; shift 3; git filter-branch --env-filter \"if [[ \\\"$`echo $VAR`\\\" = '$OLD' ]]; then export $VAR='$NEW'; fi\" $@; }; f "
     find-merge = "!sh -c 'commit=$0 && branch=${1:-HEAD} && (git rev-list $commit..$branch --ancestry-path | cat -n; git rev-list $commit..$branch --first-parent | cat -n) | sort -k2 -s | uniq -f1 -d | sort -n | tail -1 | cut -f2'"
