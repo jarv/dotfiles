@@ -1,5 +1,6 @@
 [push]
     default = current
+    autoSetupRemote = true
 [user]
     name = John Jarvis
     email = jarv@gitlab.com
@@ -7,7 +8,7 @@
     excludesfile = ~/.cvsignore
     editor = nvim
 [branch]
-    autosetupmerge = true
+    autoSetupMerge = simple
 [url "git@gitlab.com:"]
     insteadOf = https://gitlab.com/
 [filter "lfs"]
@@ -41,4 +42,4 @@
 [gpg]
     format = ssh
 [init]
-    defaultBranch = master
+    defaultBranch = main
