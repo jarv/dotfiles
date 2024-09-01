@@ -33,7 +33,7 @@ require("lazy").setup({
 	require("kickstart/plugins/conform"),
 
 	require("kickstart/plugins/cmp"),
-	require("kickstart/plugins/cmp-spell"),
+	-- require("kickstart/plugins/cmp-spell"),
 
 	require("kickstart/plugins/todo-comments"),
 
