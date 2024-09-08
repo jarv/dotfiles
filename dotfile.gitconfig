@@ -7,8 +7,8 @@
 [core]
     excludesfile = ~/.cvsignore
     editor = nvim
-[branch]
-    autoSetupMerge = simple
+; [branch]
+;     autoSetupMerge = simple
 [url "git@gitlab.com:"]
     insteadOf = https://gitlab.com/
 [filter "lfs"]
