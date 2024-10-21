@@ -71,4 +71,7 @@ vim.keymap.set("n", "<C-g>", "<Plug>(GitLabToggleCodeSuggestions)")
 -- Disable visual mode select with the mouse
 vim.opt.mouse:remove("a")
 
+-- Cursor color
+vim.opt.guicursor = "n-v-c:block-Cursor/lCursor"
+
 -- vim: ts=2 sts=2 sw=2 et
