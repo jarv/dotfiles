@@ -4,6 +4,7 @@
 [user]
     name = John Jarvis
     email = jarv@gitlab.com
+    signingkey = /Users/jarv/.ssh/key.pub
 [core]
     excludesfile = ~/.cvsignore
     editor = nvim
