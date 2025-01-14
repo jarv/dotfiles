@@ -33,21 +33,17 @@ shopt -s cmdhist
 shopt -s histappend
 shopt -s checkhash
 shopt -s no_empty_cmd_completion
-shopt -s globstar
 shopt -s execfail
-
-# make less more friendly for non-text input files, see lesspipe(1)
-[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
 ##############
 # Homedir
 ##############
 
-C_INCLUDE_PATH="$HOME/include:$C_INCLUDE_PATH"
-LIBRARY_PATH="$HOME/lib:$LIBRARY_PATH"
-LD_LIBRARY_PATH="$HOME/lib:$LD_LIBRARY_PATH"
-PKG_CONFIG_PATH="$HOME/lib/pkgconfig:$PKG_CONFIG_PATH"
-export C_INCLUDE_PATH LIBRARY_PATH LD_LIBRARY_PATH PKG_CONFIG_PATH
+# C_INCLUDE_PATH="$HOME/include:$C_INCLUDE_PATH"
+# LIBRARY_PATH="$HOME/lib:$LIBRARY_PATH"
+# LD_LIBRARY_PATH="$HOME/lib:$LD_LIBRARY_PATH"
+# PKG_CONFIG_PATH="$HOME/lib/pkgconfig:$PKG_CONFIG_PATH"
+# export C_INCLUDE_PATH LIBRARY_PATH LD_LIBRARY_PATH PKG_CONFIG_PATH
 
 ##############
 # PATH
@@ -55,46 +51,38 @@ export C_INCLUDE_PATH LIBRARY_PATH LD_LIBRARY_PATH PKG_CONFIG_PATH
 
 PATH=$PATH:/opt/homebrew/bin
 PATH="$HOME/bin:$PATH"
+PATH=$PATH:/Users/jarv/bin
 PATH=$PATH:$HOME/workspace/gitlab-com-infrastructure/bin
-PATH=$HOME/Downloads/gcloud/google-cloud-sdk/bin:$PATH
 PATH=$PATH:~/.kube/plugins/jordanwilson230
 PATH="/opt/homebrew/opt/coreutils/libexec/gnubin:$PATH"
 PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 PATH="$HOME/.cargo/bin:$PATH"
-PATH="$PATH:/opt/nvim-linux64/bin"
 export PATH
 [[ -r '/Users/jarv/Downloads/gcloud/google-cloud-sdk/path.bash.inc' ]] && . '/Users/jarv/Downloads/gcloud/google-cloud-sdk/path.bash.inc'
-export GOPATH="$HOME/go"
 
 ##################
 # Bash Completions
 ##################
 
-if command -v brew &>/dev/null; then
-  source <(kubectl completion bash)
-  [[ -r "$(brew --prefix bash-completion@2)/etc/profile.d/bash_completion.sh" ]] && . "$(brew --prefix bash-completion@2)/etc/profile.d/bash_completion.sh"
-  [[ -r '/Users/jarv/Downloads/gcloud/google-cloud-sdk/completion.bash.inc' ]] && . '/Users/jarv/Downloads/gcloud/google-cloud-sdk/completion.bash.inc'
-  [[ -r '/Users/jarv/lib/azure-cli/az.completion' ]] && . '/Users/jarv/lib/azure-cli/az.completion'
-fi
+source <(kubectl completion bash)
+[[ -r "$(brew --prefix bash-completion@2)/etc/profile.d/bash_completion.sh" ]] && . "$(brew --prefix bash-completion@2)/etc/profile.d/bash_completion.sh"
+[[ -r '/Users/jarv/Downloads/gcloud/google-cloud-sdk/completion.bash.inc' ]] && . '/Users/jarv/Downloads/gcloud/google-cloud-sdk/completion.bash.inc'
+[[ -r '/Users/jarv/lib/azure-cli/az.completion' ]] && . '/Users/jarv/lib/azure-cli/az.completion'
 
 ##################
 # Git Prompt
 ##################
 
-GIT_PROMPT_ONLY_IN_REPO=0
-GIT_PROMPT_FETCH_REMOTE_STATUS=0 # uncomment to avoid fetching remote status
-GIT_PROMPT_IGNORE_SUBMODULES=1   # uncomment to avoid searching for changed files in submodules
-GIT_PROMPT_THEME=Solarized       # use theme optimized for solarized color scheme
-if command -v brew &>/dev/null && [[ -r "$(brew --prefix)/opt/bash-git-prompt/share/gitprompt.sh" ]]; then
+if [ -r "$(brew --prefix)/opt/bash-git-prompt/share/gitprompt.sh" ]; then
+  GIT_PROMPT_ONLY_IN_REPO=0
+  GIT_PROMPT_FETCH_REMOTE_STATUS=0 # uncomment to avoid fetching remote status
+  GIT_PROMPT_IGNORE_SUBMODULES=1   # uncomment to avoid searching for changed files in submodules
+  GIT_PROMPT_THEME=Solarized       # use theme optimized for solarized color scheme
   __GIT_PROMPT_DIR=$(brew --prefix)/opt/bash-git-prompt/share
   . "$(brew --prefix)/opt/kube-ps1/share/kube-ps1.sh"
   kubeoff
   GIT_PROMPT_END=' $(kube_ps1)\n$ '
   . "$(brew --prefix)/opt/bash-git-prompt/share/gitprompt.sh"
-fi
-
-if [[ -f "$HOME/.bash-git-prompt/gitprompt.sh" ]]; then
-  source "$HOME/.bash-git-prompt/gitprompt.sh"
 fi
 
 ##############
@@ -136,20 +124,23 @@ function git_diff() {
   git diff --no-ext-diff -w "$@" | vim -R -
 }
 
+git-cd() {
+  if git rev-parse --show-toplevel >/dev/null 2>&1; then
+    cd "$(git rev-parse --show-toplevel)"
+  else
+    echo "Not in a Git repository."
+  fi
+}
 ##############
 # Misc exports
 ##############
 
-if command -v brew &>/dev/null; then
-  eval "$(brew shellenv)"
-fi
-
+eval "$(brew shellenv)"
 export BASH_SILENCE_DEPRECATION_WARNING=1
 # export DOCKER_HOST=unix://$HOME/.colima/docker.sock
-if command -v brew &>/dev/null; then
-  SSH_AUTH_SOCK="$(brew --prefix)/var/run/yubikey-agent.sock"
-  export SSH_AUTH_SOCK
-fi
+SSH_AUTH_SOCK="$(brew --prefix)/var/run/yubikey-agent.sock"
+export SSH_AUTH_SOCK
+# export SSH_AUTH_SOCK=$HOME/.gnupg/S.gpg-agent.ssh
 export VAULT_ADDR=https://vault.ops.gke.gitlab.net
 export VAULT_PROXY_ADDR=socks5://localhost:18200
 export FZF_DEFAULT_OPTS='--bind ctrl-d:page-down,ctrl-u:page-up'
@@ -167,8 +158,7 @@ export LESS RI
 # mise (was rtx (was asdf))
 ##############
 
-export MISE_LEGACY_VERSION_FILE=1
-eval "$(mise activate bash)"
+eval "$(/opt/homebrew/bin/mise activate bash)"
 
 ##############
 # direnv
@@ -191,16 +181,13 @@ fi
 
 # Key bindings
 # ------------
-if [[ -f /opt/homebrew/opt/fzf/shell/key-bindings.bash ]]; then
-  source "/opt/homebrew/opt/fzf/shell/key-bindings.bash"
-fi
+source "/opt/homebrew/opt/fzf/shell/key-bindings.bash"
 
 ##############
 # GitLab code suggestions
 # using dummy user for PAT
 ##############
-if [[ -f "$HOME/.code_suggestions" ]]; then
-  source "$HOME/.code_suggestions"
-fi
+
+source "$HOME/.code_suggestions"
 
 complete -F _complete_ssh_hosts ssh
