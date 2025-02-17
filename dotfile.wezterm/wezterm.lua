@@ -26,7 +26,7 @@ local config = {
 	-- disable most font ligatures
 	harfbuzz_features = { "calt=0", "clig=0", "liga=0" },
 	keys = {
-		{ key = "w", mods = "CMD", action = wz.action.CloseCurrentPane({ confirm = false }) },
+		{ key = "w", mods = "CTRL|SHIFT", action = wz.action.CloseCurrentPane({ confirm = true }) },
 		{ key = "I", mods = "CTRL|SHIFT", action = wz.action.SplitHorizontal({ domain = "CurrentPaneDomain" }) },
 		{ key = "O", mods = "CTRL|SHIFT", action = wz.action.SplitVertical({ domain = "CurrentPaneDomain" }) },
 		{ key = "Enter", mods = "CMD", action = wz.action.ToggleFullScreen },
