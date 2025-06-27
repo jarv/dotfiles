@@ -1,19 +1,19 @@
 _complete_ssh_hosts() {
-  COMPREPLY=()
-  cur="${COMP_WORDS[COMP_CWORD]}"
-  comp_ssh_hosts=$(
-    cat ~/.ssh/known_hosts |
-      cut -f 1 -d ' ' |
-      sed -e s/,.*//g |
-      grep -v ^# |
-      uniq |
-      grep -v "\["
-    cat ~/.ssh/config |
-      grep --color=never "^Host " |
-      awk '{print $2}'
-  )
-  COMPREPLY=($(compgen -W "${comp_ssh_hosts}" -- $cur))
-  return 0
+	COMPREPLY=()
+	cur="${COMP_WORDS[COMP_CWORD]}"
+	comp_ssh_hosts=$(
+		cat ~/.ssh/known_hosts |
+			cut -f 1 -d ' ' |
+			sed -e s/,.*//g |
+			grep -v ^# |
+			uniq |
+			grep -v "\["
+		cat ~/.ssh/config |
+			grep --color=never "^Host " |
+			awk '{print $2}'
+	)
+	COMPREPLY=($(compgen -W "${comp_ssh_hosts}" -- $cur))
+	return 0
 }
 [[ -r "$HOME/.bashrc" ]] && . "$HOME/.bashrc"
 umask 022
@@ -24,7 +24,7 @@ alias vim="nvim"
 alias k="kubectl"
 
 if [[ -s "$HOME/.rvm/scripts/rvm" ]]; then
-  source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
+	source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
 fi
 
 shopt -s cdspell
@@ -57,6 +57,7 @@ PATH=$PATH:~/.kube/plugins/jordanwilson230
 PATH="/opt/homebrew/opt/coreutils/libexec/gnubin:$PATH"
 PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 PATH="$HOME/.cargo/bin:$PATH"
+PATH="$HOME/.atuin/bin/env:$PATH"
 export PATH
 [[ -r '/Users/jarv/Downloads/gcloud/google-cloud-sdk/path.bash.inc' ]] && . '/Users/jarv/Downloads/gcloud/google-cloud-sdk/path.bash.inc'
 
@@ -74,15 +75,15 @@ source <(kubectl completion bash)
 ##################
 
 if [ -r "$(brew --prefix)/opt/bash-git-prompt/share/gitprompt.sh" ]; then
-  GIT_PROMPT_ONLY_IN_REPO=0
-  GIT_PROMPT_FETCH_REMOTE_STATUS=0 # uncomment to avoid fetching remote status
-  GIT_PROMPT_IGNORE_SUBMODULES=1   # uncomment to avoid searching for changed files in submodules
-  GIT_PROMPT_THEME=Solarized       # use theme optimized for solarized color scheme
-  __GIT_PROMPT_DIR=$(brew --prefix)/opt/bash-git-prompt/share
-  . "$(brew --prefix)/opt/kube-ps1/share/kube-ps1.sh"
-  kubeoff
-  GIT_PROMPT_END=' $(kube_ps1)\n$ '
-  . "$(brew --prefix)/opt/bash-git-prompt/share/gitprompt.sh"
+	GIT_PROMPT_ONLY_IN_REPO=0
+	GIT_PROMPT_FETCH_REMOTE_STATUS=0 # uncomment to avoid fetching remote status
+	GIT_PROMPT_IGNORE_SUBMODULES=1   # uncomment to avoid searching for changed files in submodules
+	GIT_PROMPT_THEME=Solarized       # use theme optimized for solarized color scheme
+	__GIT_PROMPT_DIR=$(brew --prefix)/opt/bash-git-prompt/share
+	. "$(brew --prefix)/opt/kube-ps1/share/kube-ps1.sh"
+	kubeoff
+	GIT_PROMPT_END=' $(kube_ps1)\n$ '
+	. "$(brew --prefix)/opt/bash-git-prompt/share/gitprompt.sh"
 fi
 
 ##############
@@ -97,7 +98,7 @@ HISTFILE="$HISTDIR/$(date +%Y_%m)"
 HISTIGNORE="&:ls:[bf]g:exit"
 export HISTFILESIZE HISTDIR HISTFILE HISTIGNORE
 h() {
-  ls -tr ~/.bash_histories/*/* | xargs grep -i "$1"
+	ls -tr ~/.bash_histories/*/* | xargs grep -i "$1"
 }
 
 #############
@@ -105,9 +106,9 @@ h() {
 ############
 
 if type rg &>/dev/null; then
-  FZF_DEFAULT_COMMAND='rg --files'
-  FZF_DEFAULT_OPTS='-m --height 50% --border'
-  export FZF_DEFAULT_COMMAND FZF_DEFAULT_OPTS
+	FZF_DEFAULT_COMMAND='rg --files'
+	FZF_DEFAULT_OPTS='-m --height 50% --border'
+	export FZF_DEFAULT_COMMAND FZF_DEFAULT_OPTS
 fi
 
 ##########
@@ -121,15 +122,15 @@ GIT_PS1_SHOWUPSTREAM="verbose"
 export GIT_PS1_SHOWUNTRACKEDFILES GIT_PS1_SHOWUPSTREAM GIT_PS1_SHOWSTASHSTATE GIT_PS1_SHOWDIRTYSTATE
 
 function git_diff() {
-  git diff --no-ext-diff -w "$@" | vim -R -
+	git diff --no-ext-diff -w "$@" | vim -R -
 }
 
 git-cd() {
-  if git rev-parse --show-toplevel >/dev/null 2>&1; then
-    cd "$(git rev-parse --show-toplevel)"
-  else
-    echo "Not in a Git repository."
-  fi
+	if git rev-parse --show-toplevel >/dev/null 2>&1; then
+		cd "$(git rev-parse --show-toplevel)"
+	else
+		echo "Not in a Git repository."
+	fi
 }
 ##############
 # Misc exports
@@ -172,7 +173,7 @@ eval "$(direnv hook bash)"
 # Setup fzf
 # ---------
 if [[ ! "$PATH" == */opt/homebrew/opt/fzf/bin* ]]; then
-  PATH="${PATH:+${PATH}:}/opt/homebrew/opt/fzf/bin"
+	PATH="${PATH:+${PATH}:}/opt/homebrew/opt/fzf/bin"
 fi
 
 # Auto-completion
@@ -183,11 +184,6 @@ fi
 # ------------
 source "/opt/homebrew/opt/fzf/shell/key-bindings.bash"
 
-##############
-# GitLab code suggestions
-# using dummy user for PAT
-##############
-
-source "$HOME/.code_suggestions"
-
 complete -F _complete_ssh_hosts ssh
+
+. "$HOME/.atuin/bin/env"
