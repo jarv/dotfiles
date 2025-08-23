@@ -4,6 +4,7 @@ tags
 *.bak
 *.orig
 .envrc
+.claude
 playbooks/roles/test*
 playbooks/test.yml
 .sass-cache
@@ -19,3 +20,4 @@ test.yml
 tags~
 private.jarv/
 terraform.tfstate.backup
+.mise-env-vars-set.*
