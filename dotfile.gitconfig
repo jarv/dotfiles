@@ -44,3 +44,6 @@
     format = ssh
 [init]
     defaultBranch = main
+[maintenance]
+	repo = /Users/jarv/workspace/gdk
+	repo = /Users/jarv/workspace/gdk/gitlab
