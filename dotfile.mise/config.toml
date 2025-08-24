@@ -1,0 +1,26 @@
+[settings]
+legacy_version_file = false
+legacy_version_file_disable_tools = ['terraform']
+experimental = true
+paranoid = false
+
+[tools]
+watchexec = "latest"
+golang = "1.23"
+pmv = "3.20.1" # datasource=gitlab-releases depName=gitlab-com/gl-infra/pmv
+ruby = "3.2.1"
+golangci-lint = "1.56.2"
+shellcheck = "0.11.0"
+awscli = "2.8.2"
+yq = "4.30.5"
+python = "3.11.9"
+nodejs = "22.14.0"
+hugo = "0.116.0"
+tflint = "0.47.0"
+glab = "1.43.0"
+gcloud = "497.0.0"
+markdownlint-cli2 = "0.15.0"
+lua = "latest"
+fd = "latest"
+lazygit = "latest"
+teleport-community = "latest"
