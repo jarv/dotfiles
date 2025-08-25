@@ -1,0 +1,64 @@
+
+add_newline = false
+
+[status]
+style = "green"
+format = "[$symbol $status]($style) "
+map_symbol = true
+disabled = false
+
+[character]
+success_symbol = '[\$](gray)'
+# success_symbol = "\\$ "
+# error_symbol   = "\\$ "
+# vicmd_symbol   = "❮ "
+
+[kubernetes]
+format = '[$path]($style)[⛵ $context](dimmed green) '
+disabled = false
+contexts = [
+  { context_pattern = "dev.local.cluster.k8s", style = "green", symbol = "💔 " },
+]
+
+[directory]
+style = "yellow"
+truncation_length = 0
+truncate_to_repo = false
+format = "[$path]($style) "
+
+[git_branch]
+format = "\\[[$branch]($style)"
+style = "cyan"
+
+[git_status]
+format = "[|$all_status$ahead_behind]($style)\\] "
+style = "purple"
+staged = "+"
+modified = "*"
+untracked = "?"
+stashed = "⚑ "
+ahead = "↑"
+behind = "↓"
+diverged = "↑↓"
+# Disable everything else
+[package]
+disabled = true
+[nodejs]
+disabled = true
+[aws]
+disabled = true
+[gcloud]
+disabled = true
+[azure]
+disabled = true
+[docker_context]
+disabled = true
+[hostname]
+disabled = true
+[username]
+disabled = true
+[env_var]
+disabled = true
+[cmd_duration]
+disabled = true
+
