@@ -141,22 +141,22 @@ if [[ ! "$PATH" == */opt/homebrew/opt/fzf/bin* ]]; then
 	PATH="${PATH:+${PATH}:}/opt/homebrew/opt/fzf/bin"
 fi
 
-###########
-# Predictive completions
-###########
-
-# zsh-autosuggestions (predictive ghost text from history)
-if [[ -r /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh ]]; then
-	source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-	ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=8' # dim gray for suggestions
-fi
-
-# zsh-syntax-highlighting (color commands as you type)
-if [[ -r /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]]; then
-	source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-fi
-
-# Key bindings for accepting suggestions
-bindkey '^ ' autosuggest-accept                # Ctrl+Space accepts full suggestion
-bindkey '^P' history-beginning-search-backward # Up (like fish shell)
-bindkey '^N' history-beginning-search-forward  # Down (like fish shell)
+# ###########
+# # Predictive completions
+# ###########
+#
+# # zsh-autosuggestions (predictive ghost text from history)
+# if [[ -r /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh ]]; then
+# 	source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+# 	ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=8' # dim gray for suggestions
+# fi
+#
+# # zsh-syntax-highlighting (color commands as you type)
+# if [[ -r /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]]; then
+# 	source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+# fi
+#
+# # Key bindings for accepting suggestions
+# bindkey '^ ' autosuggest-accept                # Ctrl+Space accepts full suggestion
+# bindkey '^P' history-beginning-search-backward # Up (like fish shell)
+# bindkey '^N' history-beginning-search-forward  # Down (like fish shell)
