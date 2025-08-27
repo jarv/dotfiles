@@ -1,0 +1,5 @@
+[user]
+    name = John Jarvis
+    email = jjarvis@gitlab.com
+    signingkey = /Users/jarv/.ssh/yubikey_nano.pub
+
