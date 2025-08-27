@@ -21,3 +21,4 @@ tags~
 private.jarv/
 terraform.tfstate.backup
 .mise-env-vars-set.*
+venv/
