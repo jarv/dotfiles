@@ -1,14 +1,13 @@
 [push]
     default = current
     autoSetupRemote = true
-[user]
-    name = John Jarvis
-    email = john@jarv.org
 [core]
     excludesfile = ~/.cvsignore
     editor = nvim
-; [branch]
-;     autoSetupMerge = simple
+[user]
+    name = John Jarvis
+    email = john@jarv.org
+    signingkey = /Users/jarv/.ssh/git_signing.pub
 [url "git@gitlab.com:"]
     insteadOf = https://gitlab.com/
 [filter "lfs"]
