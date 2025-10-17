@@ -22,3 +22,4 @@ private.jarv/
 terraform.tfstate.backup
 .mise-env-vars-set.*
 venv/
+/Users/jarv/workspace/gl-infra/k8-workloads/gitlab-com/CLAUDE.md

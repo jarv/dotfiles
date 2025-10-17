@@ -37,6 +37,7 @@ local config = {
 		{ key = "j", mods = "ALT", action = wz.action({ ActivatePaneDirection = "Down" }) },
 		{ key = "k", mods = "ALT", action = wz.action({ ActivatePaneDirection = "Up" }) },
 		{ key = "l", mods = "ALT", action = wz.action({ ActivatePaneDirection = "Right" }) },
+		{ key = "Enter", mods = "SHIFT", action = wz.action({ SendString = "\x1b\r" }) },
 	},
 	mouse_bindings = {
 		-- Change the default click behavior so that it only selects
@@ -55,49 +56,6 @@ local config = {
 		},
 	},
 	hyperlink_rules = wz.default_hyperlink_rules(),
-}
-
--- https://github.com/wez/wezterm/pull/4212
-config.hyperlink_rules = {
-	-- Matches: a URL in parens: (URL)
-	{
-		regex = "\\((\\w+://\\S+)\\)",
-		format = "$1",
-		highlight = 1,
-	},
-	-- Matches: a URL in brackets: [URL]
-	{
-		regex = "\\[(\\w+://\\S+)\\]",
-		format = "$1",
-		highlight = 1,
-	},
-	-- Matches: a URL in curly braces: {URL}
-	{
-		regex = "\\{(\\w+://\\S+)\\}",
-		format = "$1",
-		highlight = 1,
-	},
-	-- Matches: a URL in angle brackets: <URL>
-	{
-		regex = "<(\\w+://\\S+)>",
-		format = "$1",
-		highlight = 1,
-	},
-	-- Then handle URLs not wrapped in brackets
-	{
-		-- Before
-		--regex = '\\b\\w+://\\S+[)/a-zA-Z0-9-]+',
-		--format = '$0',
-		-- After
-		regex = "[^(]\\b(\\w+://\\S+[)/a-zA-Z0-9-]+)",
-		format = "$1",
-		highlight = 1,
-	},
-	-- implicit mailto link
-	{
-		regex = "\\b\\w+@[\\w-]+(\\.[\\w-]+)+\\b",
-		format = "mailto:$0",
-	},
 }
 
 return config

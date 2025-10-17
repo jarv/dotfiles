@@ -32,6 +32,7 @@
     ff = false
 [pull]
     ff = only
+	rebase = true
 [commit]
     gpgsign = true
 [gpg]
