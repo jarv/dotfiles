@@ -7,7 +7,9 @@ paranoid = false
 [tools]
 watchexec = "latest"
 golang = "1.23"
-pmv = "3.20.1" # datasource=gitlab-releases depName=gitlab-com/gl-infra/pmv
+kubectl = "latest"
+direnv = "latest"
+atuin = "latest"
 ruby = "3.2.1"
 golangci-lint = "1.56.2"
 shellcheck = "0.11.0"

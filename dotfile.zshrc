@@ -40,9 +40,6 @@ export PATH
 autoload -Uz compinit
 compinit
 
-# kubectl
-source <(kubectl completion zsh)
-
 # gcloud / azure
 [[ -r '/Users/jarv/Downloads/gcloud/google-cloud-sdk/completion.zsh.inc' ]] && . '/Users/jarv/Downloads/gcloud/google-cloud-sdk/completion.zsh.inc'
 [[ -r '/Users/jarv/lib/azure-cli/az.completion' ]] && . '/Users/jarv/lib/azure-cli/az.completion'
@@ -110,8 +107,14 @@ kubectx-reset() {
 ###########
 # Misc exports
 ###########
-eval "$(brew shellenv)"
-SSH_AUTH_SOCK="$(brew --prefix)/var/run/yubikey-agent.sock"
+if command -v brew >/dev/null 2>&1; then
+	eval "$(brew shellenv)"
+fi
+
+if command -v yubikey-agent >/dev/null 2>&1; then
+	SSH_AUTH_SOCK="$(brew --prefix)/var/run/yubikey-agent.sock"
+fi
+
 export SSH_AUTH_SOCK
 
 export VAULT_ADDR=https://vault.ops.gke.gitlab.net
@@ -130,9 +133,12 @@ export LESS RI
 ###########
 # mise, direnv, atuin (zsh versions)
 ###########
-eval "$(/opt/homebrew/bin/mise activate zsh)"
+eval "$(mise activate zsh)"
 eval "$(direnv hook zsh)"
 eval "$(atuin init zsh --disable-up-arrow)"
+
+# kubectl
+source <(kubectl completion zsh)
 
 ###########
 # fzf
