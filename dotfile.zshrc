@@ -30,6 +30,7 @@ PATH="/opt/homebrew/opt/coreutils/libexec/gnubin:$PATH"
 PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 PATH="$HOME/.cargo/bin:$PATH"
 PATH="$HOME/.atuin/bin/env:$PATH"
+PATH="$HOME/.local/bin:$PATH"
 export PATH
 
 [[ -r '/Users/jarv/Downloads/gcloud/google-cloud-sdk/path.zsh.inc' ]] && . '/Users/jarv/Downloads/gcloud/google-cloud-sdk/path.zsh.inc'
