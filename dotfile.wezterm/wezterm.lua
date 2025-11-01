@@ -1,6 +1,21 @@
 local wz = require("wezterm")
 local act = wz.action
+local function first_existing(progs)
+	for _, prog in ipairs(progs) do
+		local path = prog[1]
+		if wz.glob(path) and #wz.glob(path) > 0 then
+			return prog
+		end
+	end
+	return nil
+end
+local shells = {
+	{ "/bin/zsh", "-l" },
+	{ "/usr/bin/zsh", "-l" },
+}
+
 local config = {
+	default_prog = first_existing(shells),
 	native_macos_fullscreen_mode = true,
 	window_close_confirmation = "NeverPrompt",
 	check_for_updates = false,
@@ -18,8 +33,9 @@ local config = {
 	audible_bell = "Disabled",
 	-- window_decorations = "NONE",
 	enable_tab_bar = false,
-	font = wz.font("JetBrains Mono"),
-	font_size = 14.0,
+	-- font = wz.font_with_fallback({ { family = "CaskaydiaCove Nerd Font" }, { family = "Hack Nerd Font" } }),
+	font = wz.font_with_fallback({ "CaskaydiaMono Nerd Font", "JetBrains Mono" }),
+	font_size = 10.0,
 	-- color_scheme = 'Solarized Dark (Gogh)',
 	-- color_scheme = 'Rosé Pine (base16)',
 	color_scheme = "Rosé Pine (Gogh)",
