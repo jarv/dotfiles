@@ -35,7 +35,7 @@ local config = {
 	enable_tab_bar = false,
 	-- font = wz.font_with_fallback({ { family = "CaskaydiaCove Nerd Font" }, { family = "Hack Nerd Font" } }),
 	font = wz.font_with_fallback({ "CaskaydiaMono Nerd Font", "JetBrains Mono" }),
-	font_size = 10.0,
+	font_size = 14.0,
 	-- color_scheme = 'Solarized Dark (Gogh)',
 	-- color_scheme = 'Rosé Pine (base16)',
 	color_scheme = "Rosé Pine (Gogh)",
