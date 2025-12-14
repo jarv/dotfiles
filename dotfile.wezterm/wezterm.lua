@@ -13,7 +13,6 @@ local shells = {
 	{ "/bin/zsh", "-l" },
 	{ "/usr/bin/zsh", "-l" },
 }
-
 local config = {
 	default_prog = first_existing(shells),
 	native_macos_fullscreen_mode = true,
@@ -42,6 +41,10 @@ local config = {
 	-- disable most font ligatures
 	harfbuzz_features = { "calt=0", "clig=0", "liga=0" },
 	keys = {
+		-- Clipboard operations
+		{ key = "v", mods = "SUPER", action = wz.action.PasteFrom("Clipboard") },
+		{ key = "c", mods = "SUPER", action = wz.action.CopyTo("Clipboard") },
+
 		{ key = "w", mods = "CTRL|SHIFT", action = wz.action.CloseCurrentPane({ confirm = true }) },
 		{ key = "I", mods = "CTRL|SHIFT", action = wz.action.SplitHorizontal({ domain = "CurrentPaneDomain" }) },
 		{ key = "O", mods = "CTRL|SHIFT", action = wz.action.SplitVertical({ domain = "CurrentPaneDomain" }) },
