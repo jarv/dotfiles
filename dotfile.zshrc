@@ -134,12 +134,12 @@ export LESS RI
 ###########
 # mise, direnv, atuin (zsh versions)
 ###########
-eval "$(mise activate zsh)"
-eval "$(direnv hook zsh)"
-eval "$(atuin init zsh --disable-up-arrow)"
+command -v mise >/dev/null && eval "$(mise activate zsh)"
+command -v direnv >/dev/null && eval "$(direnv hook zsh)"
+command -v atuin >/dev/null && eval "$(atuin init zsh --disable-up-arrow)"
 
 # kubectl
-source <(kubectl completion zsh)
+command -v kubectl >/dev/null && source <(kubectl completion zsh)
 
 ###########
 # fzf
