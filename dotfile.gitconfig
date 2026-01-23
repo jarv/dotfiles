@@ -7,7 +7,7 @@
 [user]
     name = John Jarvis
     email = john@jarv.org
-    signingkey = ~/.ssh/git_signing.pub
+    signingkey = ~/.ssh/yubikey_nano_personal_id_ed25519_sk.pub
 [url "git@gitlab.com:"]
     insteadOf = https://gitlab.com/
 [filter "lfs"]
@@ -39,8 +39,6 @@
     format = ssh
 [init]
     defaultBranch = main
-[gpg "ssh"]
-    program = "/opt/1Password/op-ssh-sign"
 [maintenance]
 	repo = ~/workspace/gdk
 	repo = ~/workspace/gdk/gitlab

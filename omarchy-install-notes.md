@@ -10,6 +10,9 @@ zsh
 ttf-jetbrains-mono
 ruby-stdlib
 lsof
+yubikey-manager
+libfido2
+openssh
 ```
 
 ## Wezterm
