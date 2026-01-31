@@ -13,6 +13,7 @@ lsof
 yubikey-manager
 libfido2
 openssh
+uv
 ```
 
 ## Wezterm
