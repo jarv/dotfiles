@@ -23,7 +23,8 @@ unsetopt NOMATCH # avoid "no matches found" errors
 ###########
 PATH=$PATH:/opt/homebrew/bin
 PATH="$HOME/bin:$PATH"
-PATH=$PATH:/Users/jarv/bin
+PATH=$PATH:$HOME/bin
+PATH=$PATH:$HOME/.local/bin
 PATH=$PATH:$HOME/workspace/gitlab-com-infrastructure/bin
 PATH=$PATH:~/.kube/plugins/jordanwilson230
 PATH="/opt/homebrew/opt/coreutils/libexec/gnubin:$PATH"

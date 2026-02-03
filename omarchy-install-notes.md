@@ -4,6 +4,8 @@ These are my install notes for Omarchy on a Lemur Pro 14" laptop
 
 ## Extra packages
 
+### pacman
+
 ```
 wezterm
 zsh
@@ -14,6 +16,18 @@ yubikey-manager
 libfido2
 openssh
 uv
+yt-dlp
+ffmpeg
+```
+
+### nordvpn
+
+```
+yay -S nordvpn-bin
+sudo systemctl enable nordvpnd.service
+sudo systemctl start nordvpnd.serviceordvpn-bin
+sudo usermod -aG nordvpn $USER
+nordvpn login
 ```
 
 ## Wezterm
