@@ -18,6 +18,7 @@ openssh
 uv
 yt-dlp
 ffmpeg
+vlc
 ```
 
 ### nordvpn
@@ -28,6 +29,13 @@ sudo systemctl enable nordvpnd.service
 sudo systemctl start nordvpnd.serviceordvpn-bin
 sudo usermod -aG nordvpn $USER
 nordvpn login
+```
+
+### meshtastic
+
+```
+uv tool install meshtastic
+sudo usermod -aG uucp,lock $USER
 ```
 
 ## Wezterm
@@ -75,3 +83,46 @@ general {
 ```
 xdg-settings set default-web-browser firefox.desktop
 ```
+
+## Auto-shutdown after 4h of suspension
+
+Create `/usr/lib/systemd/system-sleep/auto-shutdown-on-long-suspend` (executable, root-owned):
+
+```bash
+#!/bin/bash
+log() { echo "auto-shutdown-on-long-suspend: $*" | systemd-cat -t auto-shutdown; }
+case "$1" in
+  pre)
+    log "pre suspend: recording time and setting RTC wakeup for 14400s"
+    date +%s > /tmp/suspend-time
+    rtcwake -m no -s 14400 2>&1 | systemd-cat -t auto-shutdown
+    log "pre suspend: done"
+    ;;
+  post)
+    log "post suspend: woke up"
+    if [ -f /tmp/suspend-time ]; then
+      suspended_at=$(cat /tmp/suspend-time)
+      now=$(date +%s)
+      elapsed=$((now - suspended_at))
+      log "post suspend: suspended_at=$suspended_at now=$now elapsed=$elapsed"
+      rm /tmp/suspend-time
+      if [ "$elapsed" -ge 14400 ]; then
+        log "post suspend: elapsed >= 14400s, scheduling poweroff"
+        systemd-run --on-active=3 systemctl poweroff
+      else
+        log "post suspend: elapsed < 14400s, not powering off"
+      fi
+    else
+      log "post suspend: no suspend-time file found"
+    fi
+    ;;
+esac```
+
+```bash
+sudo chmod +x /usr/lib/systemd/system-sleep/auto-shutdown-on-long-suspend
+```
+
+Scripts in `/usr/lib/systemd/system-sleep/` are called by systemd with `pre`/`post` arguments
+on every suspend/resume. `rtcwake -m no -s 14400` programs the hardware RTC to wake the
+system after 4h without changing the sleep state. On resume, if ≥4h has elapsed, it
+shuts down. If the user wakes the system manually before 4h, nothing happens.
