@@ -25,7 +25,6 @@ PATH=$PATH:/opt/homebrew/bin
 PATH="$HOME/bin:$PATH"
 PATH=$PATH:$HOME/bin
 PATH=$PATH:$HOME/.local/bin
-PATH=$PATH:$HOME/workspace/gitlab-com-infrastructure/bin
 PATH=$PATH:~/.kube/plugins/jordanwilson230
 PATH="/opt/homebrew/opt/coreutils/libexec/gnubin:$PATH"
 PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
@@ -48,8 +47,8 @@ compinit
 
 # ssh host completion
 zstyle ':completion:*:(ssh|scp|sftp|rsync):*' hosts \
-	$(awk '{print $1}' ~/.ssh/known_hosts 2>/dev/null | sed 's/,.*//' | grep -v '^\[' | uniq) \
-	$(grep -i '^Host ' ~/.ssh/config 2>/dev/null | awk '{for(i=2;i<=NF;i++) print $i}')
+  $(awk '{print $1}' ~/.ssh/known_hosts 2>/dev/null | sed 's/,.*//' | grep -v '^\[' | uniq) \
+  $(grep -i '^Host ' ~/.ssh/config 2>/dev/null | awk '{for(i=2;i<=NF;i++) print $i}')
 
 ###########
 # Prompt
@@ -71,15 +70,15 @@ setopt HIST_IGNORE_ALL_DUPS
 setopt EXTENDED_HISTORY
 
 h() {
-	ls -tr ~/.zsh_histories/*/* ~/.bash_histories/*/* | xargs grep -i "$1"
+  ls -tr ~/.zsh_histories/*/* ~/.bash_histories/*/* | xargs grep -i "$1"
 }
 
 ###########
 # fzf / rg defaults
 ###########
 if type rg &>/dev/null; then
-	export FZF_DEFAULT_COMMAND='rg --files'
-	export FZF_DEFAULT_OPTS='-m --height 50% --border'
+  export FZF_DEFAULT_COMMAND='rg --files'
+  export FZF_DEFAULT_OPTS='-m --height 50% --border'
 fi
 export FZF_DEFAULT_OPTS='--bind ctrl-d:page-down,ctrl-u:page-up'
 
@@ -87,15 +86,15 @@ export FZF_DEFAULT_OPTS='--bind ctrl-d:page-down,ctrl-u:page-up'
 # Git helpers
 ###########
 git_diff() {
-	git diff --no-ext-diff -w "$@" | vim -R -
+  git diff --no-ext-diff -w "$@" | vim -R -
 }
 
 git-cd() {
-	if git rev-parse --show-toplevel >/dev/null 2>&1; then
-		cd "$(git rev-parse --show-toplevel)"
-	else
-		echo "Not in a Git repository."
-	fi
+  if git rev-parse --show-toplevel >/dev/null 2>&1; then
+    cd "$(git rev-parse --show-toplevel)"
+  else
+    echo "Not in a Git repository."
+  fi
 }
 
 #########
@@ -103,18 +102,20 @@ git-cd() {
 #########
 
 kubectx-reset() {
-	kubectl config unset current-context
+  kubectl config unset current-context
 }
 
 ###########
 # Misc exports
 ###########
 if command -v brew >/dev/null 2>&1; then
-	eval "$(brew shellenv)"
+  eval "$(brew shellenv)"
 fi
 
 if command -v yubikey-agent >/dev/null 2>&1; then
-	SSH_AUTH_SOCK="$(brew --prefix)/var/run/yubikey-agent.sock"
+  SSH_AUTH_SOCK="$(brew --prefix)/var/run/yubikey-agent.sock"
+elif [[ "$OSTYPE" == "linux-gnu"* ]] && [[ -S "$XDG_RUNTIME_DIR/ssh-agent.socket" ]]; then
+  SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
 fi
 
 export SSH_AUTH_SOCK
@@ -146,7 +147,7 @@ command -v kubectl >/dev/null && source <(kubectl completion zsh)
 # fzf
 ###########
 if [[ ! "$PATH" == */opt/homebrew/opt/fzf/bin* ]]; then
-	PATH="${PATH:+${PATH}:}/opt/homebrew/opt/fzf/bin"
+  PATH="${PATH:+${PATH}:}/opt/homebrew/opt/fzf/bin"
 fi
 
 # ###########

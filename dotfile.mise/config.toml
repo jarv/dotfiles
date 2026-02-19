@@ -8,6 +8,7 @@ paranoid = false
 watchexec = "latest"
 golang = "1.23"
 kubectl = "latest"
+shfmt = "latest"
 direnv = "latest"
 atuin = "latest"
 ruby = "3.2.1"

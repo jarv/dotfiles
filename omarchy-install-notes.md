@@ -91,16 +91,24 @@ Create `/usr/lib/systemd/system-sleep/auto-shutdown-on-long-suspend` (executable
 ```bash
 #!/bin/bash
 log() { echo "auto-shutdown-on-long-suspend: $*" | systemd-cat -t auto-shutdown; }
+on_ac_power() { grep -q "^status = Charging\|^status = Full\|^online = 1" /sys/class/power_supply/*/uevent 2>/dev/null; }
 case "$1" in
   pre)
-    log "pre suspend: recording time and setting RTC wakeup for 14400s"
-    date +%s > /tmp/suspend-time
-    rtcwake -m no -s 14400 2>&1 | systemd-cat -t auto-shutdown
-    log "pre suspend: done"
+    if on_ac_power; then
+      log "pre suspend: AC power connected, skipping RTC wakeup"
+    else
+      log "pre suspend: recording time and setting RTC wakeup for 14400s"
+      date +%s > /tmp/suspend-time
+      rtcwake -m no -s 14400 2>&1 | systemd-cat -t auto-shutdown
+      log "pre suspend: done"
+    fi
     ;;
   post)
     log "post suspend: woke up"
-    if [ -f /tmp/suspend-time ]; then
+    if on_ac_power; then
+      log "post suspend: AC power connected, skipping shutdown check"
+      rm -f /tmp/suspend-time
+    elif [ -f /tmp/suspend-time ]; then
       suspended_at=$(cat /tmp/suspend-time)
       now=$(date +%s)
       elapsed=$((now - suspended_at))
