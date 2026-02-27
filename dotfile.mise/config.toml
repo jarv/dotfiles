@@ -4,6 +4,9 @@ legacy_version_file_disable_tools = ['terraform']
 experimental = true
 paranoid = false
 
+[settings.ruby]
+compile = false
+
 [tools]
 watchexec = "latest"
 golang = "1.23"
