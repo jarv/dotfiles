@@ -78,6 +78,10 @@ general {
 1. Line 10: Replace "group/tray-expander" with "tray" in the modules-right array
 2. Lines 122-137: Delete the entire group/tray-expander and custom/expand-icon
 
+`~/.config/hypr/bindings.conf`
+
+1. Add `unbind = SUPER SHIFT, RETURN`
+
 ## Firefox
 
 ```
