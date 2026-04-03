@@ -6,6 +6,11 @@
     "mdns": false
   },
   "permission": {
+    "external_directory": {
+      "*": "deny",
+      "~/workspace/**": "allow",
+      "~/src/**": "allow"
+    },
     "read": {
       "*.env": "deny",
       "*.env.*": "deny",
@@ -22,11 +27,25 @@
       "git checkout *": "allow",
       "git status *": "allow",
       "git branch *": "allow",
-      "cat *": "allow"
+      "git add *": "allow",
+      "git commit *": "allow",
+      "cat *": "allow",
+      "git log *": "allow",
+      "head *": "allow",
+      "awk *": "allow",
+      "sleep *": "allow",
+      "glab mr view *": "allow",
+      "git diff *": "allow",
+      "git show *": "allow",
+      "sed *": "allow",
+      "ls *": "allow",
+      "bundle *": "allow",
+      "which *": "allow",
+      "rg *": "allow",
+      "sort *": "allow"
     },
     "edit": "ask",
-    "webfetch": "allow",
-    "external_directory": "deny"
+    "webfetch": "allow"
   },
   "provider": {
     "gitlab": {
