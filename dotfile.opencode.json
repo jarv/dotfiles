@@ -9,7 +9,8 @@
     "external_directory": {
       "*": "deny",
       "~/workspace/**": "allow",
-      "~/src/**": "allow"
+      "~/src/**": "allow",
+      "~/.local/share/mise/**:": "allow"
     },
     "read": {
       "*.env": "deny",
@@ -42,7 +43,8 @@
       "bundle *": "allow",
       "which *": "allow",
       "rg *": "allow",
-      "sort *": "allow"
+      "sort *": "allow",
+      "git rebase *": "allow"
     },
     "edit": "ask",
     "webfetch": "allow"
