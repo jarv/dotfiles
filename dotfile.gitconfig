@@ -7,7 +7,7 @@
 [user]
     name = John Jarvis
     email = john@jarv.org
-    signingkey = /Users/jarv/.ssh/yubikey_nano.pub
+    signingkey = ~/.ssh/yubikey_nano.pub
 [url "git@gitlab.com:"]
     insteadOf = https://gitlab.com/
 [filter "lfs"]
