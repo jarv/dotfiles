@@ -5,6 +5,7 @@ alias ls="ls --color=tty -F"
 alias ag="rg"
 alias vim="nvim"
 alias k="kubectl"
+alias ck="colima kubectl"
 
 ###########
 # Zsh options (bash shopt equivalents)
@@ -21,7 +22,7 @@ unsetopt NOMATCH # avoid "no matches found" errors
 ###########
 # PATH
 ###########
-PATH=$PATH:/opt/homebrew/bin
+PATH=/opt/homebrew/bin:$PATH
 PATH="$HOME/bin:$PATH"
 PATH=$PATH:$HOME/bin
 PATH=$PATH:$HOME/.local/bin

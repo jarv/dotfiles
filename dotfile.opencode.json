@@ -9,8 +9,12 @@
     "external_directory": {
       "*": "deny",
       "~/workspace/**": "allow",
+      "~/.config/**": "allow",
       "~/src/**": "allow",
-      "~/.local/share/mise/**:": "allow"
+      "~/.local/share/mise/**:": "allow",
+      "/tmp/**": "allow",
+      "~/gitlab/**": "allow",
+      "~/.agents/skills/**": "allow"
     },
     "read": {
       "*.env": "deny",
@@ -35,7 +39,7 @@
       "head *": "allow",
       "awk *": "allow",
       "sleep *": "allow",
-      "glab mr view *": "allow",
+      "glab mr *": "allow",
       "git diff *": "allow",
       "git show *": "allow",
       "sed *": "allow",
@@ -44,7 +48,10 @@
       "which *": "allow",
       "rg *": "allow",
       "sort *": "allow",
-      "git rebase *": "allow"
+      "git rebase *": "allow",
+      "jq *": "allow",
+      "* mr-description.md": "allow",
+      "xargs *": "allow"
     },
     "edit": "ask",
     "webfetch": "allow"
@@ -91,15 +98,24 @@
     "@gitlab/opencode-gitlab-plugin"
   ],
   "mcp": {
-    "lazy-mcp": {
+    "glean": {
+      "type": "remote",
+      "url": "https://gitlab-be.glean.com/mcp/default"
+    },
+    "gitlab": {
+      "type": "remote",
+      "url": "https://gitlab.com/api/v4/mcp"
+    },
+    "incident-io": {
+      "type": "remote",
+      "url": "https://mcp.incident.io/mcp"
+    },
+    "newsgoat": {
       "type": "local",
       "command": [
-        "npx",
-        "lazy-mcp@latest",
-        "--config",
-        "~/.config/lazy-mcp/servers.json"
-      ],
-      "enabled": true
+        "newsgoat",
+        "mcp-server"
+      ]
     }
   }
 }
