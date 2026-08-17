@@ -50,37 +50,35 @@ yay -S wezterm-nightly-bin --noconfirm
 
 ## Hyprland
 
-`~/.config/hypr/monitors.conf`
+`~/.config/hypr/monitors.lua`
 
-```
-# System76 Lemur Pro 14" - 1920x1200 @ ~148 DPI
-# Optimized 1.25x scaling for comfortable readability and good workspace
-env = GDK_SCALE,1
-monitor = eDP-1, 1920x1200@60, 0x0, 1.25
-```
+```lua
+local omarchy_gdk_scale = 1
+local omarchy_monitor_scale = "auto"
 
-`~/config/hypr/looknfeel.conf`
-
-```
-general {
-    # No gaps between windows or borders
-    gaps_in = 0
-    gaps_out = 0
-    border_size = 0
-
-    # Use master layout instead of dwindle
-    # layout = master
-}
+hl.env("GDK_SCALE", tostring(omarchy_gdk_scale))
+-- System76 Lemur Pro 14" - 1920x1200 @ ~148 DPI
+-- Optimized 1.25x scaling for comfortable readability and good workspace
+hl.monitor({ output = "eDP-1", mode = "1920x1200@60", position = "0x0", scale = 1.25 })
 ```
 
-`~/.config/waybar/config.jsonc`
+`~/.config/hypr/looknfeel.lua`
 
-1. Line 10: Replace "group/tray-expander" with "tray" in the modules-right array
-2. Lines 122-137: Delete the entire group/tray-expander and custom/expand-icon
+```lua
+hl.config({
+  general = {
+    gaps_in = 0,
+    gaps_out = 0,
+    border_size = 0,
+  },
+})
+```
 
-`~/.config/hypr/bindings.conf`
+`~/.config/hypr/bindings.lua`
 
-1. Add `unbind = SUPER SHIFT, RETURN`
+```lua
+hl.unbind("SUPER + SHIFT + RETURN")
+```
 
 ## Firefox
 
