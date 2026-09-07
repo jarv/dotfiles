@@ -80,11 +80,37 @@ hl.config({
 hl.unbind("SUPER + SHIFT + RETURN")
 ```
 
+## Idle / Lock Screen
+
+`~/.config/omarchy/shell.json`
+
+```json
+"idle": {
+  "lock": 1800,
+  "screensaver": 0
+}
+```
+
+Disables the screensaver and sets the lock screen timeout to 30 minutes.
+
 ## Firefox
+
+Omarchy defaults to Chromium. Set Firefox as the default browser so `xdg-open`
+(and therefore Ctrl-click on links in wezterm) opens Firefox:
 
 ```
 xdg-settings set default-web-browser firefox.desktop
+xdg-mime default firefox.desktop x-scheme-handler/http x-scheme-handler/https x-scheme-handler/about x-scheme-handler/unknown text/html
 ```
+
+Verify:
+
+```
+xdg-settings get default-web-browser
+xdg-mime query default x-scheme-handler/https
+```
+
+Can also be changed via `Super+Alt+Space` → Setup → Defaults → Web Browser.
 
 ## Auto-shutdown after 4h of suspension
 
