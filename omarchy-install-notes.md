@@ -8,7 +8,6 @@ These are my install notes for Omarchy on a Lemur Pro 14" laptop
 
 ```
 wezterm
-zsh
 ttf-jetbrains-mono
 ruby-stdlib
 lsof
@@ -37,6 +36,19 @@ nordvpn login
 uv tool install meshtastic
 sudo usermod -aG uucp,lock $USER
 ```
+
+## Zsh
+
+Omarchy ships its own zsh config package (aliases, starship, mise, zoxide, fzf,
+syntax highlighting). Use it instead of plain `zsh`:
+
+```
+omarchy pkg add omarchy-zsh
+chsh -s /usr/bin/zsh
+```
+
+Log out to pick up the new shell (no reboot needed): `Super + Escape` → Logout,
+or `omarchy system logout`.
 
 ## Wezterm
 
@@ -87,11 +99,21 @@ hl.unbind("SUPER + SHIFT + RETURN")
 ```json
 "idle": {
   "lock": 1800,
-  "screensaver": 0
+  "screensaver": 1800
 }
 ```
 
-Disables the screensaver and sets the lock screen timeout to 30 minutes.
+Sets the lock screen timeout to 30 minutes, with the screensaver firing at the
+same time so it never shows on its own.
+
+Do **not** set `screensaver` to `0` to disable it. The shell's idle service
+(`/usr/share/omarchy/shell/plugins/services/idle/IdleModel.js`) only rejects
+negative/non-numeric values, so `0` becomes a 0-second idle timeout and the
+screensaver launches immediately on login. Check with:
+
+```
+journalctl --user -b -o cat | grep "omarchy idle"
+```
 
 ## Firefox
 

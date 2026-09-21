@@ -7,6 +7,9 @@ paranoid = false
 [settings.ruby]
 compile = false
 
+[settings.upgrade]
+auto_prune = false
+
 [tools]
 uv = "latest"
 opencode = "latest"
@@ -31,3 +34,4 @@ sqlc = "1.30.0"
 go = "1.24.13"
 codex = "latest"
 gh = "latest"
+herdr = "latest"
