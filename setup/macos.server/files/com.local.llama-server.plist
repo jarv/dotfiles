@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>Label</key>
+  <string>com.local.llama-server</string>
+
+  <key>ProgramArguments</key>
+  <array>
+    <string>/opt/homebrew/bin/llama-server</string>
+    <string>-hf</string>
+    <string>unsloth/Qwen3-Coder-30B-A3B-Instruct-GGUF:UD-Q4_K_XL</string>
+    <string>--alias</string>
+    <string>qwen3-coder:30b</string>
+    <string>--host</string>
+    <string>127.0.0.1</string>
+    <string>--port</string>
+    <string>8080</string>
+    <string>-c</string>
+    <string>131072</string>
+    <string>-fa</string>
+    <string>on</string>
+    <string>--jinja</string>
+    <string>-ctk</string>
+    <string>q8_0</string>
+    <string>-ctv</string>
+    <string>q8_0</string>
+    <string>--temp</string>
+    <string>1.0</string>
+    <string>--top-p</string>
+    <string>0.95</string>
+    <string>--top-k</string>
+    <string>40</string>
+    <string>--min-p</string>
+    <string>0.01</string>
+    <string>--repeat-penalty</string>
+    <string>1.0</string>
+  </array>
+
+  <key>UserName</key>
+  <string>USERNAME</string>
+  <key>GroupName</key>
+  <string>staff</string>
+
+  <key>EnvironmentVariables</key>
+  <dict>
+    <key>HOME</key>
+    <string>/Users/USERNAME</string>
+    <key>PATH</key>
+    <string>/opt/homebrew/bin:/usr/bin:/bin:/usr/sbin:/sbin</string>
+    <key>LLAMA_CACHE</key>
+    <string>/Users/USERNAME/models/cache</string>
+  </dict>
+
+  <key>RunAtLoad</key>
+  <true/>
+  <key>KeepAlive</key>
+  <true/>
+  <key>ThrottleInterval</key>
+  <integer>10</integer>
+  <key>ProcessType</key>
+  <string>Interactive</string>
+
+  <key>StandardOutPath</key>
+  <string>/var/log/llama-server.log</string>
+  <key>StandardErrorPath</key>
+  <string>/var/log/llama-server.log</string>
+</dict>
+</plist>

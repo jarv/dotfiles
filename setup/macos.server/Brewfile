@@ -1,0 +1,25 @@
+# Server / always-on Mac (llmbox). Workstation uses setup/macos.workstation/Brewfile.
+#   brew bundle --file ~/src/jarv/dotfiles/setup/macos.server/Brewfile
+# Deliberately small. Notably NOT included:
+#   cask "tailscale-app"  - conflicts with the tailscale formula, and only the
+#                           formula supports `tailscale serve` / Tailscale SSH
+#   brew "openssh"        - system ssh/sshd everywhere (also dropped from workstation)
+#   yubikey-agent         - no YubiKey on the server
+tap "homebrew/services"
+tap "context-labs/mactop"
+
+# networking / remote
+brew "tailscale"
+brew "mosh"
+
+# inference servers (Metal/MLX-linked native builds)
+brew "ollama"
+brew "llama.cpp"
+
+# expected by dotfile.zshrc (starship runs before mise activate, so brew)
+brew "starship"
+brew "coreutils"
+
+# monitoring
+brew "htop"
+brew "mactop"

@@ -10,28 +10,71 @@ compile = false
 [settings.upgrade]
 auto_prune = false
 
+# Shared across macOS (workstation + llmbox) and Linux. Anything that is a
+# single binary / toolchain lives here; daemons, GNU userland, casks are in
+# Brewfile.workstation / Brewfile.server.
 [tools]
-uv = "latest"
-opencode = "latest"
-watchexec = "latest"
-kubectl = "latest"
-shfmt = "latest"
-direnv = "latest"
-atuin = "latest"
-shellcheck = "0.11.0"
-awscli = "2.8.2"
+# languages / toolchains
+go = "1.24.13"
 nodejs = "22.14.0"
-hugo = "0.116.0"
-tflint = "0.47.0"
-gcloud = "497.0.0"
-markdownlint-cli2 = "0.15.0"
+rust = "latest"
+uv = "latest"
+cmake = "latest"
+ninja = "latest"
+meson = "latest"
 # lua = "latest" # Temporarily disabled due to LuaRocks 3.13.0 bug
+
+# shell / editor
+neovim = "latest"
+tree-sitter = "latest"
+tmux = "latest"
+atuin = "latest"
+direnv = "latest"
+fzf = "latest"
+ripgrep = "latest"
 fd = "latest"
+jq = "latest"
+yq = "latest"
+jd = "latest"
+miller = "latest"
+tokei = "latest"
+watchexec = "latest"
+websocat = "latest"
+lychee = "latest"
+yt-dlp = "latest"
+
+# git / lint / format
+gh = "latest"
+git-lfs = "latest"
 lazygit = "latest"
+shfmt = "latest"
+shellcheck = "0.11.0"
+checkmake = "latest"
+yamllint = "latest"
+markdownlint-cli2 = "0.15.0"
+golangci-lint = "latest"
+sqlc = "1.30.0"
+hugo = "0.116.0"
+
+# k8s / infra / cloud
+kubectl = "latest"
+kubectx = "latest"
+k9s = "latest"
+kind = "latest"
+helm = "latest"
+helmfile = "latest"
+stern = "latest"
+minio = "latest"
+cosign = "latest"
+terraform-docs = "latest"
+terraform-ls = "latest"
+tflint = "0.47.0"
+awscli = "2.8.2"
+gcloud = "497.0.0"
 teleport-community = "latest"
 "asdf:mise-plugins/mise-glab" = "latest"
-sqlc = "1.30.0"
-go = "1.24.13"
+
+# agents
+opencode = "latest"
 codex = "latest"
-gh = "latest"
 herdr = "latest"

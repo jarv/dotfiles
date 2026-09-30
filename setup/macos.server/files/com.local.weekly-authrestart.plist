@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>Label</key>
+  <string>com.local.weekly-authrestart</string>
+  <!--
+    Sunday 04:00 reboot that keeps FileVault unlocked.
+    Requires /etc/fde-pass (root:wheel, 0400) containing a plist:
+      &lt;plist version="1.0"&gt;&lt;dict&gt;
+        &lt;key&gt;Username&lt;/key&gt;&lt;string&gt;jarv&lt;/string&gt;
+        &lt;key&gt;Password&lt;/key&gt;&lt;string&gt;...&lt;/string&gt;
+      &lt;/dict&gt;&lt;/plist&gt;
+    OPTIONAL: skip this file entirely if you do not want a password on disk.
+  -->
+  <key>ProgramArguments</key>
+  <array>
+    <string>/bin/sh</string>
+    <string>-c</string>
+    <string>/usr/bin/fdesetup authrestart -inputplist &lt; /etc/fde-pass</string>
+  </array>
+  <key>StartCalendarInterval</key>
+  <dict>
+    <key>Weekday</key>
+    <integer>0</integer>
+    <key>Hour</key>
+    <integer>4</integer>
+    <key>Minute</key>
+    <integer>0</integer>
+  </dict>
+  <key>StandardErrorPath</key>
+  <string>/var/log/weekly-authrestart.log</string>
+</dict>
+</plist>

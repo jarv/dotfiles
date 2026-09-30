@@ -92,6 +92,22 @@ hl.config({
 hl.unbind("SUPER + SHIFT + RETURN")
 ```
 
+`~/.config/hypr/input.lua`
+
+```lua
+hl.config({
+  input = {
+    kb_options = "ctrl:nocaps,shift:both_capslock_cancel",
+    numlock_by_default = false,
+  },
+})
+```
+
+Omarchy's default is `compose:caps`, but the Lemur Pro firmware already remaps Caps→Ctrl
+so compose never applied there. External keyboards (Kinesis Freestyle2) don't get the
+firmware remap, so `ctrl:nocaps` makes them match. `numlock_by_default = false` keeps the
+Num Lk LED off on the Kinesis.
+
 ## Idle / Lock Screen
 
 `~/.config/omarchy/shell.json`

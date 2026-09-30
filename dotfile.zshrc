@@ -113,13 +113,13 @@ if command -v brew >/dev/null 2>&1; then
   eval "$(brew shellenv)"
 fi
 
-if command -v yubikey-agent >/dev/null 2>&1; then
-  SSH_AUTH_SOCK="$(brew --prefix)/var/run/yubikey-agent.sock"
-elif [[ "$OSTYPE" == "linux-gnu"* ]] && [[ -S "$XDG_RUNTIME_DIR/ssh-agent.socket" ]]; then
+# macOS: YubiKey is used via the built-in PKCS11 provider
+# (PKCS11Provider /usr/lib/ssh-keychain.dylib in ~/.ssh/config); the default
+# launchd ssh-agent is fine, no yubikey-agent.
+if [[ "$OSTYPE" == "linux-gnu"* ]] && [[ -S "$XDG_RUNTIME_DIR/ssh-agent.socket" ]]; then
   SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
+  export SSH_AUTH_SOCK
 fi
-
-export SSH_AUTH_SOCK
 
 export VAULT_ADDR=https://vault.ops.gke.gitlab.net
 export VAULT_PROXY_ADDR=socks5://localhost:18200
