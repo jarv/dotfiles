@@ -72,7 +72,6 @@ tflint = "0.47.0"
 awscli = "2.8.2"
 gcloud = "497.0.0"
 teleport-community = "latest"
-"asdf:mise-plugins/mise-glab" = "latest"
 
 # agents
 opencode = "latest"

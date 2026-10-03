@@ -7,9 +7,11 @@
 [user]
     name = John Jarvis
     email = john@jarv.org
-    signingkey = ~/.ssh/yubikey_nano.pub
+    signingkey = ~/.ssh/id_ed25519_sk_github
 [url "git@gitlab.com:"]
     insteadOf = https://gitlab.com/
+[url "git@github.com:"]
+    insteadOf = https://github.com/
 [filter "lfs"]
     clean = git-lfs clean -- %f
     smudge = git-lfs smudge -- %f
@@ -19,6 +21,12 @@
     path = .gitconfig-gitlab
 [includeIf "hasconfig:remote.*.url:*github.com*/**"]
     path = .gitconfig-github
+[includeIf "hasconfig:remote.*.url:git@github.com:supabase/**"]
+    path = .gitconfig-supabase
+[includeIf "hasconfig:remote.*.url:https://github.com/supabase/**"]
+    path = .gitconfig-supabase
+[includeIf "hasconfig:remote.*.url:ssh://git@github.com/supabase/**"]
+    path = .gitconfig-supabase
 [alias]
     change-commits = "!f() { VAR=$1; OLD=$2; NEW=$3; shift 3; git filter-branch --env-filter \"if [[ \\\"$`echo $VAR`\\\" = '$OLD' ]]; then export $VAR='$NEW'; fi\" $@; }; f "
     find-merge = "!sh -c 'commit=$0 && branch=${1:-HEAD} && (git rev-list $commit..$branch --ancestry-path | cat -n; git rev-list $commit..$branch --first-parent | cat -n) | sort -k2 -s | uniq -f1 -d | sort -n | tail -1 | cut -f2'"
@@ -39,6 +47,8 @@
     gpgsign = true
 [gpg]
     format = ssh
+[gpg "ssh"]
+    program = ~/.local/bin/ssh-keygen-yubikey
 [init]
     defaultBranch = main
 [maintenance]

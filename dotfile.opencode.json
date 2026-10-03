@@ -9,12 +9,16 @@
     "external_directory": {
       "*": "deny",
       "~/workspace/**": "allow",
+      "~/supabase/**": "allow",
+      "~/supabase.io/**": "allow",
       "~/.config/**": "allow",
       "~/src/**": "allow",
       "~/.local/share/mise/**:": "allow",
       "/tmp/**": "allow",
+      "/var/tmp/**": "allow",
       "~/gitlab/**": "allow",
-      "~/.agents/skills/**": "allow"
+      "~/.agents/skills/**": "allow",
+      "/var/foldders/**": "allow"
     },
     "read": {
       "*.env": "deny",
@@ -56,55 +60,17 @@
     "edit": "ask",
     "webfetch": "allow"
   },
-  "provider": {
-    "gitlab": {
-      "models": {
-        "duo-chat-haiku-4-5": {
-          "cost": {
-            "input": 0.8,
-            "output": 4
-          }
-        },
-        "duo-chat-sonnet-4-5": {
-          "cost": {
-            "input": 3,
-            "output": 15
-          }
-        },
-        "duo-chat-opus-4-5": {
-          "cost": {
-            "input": 15,
-            "output": 75
-          }
-        },
-        "duo-chat-sonnet-4-6": {
-          "cost": {
-            "input": 3,
-            "output": 15
-          }
-        },
-        "duo-chat-opus-4-6": {
-          "cost": {
-            "input": 15,
-            "output": 75
-          }
-        }
-      }
-    }
-  },
+  "provider": {},
   "share": "disabled",
   "model": "gitlab/duo-chat",
   "plugin": [
     "@gitlab/opencode-gitlab-plugin"
   ],
   "mcp": {
-    "glean": {
+    "notion": {
       "type": "remote",
-      "url": "https://gitlab-be.glean.com/mcp/default"
-    },
-    "gitlab": {
-      "type": "remote",
-      "url": "https://gitlab.com/api/v4/mcp"
+      "url": "https://mcp.notion.com/mcp",
+      "enabled": true
     },
     "incident-io": {
       "type": "remote",
@@ -116,6 +82,14 @@
         "newsgoat",
         "mcp-server"
       ]
+    },
+    "linear": {
+      "type": "remote",
+      "url": "https://mcp.linear.app/mcp"
+    },
+    "vercel": {
+      "type": "remote",
+      "url": "https://mcp.vercel.com"
     }
   }
 }

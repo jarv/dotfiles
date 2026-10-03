@@ -26,6 +26,7 @@ ln -sf  $D/dotfile.bashrc           ~/.bashrc
 ln -sf  $D/dotfile.bash_profile     ~/.bash_profile
 ln -sf  $D/dotfile.gitconfig        ~/.gitconfig
 ln -sf  $D/dotfile.gitconfig-gitlab ~/.gitconfig-gitlab
+ln -sf  $D/dotfile.gitconfig-supabase ~/.gitconfig-supabase
 ln -sf  $D/dotfile.cvsignore        ~/.cvsignore
 ln -sf  $D/dotfile.starship.toml    ~/.config/starship.toml
 ln -sfn $D/dotfile.mise             ~/.config/mise
@@ -134,5 +135,6 @@ defaults write com.apple.finder AppleShowAllFiles -bool true
 defaults write NSGlobalDomain KeyRepeat -int 2
 defaults write NSGlobalDomain InitialKeyRepeat -int 15
 defaults write com.apple.dock autohide -bool true
-killall Finder Dock
+defaults write com.apple.WindowManager EnableStandardClickToShowDesktop -bool false
+killall Finder Dock WindowManager
 ```

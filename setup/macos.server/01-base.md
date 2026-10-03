@@ -51,6 +51,7 @@ cd $D/setup/macos.server                             # rest of this guide runs f
 ln -sf  $D/dotfile.zshrc            ~/.zshrc
 ln -sf  $D/dotfile.gitconfig        ~/.gitconfig
 ln -sf  $D/dotfile.gitconfig-gitlab ~/.gitconfig-gitlab
+ln -sf  $D/dotfile.gitconfig-supabase ~/.gitconfig-supabase
 ln -sf  $D/dotfile.cvsignore        ~/.cvsignore
 ln -sf  $D/dotfile.starship.toml    ~/.config/starship.toml
 ln -sfn $D/dotfile.mise             ~/.config/mise
@@ -152,6 +153,9 @@ git -C ~/src/jarv/dotfiles remote set-url origin git@github.com:jarv/dotfiles
 defaults write com.apple.loginwindow TALLogoutSavesState -bool false
 # Show full path / all extensions (nice over screen sharing)
 defaults write NSGlobalDomain AppleShowAllExtensions -bool true
+# Do not move windows aside when clicking the desktop
+defaults write com.apple.WindowManager EnableStandardClickToShowDesktop -bool false
+killall WindowManager 2>/dev/null || true
 # Disable Spotlight indexing of the model directories (saves CPU/IO)
 sudo mdutil -i off ~/.ollama 2>/dev/null || true
 ```
