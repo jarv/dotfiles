@@ -39,7 +39,7 @@ flip it to always-on as the final step.
 ## Design decisions (short version)
 
 - **Dotfiles drive the user environment.** `~/src/jarv/dotfiles` is cloned
-  first and symlinked (`dotfile.zshrc`, `dotfile.gitconfig`, `dotfile.mise`,
+  first and symlinked (`dotfile.zshrc`, `dotfile.git`, `dotfile.mise`,
   `dotfile.opencode.json`). mise installs the tool layer (incl. opencode) from
   the shared config. The dotfiles repo has `setup/macos.workstation/Brewfile` (not for
   this box) and `setup/macos.server/Brewfile` (tailscale, ollama, llama.cpp, ...). Git

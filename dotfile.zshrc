@@ -109,6 +109,8 @@ kubectx-reset() {
 ###########
 # Misc exports
 ###########
+[[ -r "$HOME/.config/zsh/local.zsh" ]] && source "$HOME/.config/zsh/local.zsh"
+
 if command -v brew >/dev/null 2>&1; then
   eval "$(brew shellenv)"
 fi

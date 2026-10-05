@@ -39,7 +39,7 @@ sudo defaults write /Library/Preferences/com.apple.commerce AutoUpdate -bool fal
 
 The dotfiles repo already carries the shell, git, mise and opencode config,
 so the box gets the same environment as every other machine with a clone and
-a handful of symlinks. This replaces hand-editing `~/.zshrc`, `~/.gitconfig`
+a handful of symlinks. This replaces hand-editing `~/.zshrc`, `~/.config/git/config`
 and `~/.config/mise/config.toml`.
 
 ```sh
@@ -49,9 +49,7 @@ D=~/src/jarv/dotfiles
 cd $D/setup/macos.server                             # rest of this guide runs from here
 
 ln -sf  $D/dotfile.zshrc            ~/.zshrc
-ln -sf  $D/dotfile.gitconfig        ~/.gitconfig
-ln -sf  $D/dotfile.gitconfig-gitlab ~/.gitconfig-gitlab
-ln -sf  $D/dotfile.gitconfig-supabase ~/.gitconfig-supabase
+ln -sfn $D/dotfile.git              ~/.config/git
 ln -sf  $D/dotfile.cvsignore        ~/.cvsignore
 ln -sf  $D/dotfile.starship.toml    ~/.config/starship.toml
 ln -sfn $D/dotfile.mise             ~/.config/mise
@@ -73,18 +71,18 @@ What the existing files give you for free:
   `atuin`, `direnv`, `shellcheck`, `lazygit`, ... - the whole mise tool layer.
   `opencode` being there means the box can run opencode locally with no extra
   steps (see `05-opencode-client.md`).
-- `dotfile.gitconfig`: identity, aliases, LFS, `pull.rebase`.
+- `dotfile.git/config`: identity, aliases, LFS, `pull.rebase`.
 - `dotfile.opencode.json`: permissions / MCP / gitlab provider. The `llmbox`
   provider gets added to this file so every machine picks it up.
 
 Two things in the dotfiles do **not** fit a headless box:
 
 1. `commit.gpgsign = true` with the YubiKey ssh key - no YubiKey here.
-   `dotfile.gitconfig` includes `~/.gitconfig-local` (missing file is
+   `dotfile.git/config` includes `machine.local.gitconfig` (missing file is
    ignored), so override on the box only:
 
    ```sh
-   printf '[commit]\n    gpgsign = false\n' > ~/.gitconfig-local
+   printf '[commit]\n    gpgsign = false\n' > ~/.config/git/machine.local.gitconfig
    ```
 
 2. YubiKey ssh. Nothing to do on the box: there is no yubikey-agent anywhere

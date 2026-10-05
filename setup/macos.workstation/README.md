@@ -24,9 +24,7 @@ D=~/src/jarv/dotfiles
 ln -sf  $D/dotfile.zshrc            ~/.zshrc
 ln -sf  $D/dotfile.bashrc           ~/.bashrc
 ln -sf  $D/dotfile.bash_profile     ~/.bash_profile
-ln -sf  $D/dotfile.gitconfig        ~/.gitconfig
-ln -sf  $D/dotfile.gitconfig-gitlab ~/.gitconfig-gitlab
-ln -sf  $D/dotfile.gitconfig-supabase ~/.gitconfig-supabase
+ln -sfn $D/dotfile.git              ~/.config/git
 ln -sf  $D/dotfile.cvsignore        ~/.cvsignore
 ln -sf  $D/dotfile.starship.toml    ~/.config/starship.toml
 ln -sfn $D/dotfile.mise             ~/.config/mise
@@ -89,7 +87,7 @@ already sets `PKCS11Provider` for it (guarded so it is inert on Linux).
 # once per boot (or add to a login item / launchd agent):
 ssh-add -s /usr/lib/ssh-keychain.dylib      # prompts for the PIV PIN
 ssh-add -L                                   # shows the PIV key
-ssh-add -L | grep -i piv > ~/.ssh/yubikey_nano.pub   # what .gitconfig signingkey points at
+ssh-add -L | grep -i piv > ~/.ssh/yubikey_nano.pub   # what dotfile.git/config points at
 ```
 
 Provision the PIV slot itself with `ykman piv keys generate 9a ...` /

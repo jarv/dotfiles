@@ -17,16 +17,6 @@
     smudge = git-lfs smudge -- %f
     process = git-lfs filter-process
     required = true
-[includeIf "hasconfig:remote.*.url:*gitlab.com*/**"]
-    path = .gitconfig-gitlab
-[includeIf "hasconfig:remote.*.url:*github.com*/**"]
-    path = .gitconfig-github
-[includeIf "hasconfig:remote.*.url:git@github.com:supabase/**"]
-    path = .gitconfig-supabase
-[includeIf "hasconfig:remote.*.url:https://github.com/supabase/**"]
-    path = .gitconfig-supabase
-[includeIf "hasconfig:remote.*.url:ssh://git@github.com/supabase/**"]
-    path = .gitconfig-supabase
 [alias]
     change-commits = "!f() { VAR=$1; OLD=$2; NEW=$3; shift 3; git filter-branch --env-filter \"if [[ \\\"$`echo $VAR`\\\" = '$OLD' ]]; then export $VAR='$NEW'; fi\" $@; }; f "
     find-merge = "!sh -c 'commit=$0 && branch=${1:-HEAD} && (git rev-list $commit..$branch --ancestry-path | cat -n; git rev-list $commit..$branch --first-parent | cat -n) | sort -k2 -s | uniq -f1 -d | sort -n | tail -1 | cut -f2'"
@@ -62,5 +52,23 @@
 [credential "https://gist.github.com"]
 	helper = 
 	helper = !/usr/bin/gh auth git-credential
+[includeIf "hasconfig:remote.*.url:git@gitlab.com:*/**"]
+    path = identity.gitlab.gitconfig
+[includeIf "hasconfig:remote.*.url:https://gitlab.com/**"]
+    path = identity.gitlab.gitconfig
+[includeIf "hasconfig:remote.*.url:ssh://git@gitlab.com/**"]
+    path = identity.gitlab.gitconfig
+[includeIf "hasconfig:remote.*.url:git@github.com:*/**"]
+    path = signing.github.local.gitconfig
+[includeIf "hasconfig:remote.*.url:https://github.com/**"]
+    path = signing.github.local.gitconfig
+[includeIf "hasconfig:remote.*.url:ssh://git@github.com/**"]
+    path = signing.github.local.gitconfig
+[includeIf "hasconfig:remote.*.url:git@github.com:supabase/**"]
+    path = identity.supabase.gitconfig
+[includeIf "hasconfig:remote.*.url:https://github.com/supabase/**"]
+    path = identity.supabase.gitconfig
+[includeIf "hasconfig:remote.*.url:ssh://git@github.com/supabase/**"]
+    path = identity.supabase.gitconfig
 [include]
-    path = ~/.gitconfig-local
+    path = machine.local.gitconfig
