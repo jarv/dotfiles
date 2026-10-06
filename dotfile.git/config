@@ -41,28 +41,23 @@
     program = ~/.local/bin/ssh-keygen-yubikey
 [init]
     defaultBranch = main
-[maintenance]
-	repo = ~/workspace/gdk
-	repo = ~/workspace/gdk/gitlab
-	repo = /Users/jarv/workspace/gdk
-	repo = /Users/jarv/workspace/gdk/gitlab
 [credential "https://github.com"]
 	helper = 
 	helper = !/usr/bin/gh auth git-credential
 [credential "https://gist.github.com"]
 	helper = 
 	helper = !/usr/bin/gh auth git-credential
-[includeIf "hasconfig:remote.*.url:git@gitlab.com:*/**"]
-    path = identity.gitlab.gitconfig
-[includeIf "hasconfig:remote.*.url:https://gitlab.com/**"]
-    path = identity.gitlab.gitconfig
-[includeIf "hasconfig:remote.*.url:ssh://git@gitlab.com/**"]
-    path = identity.gitlab.gitconfig
 [includeIf "hasconfig:remote.*.url:git@github.com:*/**"]
     path = signing.github.local.gitconfig
 [includeIf "hasconfig:remote.*.url:https://github.com/**"]
     path = signing.github.local.gitconfig
 [includeIf "hasconfig:remote.*.url:ssh://git@github.com/**"]
+    path = signing.github.local.gitconfig
+[includeIf "hasconfig:remote.*.url:git@gitlab.com:*/**"]
+    path = signing.github.local.gitconfig
+[includeIf "hasconfig:remote.*.url:https://gitlab.com/**"]
+    path = signing.github.local.gitconfig
+[includeIf "hasconfig:remote.*.url:ssh://git@gitlab.com/**"]
     path = signing.github.local.gitconfig
 [includeIf "hasconfig:remote.*.url:git@github.com:supabase/**"]
     path = identity.supabase.gitconfig
