@@ -11,14 +11,14 @@ for dense 30B, and tool calling is reliable at 30B+ total params. Small
 
 ## Recommended
 
-| Model | Ollama tag | GGUF (unsloth) quant | Weights | Notes |
-|---|---|---|---|---|
-| **Qwen3-Coder-30B-A3B-Instruct** | `qwen3-coder:30b` | `UD-Q4_K_XL` (17.7GB) / `Q8_0` (32GB) | 18-32GB | Default daily driver. 256k ctx, fast, strong tools. Q8 fits fine and is noticeably better. |
-| **Qwen3-Coder-Next (80B-A3B)** | `qwen3-coder-next` (check `ollama search`) | `UD-Q3_K_XL` (36GB) or `UD-Q4_K_XL` (49.6GB) | 36-50GB | Best quality that fits. 4-bit is tight - use ctx <=64k or the Q3_K_XL, which benchmarks ~= BF16 on Aider polyglot. Needs the wired-limit bump. |
-| **Qwen3.5-35B-A3B coding** | `qwen3.5:35b-a3b-coding-nvfp4` | (Ollama MLX only) | ~20GB | Ollama's MLX/NVFP4 showcase; fastest path on Ollama today. |
-| gpt-oss-20b | `gpt-oss:20b` | MXFP4 | ~13GB | Fast, decent tools; good "second loaded model" for quick edits. |
-| Devstral Small 2 (24B) | `devstral-small-2` | `Q4_K_M` | ~14GB | Dense; Mistral's agentic coder. Slower decode. |
-| Gemma 3 27B | `gemma3:27b` | `Q4_K_M` | ~17GB | Good general model, weaker tool use. |
+| Model | Ollama tag | Weights | Notes |
+|---|---|---|---|
+| **Qwen3-Coder-30B-A3B-Instruct** | `qwen3-coder:30b` | ~18GB | Default daily driver. 256k ctx, fast, strong tools. |
+| **Qwen3-Coder-Next (80B-A3B)** | `qwen3-coder-next` (check `ollama search`) | ~50GB at 4-bit | Best quality that fits. 4-bit is tight - use ctx <=64k. Needs the wired-limit bump. |
+| **Qwen3.5-35B-A3B coding** | `qwen3.5:35b-a3b-coding-nvfp4` | ~20GB | Ollama's MLX/NVFP4 showcase; fastest path on Ollama today. |
+| gpt-oss-20b | `gpt-oss:20b` | ~13GB | MXFP4. Fast, decent tools; good "second loaded model" for quick edits. |
+| Devstral Small 2 (24B) | `devstral-small-2` | ~14GB | Q4_K_M. Dense; Mistral's agentic coder. Slower decode. |
+| Gemma 3 27B | `gemma3:27b` | ~17GB | Q4_K_M. Good general model, weaker tool use. |
 
 ## Does not fit / not worth it
 
@@ -49,17 +49,11 @@ ollama create qwen3-coder:30b-oc -f /tmp/Modelfile
 ## Pull everything at once
 
 ```sh
+export OLLAMA_HOST=http://homer:11434
 ollama pull qwen3-coder:30b
 ollama pull qwen3.5:35b-a3b-coding-nvfp4
 ollama pull gpt-oss:20b
 ollama list
-```
-
-For llama-server, unsloth GGUFs via `-hf` or:
-
-```sh
-uv tool install "huggingface_hub[cli]"
-hf download unsloth/Qwen3-Coder-30B-A3B-Instruct-GGUF --include "*UD-Q4_K_XL*" --local-dir ~/models
 ```
 
 ## Benchmark quickly

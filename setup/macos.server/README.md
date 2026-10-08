@@ -15,11 +15,11 @@ Guide files:
 | `README.md` | This overview + order of operations |
 | `01-base.md` | First boot, FileVault, mise, brew, dotfiles/shell |
 | `02-remote-access.md` | Tailscale, SSH hardening, firewall |
-| `03-llm-server.md` | Ollama (default) and llama-server (advanced), launchd, GPU memory |
+| `03-llm-server.md` | Ollama, launchd, GPU memory, direct Tailscale access |
 | `04-models.md` | Which models fit in 64GB and why |
 | `05-opencode-client.md` | `opencode.json` on your client machines |
 | `06-always-on.md` | Power settings for lid-closed 24/7 operation (last step) |
-| `Brewfile` | Server Brewfile (tailscale, ollama, llama.cpp, ...) |
+| `Brewfile` | Server Brewfile (tailscale, ollama, ...) |
 | `files/` | Ready-to-copy plists, sshd config, pf anchor |
 
 ## Order of operations
@@ -42,19 +42,18 @@ flip it to always-on as the final step.
   first and symlinked (`dotfile.zshrc`, `dotfile.git`, `dotfile.mise`,
   `dotfile.opencode.json`). mise installs the tool layer (incl. opencode) from
   the shared config. The dotfiles repo has `setup/macos.workstation/Brewfile` (not for
-  this box) and `setup/macos.server/Brewfile` (tailscale, ollama, llama.cpp, ...). Git
+  this box) and `setup/macos.server/Brewfile` (tailscale, ollama, ...). Git
   signing is disabled on the box via a local include. The box's ssh key
   (for git push) lives in 1Password's ssh agent, same as the workstation.
 
-- **Inference server: Ollama by default, llama-server as the power option.**
+- **Inference server: Ollama.**
   As of 2026 Ollama runs MLX-native on Apple Silicon (0.19+), has an
   OpenAI-compatible `/v1` API with tool calling, and `ollama launch opencode`
-  can auto-configure a client. `llama-server` gives more control (context, KV
-  cache, sampling, multi-model router) and is what most r/LocalLLaMA / HN power
-  users run. mlx-lm's server is fastest raw but has weak tool-call support, so
-  it is not recommended as an agent backend. LM Studio works but is GUI-first.
-- **Network: nothing listens on LAN/Internet.** Services bind to `127.0.0.1`
-  and are published over the tailnet with `tailscale serve` (TLS, tailnet-only).
+  can auto-configure a client. Models are managed with `ollama pull`, and
+  OpenCode uses the `homer` provider at `http://homer:11434/v1`.
+- **Network: nothing listens on LAN/Internet.** Inference services bind to the
+  server's Tailscale IP and clients connect directly using MagicDNS (`homer`).
+  Tailscale encrypts the HTTP traffic between devices.
   SSH is key-only; optionally also Tailscale SSH.
 - **Services run as LaunchDaemons with `UserName` set to your user**, so they
   start at boot without anyone logging in, but models live in your home dir.
@@ -69,7 +68,7 @@ flip it to always-on as the final step.
 # health
 tailscale status
 sudo launchctl print system/com.local.ollama | head
-curl -s http://127.0.0.1:11434/v1/models | jq .
+curl -sS --fail-with-body --max-time 10 http://homer:11434/v1/models | jq .
 
 # remote reboot keeping FileVault
 sudo fdesetup authrestart

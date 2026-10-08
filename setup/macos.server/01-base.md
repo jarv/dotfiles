@@ -119,18 +119,18 @@ The dotfiles repo has two Brewfiles:
 | File | Use |
 |---|---|
 | `setup/macos.workstation/Brewfile` | full dev laptop dump (ffmpeg, docker, k8s, casks...) - **not** for this box |
-| `setup/macos.server/Brewfile` | tailscale, ollama, llama.cpp, starship, coreutils, mosh, htop, mactop |
+| `setup/macos.server/Brewfile` | tailscale, ollama, starship, coreutils, mosh, htop, mactop |
 
 ```sh
 brew bundle --file ~/src/jarv/dotfiles/setup/macos.server/Brewfile
 ```
 
 `setup/macos.server/Brewfile` intentionally leaves out `cask "tailscale-app"` (conflicts
-with the `tailscale` formula, and only the formula does `tailscale serve` /
-Tailscale SSH). Neither Brewfile installs `openssh`: the system ssh is used everywhere.
+with the `tailscale` formula, which supports Tailscale SSH on macOS and runs
+as a root LaunchDaemon). Neither Brewfile installs `openssh`: the system ssh is used everywhere.
 
-Why brew and not mise for these: Ollama and llama.cpp need Metal/MLX-linked
-native builds and Tailscale needs a root LaunchDaemon; brew formulas handle
+Why brew and not mise for these: Ollama needs a Metal/MLX-linked native build
+and Tailscale needs a root LaunchDaemon; brew formulas handle
 both, mise's backends do not.
 
 ## SSH key for the box (1Password ssh agent)
@@ -142,16 +142,15 @@ do this once over Screen Sharing (or with the lid open) while setting up:
 
 1. `open -a 1Password`, sign in, and in Settings > General turn on "Start at
    login". In Settings > Developer turn on "Use the SSH agent".
-2. Create (or reuse) an SSH key item for the box and add its public key to
-   GitHub.
+2. Reuse the **GitHub Personal** SSH key item in 1Password and add its public
+   key to GitHub if it is not already registered.
 3. Point ssh at the agent for GitHub/GitLab in the untracked
-   `~/.config/ssh/config.local` (included first by `dotfile.ssh.config`, so
-   it wins over the shared `IdentityAgent none` for github.com):
+   `~/.config/ssh/config.local` (included first by `dotfile.ssh.config`):
 
    ```
-   Host github.com gitlab.com
+   Host github.com
      IdentityAgent "~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
-     IdentityFile ~/.config/ssh/github_homer.pub
+     IdentityFile ~/.ssh/github_personal.pub
      IdentitiesOnly yes
    ```
 

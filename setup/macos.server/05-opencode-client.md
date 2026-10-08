@@ -2,26 +2,27 @@
 
 opencode talks to any OpenAI-compatible endpoint via `@ai-sdk/openai-compatible`.
 The **model key must equal the id returned by `GET /v1/models`** on the server
-(`ollama list` names, or `--alias` on llama-server).
+(`ollama list` names).
 
 Your opencode config is `~/src/jarv/dotfiles/dotfile.opencode.json`,
 symlinked to `~/.config/opencode/opencode.json` on every machine. Add the
 provider there once, commit, and pull on the other machines. It already has a
-`provider` block (gitlab); the `homer` key goes alongside it.
+`provider` block; the `homer` key goes alongside the existing providers.
 
-## Ollama over Tailscale (TLS via `tailscale serve`)
+## Ollama directly over Tailscale
 
 Add to the `provider` object in `dotfile.opencode.json`:
 
 ```json
 {
+  "$schema": "https://opencode.ai/config.json",
   "provider": {
     "gitlab": { "...": "unchanged" },
     "homer": {
       "npm": "@ai-sdk/openai-compatible",
       "name": "homer (Ollama)",
       "options": {
-        "baseURL": "https://homer.TAILNET.ts.net/v1"
+        "baseURL": "http://homer:11434/v1"
       },
       "models": {
         "qwen3-coder:30b": {
@@ -47,31 +48,24 @@ session with `/models` or run `opencode -m homer/qwen3-coder:30b`. Setting
 `"small_model": "homer/gpt-oss:20b"` is a cheap win either way - titles and
 summaries then never leave the tailnet.
 
-Replace `TAILNET` with your tailnet name (`tailscale status` shows it, or
-`tailscale cert` output). If you used `--http=80` instead of TLS, use
-`http://homer:80/v1`.
+Bind Ollama to Homer's Tailscale IP as described in `03-llm-server.md`.
+Clients connect directly over HTTP; Tailscale encrypts the traffic between
+devices. The short name `homer` uses
+Tailscale MagicDNS; enable Tailscale DNS on clients. The full name
+`homer.tail1a3497.ts.net` also works on port 11434.
 
-## llama-server
+The checked-in config uses provider id `homer` and the actual tailnet URL.
+Quit and restart opencode after changing the config, then select it with:
 
-Same shape, different port and ids:
+```sh
+opencode -m homer/qwen3-coder:30b
+```
 
-```json
-{
-  "$schema": "https://opencode.ai/config.json",
-  "provider": {
-    "homer-llama": {
-      "npm": "@ai-sdk/openai-compatible",
-      "name": "homer (llama-server)",
-      "options": { "baseURL": "https://homer.TAILNET.ts.net:8443/v1" },
-      "models": {
-        "qwen3-coder:30b": {
-          "name": "Qwen3-Coder 30B-A3B (llama.cpp)",
-          "limit": { "context": 131072, "output": 65536 }
-        }
-      }
-    }
-  }
-}
+From the client, verify connectivity, then restart OpenCode:
+
+```sh
+curl -sS --fail-with-body --max-time 10 http://homer:11434/api/version
+opencode -m homer/qwen3-coder:30b
 ```
 
 ## Shortcut: let Ollama write the config
@@ -79,7 +73,7 @@ Same shape, different port and ids:
 On a machine that has the `ollama` CLI and can reach the box:
 
 ```sh
-OLLAMA_HOST=https://homer.TAILNET.ts.net ollama launch opencode --config
+OLLAMA_HOST=http://homer:11434 ollama launch opencode --config
 ```
 
 This writes an inline provider config without clobbering your existing
@@ -88,12 +82,12 @@ This writes an inline provider config without clobbering your existing
 ## Verify
 
 ```sh
-opencode models | grep homer
+opencode models homer
 opencode run -m homer/qwen3-coder:30b "list the files in this directory using a tool"
 ```
 
 If tool calls do not fire: confirm the server's context is >=64k
-(`OLLAMA_CONTEXT_LENGTH` / `-c`), confirm the id in `models` matches
+(`OLLAMA_CONTEXT_LENGTH`), confirm the id in `models` matches
 `curl .../v1/models` exactly, and try a larger model - sub-14B models are the
 usual culprit.
 

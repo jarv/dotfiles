@@ -5,8 +5,8 @@ tailnet. SSH accepts keys only.
 
 ## Tailscale (brew formula = open-source `tailscaled`)
 
-The App Store / `.app` version cannot do `tailscale serve` or Tailscale SSH on
-macOS; the brew formula can, and it runs as a root LaunchDaemon so it is up
+Use the brew formula for Tailscale SSH on macOS. It runs as a root
+LaunchDaemon so it is up
 before login.
 
 ```sh
@@ -18,10 +18,10 @@ sudo tailscale up --ssh --hostname homer --accept-dns
 `tailscale up` prints an auth URL; open it on any device. Then in the
 [admin console](https://login.tailscale.com/admin):
 
-- **DNS > MagicDNS**: on. **HTTPS Certificates**: on (needed by `tailscale serve`).
+- **DNS > MagicDNS**: on, so clients can resolve `homer`.
 - Disable key expiry for `homer` (Machines > ... > Disable key expiry) so it
   does not fall off the tailnet after 180 days.
-- Optionally add an ACL so only your own devices can reach `homer:22,443`.
+- Optionally add an ACL so only your own devices can reach `homer:22,11434`.
 
 Check:
 
@@ -100,9 +100,9 @@ sudo cp files/pf-homer.conf /etc/pf.anchors/homer
 sudo pfctl -f /etc/pf.conf && sudo pfctl -e
 ```
 
-Skip `pf` if you are comfortable with "services bind to 127.0.0.1 and only
-`tailscale serve` exposes them"; that alone already means the LAN sees nothing
-but sshd (and sshd only if you left its ListenAddress open).
+Inference services bind directly to the Tailscale IP, so they are not reachable
+on the LAN interface. `pf` is optional if that restriction meets your needs;
+sshd is still reachable on the LAN if you left its ListenAddress open.
 
 ## Other machines
 
