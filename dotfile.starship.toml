@@ -54,11 +54,12 @@ disabled = true
 [docker_context]
 disabled = true
 [hostname]
-disabled = true
+disabled = false
+ssh_only = false
+format = '[$hostname](bold green) '
 [username]
 disabled = true
 [env_var]
 disabled = true
 [cmd_duration]
 disabled = true
-
