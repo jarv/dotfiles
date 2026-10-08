@@ -2,6 +2,18 @@
 
 These are my install notes for Omarchy on a Lemur Pro 14" laptop
 
+## Herdr config
+
+Use the shared Herdr config from the dotfiles repo:
+
+```sh
+D=~/src/jarv/dotfiles
+mkdir -p ~/.config/herdr
+ln -sf $D/dotfile.herdr/config.toml ~/.config/herdr/config.toml
+```
+
+Only link `config.toml`; Herdr keeps runtime files in `~/.config/herdr/`.
+
 ## Extra packages
 
 ### pacman

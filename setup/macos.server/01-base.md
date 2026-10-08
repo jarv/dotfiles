@@ -43,7 +43,7 @@ a handful of symlinks. This replaces hand-editing `~/.zshrc`, `~/.config/git/con
 and `~/.config/mise/config.toml`.
 
 ```sh
-mkdir -p ~/src/jarv ~/.config/opencode && cd ~/src/jarv
+mkdir -p ~/src/jarv ~/.config/opencode ~/.config/herdr && cd ~/src/jarv
 git clone https://github.com/jarv/dotfiles.git      # https: no ssh key on the box yet
 D=~/src/jarv/dotfiles
 cd $D/setup/macos.server                             # rest of this guide runs from here
@@ -54,6 +54,7 @@ ln -sf  $D/dotfile.cvsignore        ~/.cvsignore
 ln -sf  $D/dotfile.starship.toml    ~/.config/starship.toml
 ln -sfn $D/dotfile.mise             ~/.config/mise
 ln -sfn $D/dotfile.atuin            ~/.config/atuin
+ln -sf  $D/dotfile.herdr/config.toml ~/.config/herdr/config.toml
 ln -sf  $D/dotfile.opencode.json    ~/.config/opencode/opencode.json
 mkdir -p ~/.ssh && chmod 700 ~/.ssh
 ln -sf  $D/dotfile.ssh.config       ~/.ssh/config
@@ -72,6 +73,7 @@ What the existing files give you for free:
   `opencode` being there means the box can run opencode locally with no extra
   steps (see `05-opencode-client.md`).
 - `dotfile.git/config`: identity, aliases, LFS, `pull.rebase`.
+- `dotfile.herdr/config.toml`: terminal theme, tmux-style keybindings and pane UI.
 - `dotfile.opencode.json`: permissions / MCP / gitlab provider. The `llmbox`
   provider gets added to this file so every machine picks it up.
 

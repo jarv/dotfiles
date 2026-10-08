@@ -17,7 +17,7 @@ sudo scutil --set LocalHostName <name>
 ## 2. Clone dotfiles and symlink
 
 ```sh
-mkdir -p ~/src/jarv ~/.config/opencode ~/.ssh && chmod 700 ~/.ssh && cd ~/src/jarv
+mkdir -p ~/src/jarv ~/.config/opencode ~/.config/herdr ~/.ssh && chmod 700 ~/.ssh && cd ~/src/jarv
 git clone https://github.com/jarv/dotfiles.git      # https until the YubiKey key is set up
 D=~/src/jarv/dotfiles
 
@@ -29,6 +29,7 @@ ln -sf  $D/dotfile.cvsignore        ~/.cvsignore
 ln -sf  $D/dotfile.starship.toml    ~/.config/starship.toml
 ln -sfn $D/dotfile.mise             ~/.config/mise
 ln -sfn $D/dotfile.atuin            ~/.config/atuin
+ln -sf  $D/dotfile.herdr/config.toml ~/.config/herdr/config.toml
 ln -sfn $D/dotfile.wezterm          ~/.config/wezterm
 ln -sfn $D/dotfile.nvim             ~/.config/nvim      # needs ../MiniMax checked out, see below
 ln -sf  $D/dotfile.opencode.json    ~/.config/opencode/opencode.json
