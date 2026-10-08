@@ -39,6 +39,19 @@
 	rebase = true
 [commit]
     gpgsign = true
+    verbose = true
+[diff]
+    algorithm = histogram
+    colorMoved = plain
+    mnemonicPrefix = true
+[branch]
+    sort = -committerdate
+[tag]
+    sort = -version:refname
+[rerere]
+    enabled = true
+[column]
+    ui = auto
 [gpg]
     format = ssh
 [gpg "ssh"]
