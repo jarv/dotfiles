@@ -1,0 +1,106 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "autoupdate": true,
+  "permission": {
+    "external_directory": {
+      "*": "deny",
+      "~/workspace/**": "allow",
+      "~/supabase/**": "allow",
+      "~/.config/**": "allow",
+      "~/src/**": "allow",
+      "~/.local/share/mise/**": "allow",
+      "/tmp/**": "allow",
+      "/private/tmp/**": "allow",
+      "/var/tmp/**": "allow",
+      "/private/var/tmp/**": "allow",
+      "/var/folders/**": "allow",
+      "/private/var/folders/**": "allow",
+      "~/gitlab/**": "allow",
+      "~/.agents/skills/**": "allow"
+    },
+    "read": {
+      "*.env": "deny",
+      "*.env.*": "deny",
+      "~/.ssh/*": "deny",
+      "~/.aws/*": "deny",
+      "~/.gnupg/*": "deny",
+      "~/.netrc": "deny"
+    },
+    "bash": {
+      "*": "ask",
+      "echo *": "allow",
+      "find *": "allow",
+      "grep *": "allow",
+      "git checkout *": "allow",
+      "git status *": "allow",
+      "git branch *": "allow",
+      "git add *": "allow",
+      "git commit *": "allow",
+      "cat *": "allow",
+      "git log *": "allow",
+      "head *": "allow",
+      "awk *": "allow",
+      "sleep *": "allow",
+      "glab mr *": "allow",
+      "git diff *": "allow",
+      "git show *": "allow",
+      "sed *": "allow",
+      "ls *": "allow",
+      "bundle *": "allow",
+      "which *": "allow",
+      "rg *": "allow",
+      "sort *": "allow",
+      "git rebase *": "allow",
+      "jq *": "allow",
+      "* mr-description.md": "allow",
+      "*team-activity-summary/scripts/github-activity.sh*": "allow",
+      "xargs *": "allow"
+    },
+    "edit": "ask",
+    "webfetch": "allow"
+  },
+  "provider": {
+    "homer": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "homer (Ollama)",
+      "options": {
+        "baseURL": "http://homer:11434/v1"
+      },
+      "models": {
+        "qwen3-coder:30b": {
+          "name": "Qwen3 Coder 30B-A3B",
+          "limit": {
+            "context": 131072,
+            "output": 32768
+          }
+        }
+      }
+    }
+  },
+  "mcp": {
+    "notion": {
+      "type": "remote",
+      "url": "https://mcp.notion.com/mcp",
+      "enabled": true
+    },
+    "incident-io": {
+      "type": "remote",
+      "url": "https://mcp.incident.io/mcp"
+    },
+    "newsgoat": {
+      "type": "local",
+      "command": [
+        "newsgoat",
+        "mcp-server"
+      ]
+    },
+    "linear": {
+      "type": "remote",
+      "url": "https://mcp.linear.app/mcp"
+    },
+    "vercel": {
+      "type": "remote",
+      "url": "https://mcp.vercel.com"
+    }
+  }
+}

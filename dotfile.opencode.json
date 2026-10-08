@@ -1,16 +1,12 @@
 {
   "$schema": "https://opencode.ai/config.json",
   "autoupdate": true,
-  "server": {
-    "hostname": "127.0.0.1",
-    "mdns": false
-  },
+  "share": "disabled",
   "permission": {
     "external_directory": {
       "*": "deny",
       "~/workspace/**": "allow",
       "~/supabase/**": "allow",
-      "~/supabase.io/**": "allow",
       "~/.config/**": "allow",
       "~/src/**": "allow",
       "~/.local/share/mise/**": "allow",
@@ -30,39 +26,7 @@
       "~/.aws/*": "deny",
       "~/.gnupg/*": "deny",
       "~/.netrc": "deny"
-    },
-    "bash": {
-      "*": "ask",
-      "echo *": "allow",
-      "find *": "allow",
-      "grep *": "allow",
-      "git checkout *": "allow",
-      "git status *": "allow",
-      "git branch *": "allow",
-      "git add *": "allow",
-      "git commit *": "allow",
-      "cat *": "allow",
-      "git log *": "allow",
-      "head *": "allow",
-      "awk *": "allow",
-      "sleep *": "allow",
-      "glab mr *": "allow",
-      "git diff *": "allow",
-      "git show *": "allow",
-      "sed *": "allow",
-      "ls *": "allow",
-      "bundle *": "allow",
-      "which *": "allow",
-      "rg *": "allow",
-      "sort *": "allow",
-      "git rebase *": "allow",
-      "jq *": "allow",
-      "* mr-description.md": "allow",
-      "*team-activity-summary/scripts/github-activity.sh*": "allow",
-      "xargs *": "allow"
-    },
-    "edit": "ask",
-    "webfetch": "allow"
+    }
   },
   "provider": {
     "homer": {
@@ -83,29 +47,18 @@
     }
   },
   "mcp": {
-    "notion": {
-      "type": "remote",
-      "url": "https://mcp.notion.com/mcp",
-      "enabled": true
-    },
-    "incident-io": {
-      "type": "remote",
-      "url": "https://mcp.incident.io/mcp"
-    },
-    "newsgoat": {
+    "playwright": {
       "type": "local",
       "command": [
-        "newsgoat",
-        "mcp-server"
+        "npx",
+        "-y",
+        "@playwright/mcp",
+        "--headless",
+        "--browser",
+        "chromium",
+        "--executable-path",
+        "/home/jarv/.cache/ms-playwright/chromium-1217/chrome-linux64/chrome"
       ]
-    },
-    "linear": {
-      "type": "remote",
-      "url": "https://mcp.linear.app/mcp"
-    },
-    "vercel": {
-      "type": "remote",
-      "url": "https://mcp.vercel.com"
     }
   }
 }
