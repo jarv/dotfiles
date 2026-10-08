@@ -1,4 +1,0 @@
-[user]
-    signingkey = /Users/jarv/.config/ssh/github_bitwarden.pub
-[gpg "ssh"]
-    program = /usr/bin/ssh-keygen

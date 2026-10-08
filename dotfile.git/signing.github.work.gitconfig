@@ -1,4 +1,4 @@
 [user]
-    email = john.jarvis@supabase.io
+    signingkey = ~/.config/ssh/github_bitwarden.pub
 [gpg "ssh"]
     program = /usr/bin/ssh-keygen

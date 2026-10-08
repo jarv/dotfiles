@@ -7,11 +7,15 @@
 [user]
     name = John Jarvis
     email = john@jarv.org
-    signingkey = ~/.ssh/id_ed25519_sk_github
+    signingkey = ~/.ssh/github_personal.pub
 [url "git@gitlab.com:"]
     insteadOf = https://gitlab.com/
 [url "git@github.com:"]
     insteadOf = https://github.com/
+[url "git@github-supabase:supabase/"]
+    insteadOf = git@github.com:supabase/
+    insteadOf = https://github.com/supabase/
+    insteadOf = ssh://git@github.com/supabase/
 [filter "lfs"]
     clean = git-lfs clean -- %f
     smudge = git-lfs smudge -- %f
@@ -38,7 +42,7 @@
 [gpg]
     format = ssh
 [gpg "ssh"]
-    program = ~/.local/bin/ssh-keygen-yubikey
+    program = /opt/1Password/op-ssh-sign
 [init]
     defaultBranch = main
 [credential "https://github.com"]
@@ -47,23 +51,25 @@
 [credential "https://gist.github.com"]
 	helper = 
 	helper = !/usr/bin/gh auth git-credential
-[includeIf "hasconfig:remote.*.url:git@github.com:*/**"]
-    path = signing.github.local.gitconfig
-[includeIf "hasconfig:remote.*.url:https://github.com/**"]
-    path = signing.github.local.gitconfig
-[includeIf "hasconfig:remote.*.url:ssh://git@github.com/**"]
-    path = signing.github.local.gitconfig
-[includeIf "hasconfig:remote.*.url:git@gitlab.com:*/**"]
-    path = signing.github.local.gitconfig
-[includeIf "hasconfig:remote.*.url:https://gitlab.com/**"]
-    path = signing.github.local.gitconfig
-[includeIf "hasconfig:remote.*.url:ssh://git@gitlab.com/**"]
-    path = signing.github.local.gitconfig
+[includeIf "hasconfig:remote.*.url:git@github.com:supabase/**"]
+    path = signing.github.work.gitconfig
+[includeIf "hasconfig:remote.*.url:https://github.com/supabase/**"]
+    path = signing.github.work.gitconfig
+[includeIf "hasconfig:remote.*.url:ssh://git@github.com/supabase/**"]
+    path = signing.github.work.gitconfig
 [includeIf "hasconfig:remote.*.url:git@github.com:supabase/**"]
     path = identity.supabase.gitconfig
 [includeIf "hasconfig:remote.*.url:https://github.com/supabase/**"]
     path = identity.supabase.gitconfig
 [includeIf "hasconfig:remote.*.url:ssh://git@github.com/supabase/**"]
+    path = identity.supabase.gitconfig
+[includeIf "hasconfig:remote.*.url:git@github-supabase:supabase/**"]
+    path = signing.github.work.gitconfig
+[includeIf "hasconfig:remote.*.url:ssh://git@github-supabase/supabase/**"]
+    path = signing.github.work.gitconfig
+[includeIf "hasconfig:remote.*.url:git@github-supabase:supabase/**"]
+    path = identity.supabase.gitconfig
+[includeIf "hasconfig:remote.*.url:ssh://git@github-supabase/supabase/**"]
     path = identity.supabase.gitconfig
 [include]
     path = machine.local.gitconfig
