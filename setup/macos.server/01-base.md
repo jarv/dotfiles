@@ -160,4 +160,16 @@ killall WindowManager 2>/dev/null || true
 sudo mdutil -i off ~/.ollama 2>/dev/null || true
 ```
 
+## Free up Ctrl+Space (herdr prefix)
+
+`dotfile.herdr/config.toml` uses `prefix = "ctrl+space"`, but macOS binds
+Ctrl+Space to "Select the previous input source" and swallows it before the
+terminal sees it. This matters for the local keyboard and Screen Sharing
+sessions; plain ssh/mosh sessions are unaffected. Disable it anyway so the
+box behaves like the other machines:
+
+**System Settings > Keyboard > Keyboard Shortcuts... > Input Sources**, then
+uncheck "Select the previous input source" (Ctrl+Space). Log out and back in
+if it does not take effect.
+
 Continue with `02-remote-access.md`.

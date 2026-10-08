@@ -128,7 +128,18 @@ gitlab provider, and the `llmbox` local provider). Nothing to do beyond
 `bash_profile`/`zprofile` ordering, `brew shellenv` and `mise activate` are
 all picked up from a clean login shell.
 
-## 9. Optional macOS defaults
+## 9. Free up Ctrl+Space (herdr prefix)
+
+`dotfile.herdr/config.toml` sets `prefix = "ctrl+space"`. macOS reserves that
+combo for "Select the previous input source" and swallows it before the
+terminal sees it, so herdr never gets the prefix. Disable the shortcut:
+
+**System Settings > Keyboard > Keyboard Shortcuts... > Input Sources**, then
+uncheck "Select the previous input source" (Ctrl+Space).
+
+If it still does not take effect, log out and back in.
+
+## 10. Optional macOS defaults
 
 ```sh
 defaults write NSGlobalDomain AppleShowAllExtensions -bool true
