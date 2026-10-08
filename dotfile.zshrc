@@ -115,9 +115,8 @@ if command -v brew >/dev/null 2>&1; then
   eval "$(brew shellenv)"
 fi
 
-# macOS: YubiKey is used via the built-in PKCS11 provider
-# (PKCS11Provider /usr/lib/ssh-keychain.dylib in ~/.ssh/config); the default
-# launchd ssh-agent is fine, no yubikey-agent.
+# macOS: ssh keys are served by a password-manager agent (1Password/Bitwarden)
+# selected per host in ~/.config/ssh/config.local, so SSH_AUTH_SOCK is left alone.
 if [[ "$OSTYPE" == "linux-gnu"* ]] && [[ -S "$XDG_RUNTIME_DIR/ssh-agent.socket" ]]; then
   SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
   export SSH_AUTH_SOCK

@@ -1,4 +1,4 @@
-# M4 Max 64GB "Local LLM Box" Setup (macOS Tahoe)
+# M4 Max 64GB "homer" (Local LLM Server) Setup (macOS Tahoe)
 
 Goal: a MacBook Pro that sits lid-closed, always on, serving an OpenAI-compatible
 LLM API to `opencode` running on other machines, reachable only over Tailscale
@@ -43,9 +43,8 @@ flip it to always-on as the final step.
   `dotfile.opencode.json`). mise installs the tool layer (incl. opencode) from
   the shared config. The dotfiles repo has `setup/macos.workstation/Brewfile` (not for
   this box) and `setup/macos.server/Brewfile` (tailscale, ollama, llama.cpp, ...). Git
-  signing (YubiKey) is disabled on the box via a local include; YubiKey ssh on
-  the workstation uses macOS's built-in PKCS11 provider
-  (`/usr/lib/ssh-keychain.dylib`), no yubikey-agent.
+  signing is disabled on the box via a local include. The box's ssh key
+  (for git push) lives in 1Password's ssh agent, same as the workstation.
 
 - **Inference server: Ollama by default, llama-server as the power option.**
   As of 2026 Ollama runs MLX-native on Apple Silicon (0.19+), has an

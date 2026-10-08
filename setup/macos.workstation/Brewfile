@@ -1,12 +1,11 @@
-# Workstation (dev laptop). Server/llmbox uses setup/macos.server/Brewfile.
+# Workstation (dev laptop). Server/homer uses setup/macos.server/Brewfile.
 #   brew bundle --file ~/src/jarv/dotfiles/setup/macos.workstation/Brewfile
 #
 # Only things that need brew live here: daemons/system integration, GNU
 # userland, libraries-heavy tools, casks and fonts. Single-binary CLIs and
 # toolchains are in dotfile.mise/config.toml (shared with Linux).
 #
-# YubiKey ssh: no yubikey-agent and no brew openssh - the system ssh uses
-# /usr/lib/ssh-keychain.dylib (PKCS11), see dotfile.ssh.config.
+# No brew openssh: the system ssh is used everywhere.
 tap "homebrew/services"
 tap "context-labs/mactop"
 tap "starkandwayne/cf"
@@ -47,7 +46,6 @@ brew "qemu"
 # crypto / keys
 brew "gnupg"
 brew "pinentry-mac"
-brew "ykman"
 brew "sslmate"
 brew "starkandwayne/cf/safe"
 

@@ -127,7 +127,7 @@ sudo tailscale serve --bg --https=8443 http://127.0.0.1:8080   # llama-server (o
 tailscale serve status
 ```
 
-Clients reach `https://llmbox.<tailnet>.ts.net/v1` (and `:8443`). Only tailnet
+Clients reach `https://homer.<tailnet>.ts.net/v1` (and `:8443`). Only tailnet
 devices can connect; no ports open on the LAN. `serve` config persists across
 reboots.
 
@@ -138,7 +138,7 @@ because the IP is baked into the plist.
 ## Smoke test from a client
 
 ```sh
-curl -s https://llmbox.<tailnet>.ts.net/v1/chat/completions \
+curl -s https://homer.<tailnet>.ts.net/v1/chat/completions \
   -H 'content-type: application/json' \
   -d '{"model":"qwen3-coder:30b","messages":[{"role":"user","content":"hi"}]}' | jq -r '.choices[0].message.content'
 ```

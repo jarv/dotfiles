@@ -16,9 +16,9 @@ After reaching the desktop, open Terminal and do everything below from there.
 
 ```sh
 # Hostname (used by Tailscale MagicDNS as well)
-sudo scutil --set ComputerName llmbox
-sudo scutil --set HostName llmbox
-sudo scutil --set LocalHostName llmbox
+sudo scutil --set ComputerName homer
+sudo scutil --set HostName homer
+sudo scutil --set LocalHostName homer
 
 # Xcode command line tools (git, clang, make - needed by brew and mise)
 xcode-select --install
@@ -66,7 +66,7 @@ machine) and `dotfile.wezterm`.
 What the existing files give you for free:
 
 - `dotfile.zshrc`: `brew shellenv`, `mise activate`, starship, atuin, direnv,
-  fzf/rg defaults, per-host history in `~/.zsh_histories/llmbox/`. Every
+  fzf/rg defaults, per-host history in `~/.zsh_histories/homer/`. Every
   optional tool is guarded with `command -v`, so it works before brew exists.
 - `dotfile.mise/config.toml`: `uv`, `opencode`, `nodejs`, `go`, `fd`, `gh`,
   `atuin`, `direnv`, `shellcheck`, `lazygit`, ... - the whole mise tool layer.
@@ -74,25 +74,20 @@ What the existing files give you for free:
   steps (see `05-opencode-client.md`).
 - `dotfile.git/config`: identity, aliases, LFS, `pull.rebase`.
 - `dotfile.herdr/config.toml`: terminal theme, tmux-style keybindings and pane UI.
-- `dotfile.opencode.json`: permissions / MCP / gitlab provider. The `llmbox`
+- `dotfile.opencode.json`: permissions / MCP / gitlab provider. The `homer`
   provider gets added to this file so every machine picks it up.
 
-Two things in the dotfiles do **not** fit a headless box:
+One thing in the dotfiles does **not** fit a headless box: `commit.gpgsign = true`
+signs with a key from 1Password, and signing is not set up here by default.
+`dotfile.git/config` includes `machine.local.gitconfig` (missing file is
+ignored), so override on the box only:
 
-1. `commit.gpgsign = true` with the YubiKey ssh key - no YubiKey here.
-   `dotfile.git/config` includes `machine.local.gitconfig` (missing file is
-   ignored), so override on the box only:
+```sh
+printf '[commit]\n    gpgsign = false\n' > ~/.config/git/machine.local.gitconfig
+```
 
-   ```sh
-   printf '[commit]\n    gpgsign = false\n' > ~/.config/git/machine.local.gitconfig
-   ```
-
-2. YubiKey ssh. Nothing to do on the box: there is no yubikey-agent anywhere
-   any more. On the workstation the YubiKey PIV slot is used through macOS's
-   built-in PKCS11 provider (`PKCS11Provider /usr/lib/ssh-keychain.dylib` in
-   `dotfile.ssh.config`, guarded by `Match exec` so it is inert on Linux and
-   on the box). `ssh-add -s /usr/lib/ssh-keychain.dylib` once per boot loads
-   it into the stock launchd ssh-agent.
+To sign commits on the box instead, follow "Git signing with 1Password" in
+`../macos.workstation/README.md` (step 5) and skip this override.
 
 ## mise (preferred installer)
 
@@ -132,19 +127,47 @@ brew bundle --file ~/src/jarv/dotfiles/setup/macos.server/Brewfile
 
 `setup/macos.server/Brewfile` intentionally leaves out `cask "tailscale-app"` (conflicts
 with the `tailscale` formula, and only the formula does `tailscale serve` /
-Tailscale SSH). Neither Brewfile installs `openssh`: the system ssh is used everywhere, which is also what makes the YubiKey PKCS11 provider work.
+Tailscale SSH). Neither Brewfile installs `openssh`: the system ssh is used everywhere.
 
 Why brew and not mise for these: Ollama and llama.cpp need Metal/MLX-linked
 native builds and Tailscale needs a root LaunchDaemon; brew formulas handle
 both, mise's backends do not.
 
-## SSH key for the box (so it can push to the dotfiles repo)
+## SSH key for the box (1Password ssh agent)
 
-```sh
-ssh-keygen -t ed25519 -C "jarv@llmbox" -f ~/.ssh/id_ed25519
-gh auth login            # gh is from mise; choose "upload ssh key"
-git -C ~/src/jarv/dotfiles remote set-url origin git@github.com:jarv/dotfiles
-```
+Like the workstation, the box keeps its ssh key in 1Password rather than on
+disk (see `../macos.workstation/README.md`, step 5). The Brewfile installs the
+1Password app; the agent only runs while the app is running and unlocked, so
+do this once over Screen Sharing (or with the lid open) while setting up:
+
+1. `open -a 1Password`, sign in, and in Settings > General turn on "Start at
+   login". In Settings > Developer turn on "Use the SSH agent".
+2. Create (or reuse) an SSH key item for the box and add its public key to
+   GitHub.
+3. Point ssh at the agent for GitHub/GitLab in the untracked
+   `~/.config/ssh/config.local` (included first by `dotfile.ssh.config`, so
+   it wins over the shared `IdentityAgent none` for github.com):
+
+   ```
+   Host github.com gitlab.com
+     IdentityAgent "~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
+     IdentityFile ~/.config/ssh/github_homer.pub
+     IdentitiesOnly yes
+   ```
+
+   Save the key's *public* half from 1Password to that `IdentityFile` path
+   (the SSH key item has a "Public key" field).
+4. Switch the dotfiles remote to ssh:
+
+   ```sh
+   ssh -T git@github.com    # should greet you by username
+   git -C ~/src/jarv/dotfiles remote set-url origin git@github.com:jarv/dotfiles
+   ```
+
+If the box is rebooted, the agent is unavailable until someone logs in and
+unlocks 1Password, so git-over-ssh from the box will not work until then.
+Inbound ssh to the box is unaffected (it uses your workstation's key and
+`authorized_keys`, see `02-remote-access.md`).
 
 ## macOS defaults worth setting on a server
 

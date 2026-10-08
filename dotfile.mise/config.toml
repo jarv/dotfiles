@@ -10,7 +10,7 @@ compile = false
 [settings.upgrade]
 auto_prune = false
 
-# Shared across macOS (workstation + llmbox) and Linux. Anything that is a
+# Shared across macOS (workstation + homer) and Linux. Anything that is a
 # single binary / toolchain lives here; daemons, GNU userland, casks are in
 # Brewfile.workstation / Brewfile.server.
 [tools]

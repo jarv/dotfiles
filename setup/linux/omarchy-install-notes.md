@@ -23,8 +23,6 @@ wezterm
 ttf-jetbrains-mono
 ruby-stdlib
 lsof
-yubikey-manager
-libfido2
 openssh
 uv
 yt-dlp

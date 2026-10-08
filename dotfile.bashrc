@@ -138,8 +138,6 @@ git-cd() {
 eval "$(brew shellenv)"
 export BASH_SILENCE_DEPRECATION_WARNING=1
 # export DOCKER_HOST=unix://$HOME/.colima/docker.sock
-SSH_AUTH_SOCK="$(brew --prefix)/var/run/yubikey-agent.sock"
-export SSH_AUTH_SOCK
 # export SSH_AUTH_SOCK=$HOME/.gnupg/S.gpg-agent.ssh
 export VAULT_ADDR=https://vault.ops.gke.gitlab.net
 export VAULT_PROXY_ADDR=socks5://localhost:18200

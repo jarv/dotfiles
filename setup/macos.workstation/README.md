@@ -18,7 +18,7 @@ sudo scutil --set LocalHostName <name>
 
 ```sh
 mkdir -p ~/src/jarv ~/.config/opencode ~/.config/herdr ~/.ssh && chmod 700 ~/.ssh && cd ~/src/jarv
-git clone https://github.com/jarv/dotfiles.git      # https until the YubiKey key is set up
+git clone https://github.com/jarv/dotfiles.git      # https until ssh keys are set up (step 5)
 D=~/src/jarv/dotfiles
 
 ln -sf  $D/dotfile.zshrc            ~/.zshrc
@@ -75,35 +75,36 @@ Rules for what goes where:
 | | library-heavy tools (ffmpeg, imagemagick, graphviz, qemu) |
 | | casks and fonts |
 
-Never add `openssh` or `yubikey-agent` (see next section). The workstation uses
+Never add `openssh` (the system ssh is used everywhere). The workstation uses
 the `tailscale-app` cask for the native menu-bar app; the server uses the
 `tailscale` formula for `tailscale serve` and Tailscale SSH.
 
-## 5. YubiKey for ssh and git signing (no yubikey-agent)
+## 5. SSH keys and git signing (password-manager agents)
 
-macOS ships a PKCS11 provider at `/usr/lib/ssh-keychain.dylib` that lets the
-system `ssh`/`ssh-agent` use the YubiKey PIV slot directly. `dotfile.ssh.config`
-already sets `PKCS11Provider` for it (guarded so it is inert on Linux).
+No hardware keys and no private keys on disk: ssh keys live in a
+password-manager SSH agent (1Password and/or Bitwarden), and the system
+`ssh` talks to it. Which agent serves which host is machine-specific, so it
+lives in the untracked `~/.config/ssh/config.local`, which `dotfile.ssh.config`
+includes first. Example (the work Mac serves GitHub/GitLab from Bitwarden):
 
-```sh
-# once per boot (or add to a login item / launchd agent):
-ssh-add -s /usr/lib/ssh-keychain.dylib      # prompts for the PIV PIN
-ssh-add -L                                   # shows the PIV key
-ssh-add -L | grep -i piv > ~/.ssh/yubikey_nano.pub   # what dotfile.git/config points at
+```
+Host github.com gitlab.com
+  IdentityAgent ~/.bitwarden-ssh-agent.sock
+  IdentityFile ~/.config/ssh/github_bitwarden.pub
+  IdentitiesOnly yes
 ```
 
-Provision the PIV slot itself with `ykman piv keys generate 9a ...` /
-`ykman piv certificates generate 9a ...` if this is a new key (ykman is in
-the Brewfile). Git signing is `gpg.format = ssh` with that pubkey, so commits
-sign through the same agent - nothing else to configure.
+Turn the agent on in the password manager (Bitwarden: Settings > SSH agent;
+1Password: Settings > Developer > "Use the SSH agent"). The `IdentityFile` is
+the *public* key; it tells ssh which agent key to offer.
 
-### Git signing with 1Password (what `dotfile.git/config` uses today)
+### Git signing with 1Password
 
 `dotfile.git/config` is shared with Linux, so it hardcodes the Linux signer
 (`gpg.ssh.program = /opt/1Password/op-ssh-sign`) and
 `user.signingkey = ~/.ssh/github_personal.pub`. On macOS:
 
-1. 1Password > Settings > Developer: turn on "Use the SSH agent".
+1. Make sure 1Password's SSH agent is on (above).
 2. Write the public half of the signing key to the file git expects (public
    keys are not secret; the key name is whatever it is called in 1Password):
 
@@ -141,14 +142,15 @@ open -a Tailscale
 Sign in from the menu-bar app. If macOS prompts for approval, enable Tailscale
 under **System Settings > Privacy & Security**.
 
-The `Host llmbox` stanza in `dotfile.ssh.config` means `ssh llmbox` and
-`mosh llmbox` work as soon as both machines are on the tailnet. Add the
-YubiKey pubkey (`ssh-add -L`) to `llmbox:~/.ssh/authorized_keys`.
+The `Host homer` stanza in `dotfile.ssh.config` means `ssh homer` and
+`mosh homer` work as soon as both machines are on the tailnet. Add your ssh
+public key (`ssh-add -L`, with the password-manager agent running) to
+`homer:~/.ssh/authorized_keys`.
 
 ## 7. opencode
 
 Config is the symlinked `dotfile.opencode.json` (permissions, MCP servers,
-gitlab provider, and the `llmbox` local provider). Nothing to do beyond
+gitlab provider, and the `homer` local provider). Nothing to do beyond
 `mise install`. Run `opencode auth login` for the gitlab provider.
 
 ## 8. Shell

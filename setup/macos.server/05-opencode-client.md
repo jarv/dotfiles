@@ -7,7 +7,7 @@ The **model key must equal the id returned by `GET /v1/models`** on the server
 Your opencode config is `~/src/jarv/dotfiles/dotfile.opencode.json`,
 symlinked to `~/.config/opencode/opencode.json` on every machine. Add the
 provider there once, commit, and pull on the other machines. It already has a
-`provider` block (gitlab); the `llmbox` key goes alongside it.
+`provider` block (gitlab); the `homer` key goes alongside it.
 
 ## Ollama over Tailscale (TLS via `tailscale serve`)
 
@@ -17,11 +17,11 @@ Add to the `provider` object in `dotfile.opencode.json`:
 {
   "provider": {
     "gitlab": { "...": "unchanged" },
-    "llmbox": {
+    "homer": {
       "npm": "@ai-sdk/openai-compatible",
-      "name": "llmbox (Ollama)",
+      "name": "homer (Ollama)",
       "options": {
-        "baseURL": "https://llmbox.TAILNET.ts.net/v1"
+        "baseURL": "https://homer.TAILNET.ts.net/v1"
       },
       "models": {
         "qwen3-coder:30b": {
@@ -43,13 +43,13 @@ Add to the `provider` object in `dotfile.opencode.json`:
 ```
 
 Keep `"model": "gitlab/duo-chat"` as the default if you want; switch per
-session with `/models` or run `opencode -m llmbox/qwen3-coder:30b`. Setting
-`"small_model": "llmbox/gpt-oss:20b"` is a cheap win either way - titles and
+session with `/models` or run `opencode -m homer/qwen3-coder:30b`. Setting
+`"small_model": "homer/gpt-oss:20b"` is a cheap win either way - titles and
 summaries then never leave the tailnet.
 
 Replace `TAILNET` with your tailnet name (`tailscale status` shows it, or
 `tailscale cert` output). If you used `--http=80` instead of TLS, use
-`http://llmbox:80/v1`.
+`http://homer:80/v1`.
 
 ## llama-server
 
@@ -59,10 +59,10 @@ Same shape, different port and ids:
 {
   "$schema": "https://opencode.ai/config.json",
   "provider": {
-    "llmbox-llama": {
+    "homer-llama": {
       "npm": "@ai-sdk/openai-compatible",
-      "name": "llmbox (llama-server)",
-      "options": { "baseURL": "https://llmbox.TAILNET.ts.net:8443/v1" },
+      "name": "homer (llama-server)",
+      "options": { "baseURL": "https://homer.TAILNET.ts.net:8443/v1" },
       "models": {
         "qwen3-coder:30b": {
           "name": "Qwen3-Coder 30B-A3B (llama.cpp)",
@@ -79,7 +79,7 @@ Same shape, different port and ids:
 On a machine that has the `ollama` CLI and can reach the box:
 
 ```sh
-OLLAMA_HOST=https://llmbox.TAILNET.ts.net ollama launch opencode --config
+OLLAMA_HOST=https://homer.TAILNET.ts.net ollama launch opencode --config
 ```
 
 This writes an inline provider config without clobbering your existing
@@ -88,8 +88,8 @@ This writes an inline provider config without clobbering your existing
 ## Verify
 
 ```sh
-opencode models | grep llmbox
-opencode run -m llmbox/qwen3-coder:30b "list the files in this directory using a tool"
+opencode models | grep homer
+opencode run -m homer/qwen3-coder:30b "list the files in this directory using a tool"
 ```
 
 If tool calls do not fire: confirm the server's context is >=64k
@@ -104,6 +104,6 @@ usual culprit.
 tailnet URL resolves from the box too, so nothing extra is needed:
 
 ```sh
-ssh llmbox
-cd ~/src/something && opencode -m llmbox/qwen3-coder:30b
+ssh homer
+cd ~/src/something && opencode -m homer/qwen3-coder:30b
 ```
