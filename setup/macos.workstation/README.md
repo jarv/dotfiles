@@ -74,8 +74,9 @@ Rules for what goes where:
 | | library-heavy tools (ffmpeg, imagemagick, graphviz, qemu) |
 | | casks and fonts |
 
-Never add `openssh` or `yubikey-agent` (see next section), and use the
-`tailscale` formula, not the `tailscale-app` cask.
+Never add `openssh` or `yubikey-agent` (see next section). The workstation uses
+the `tailscale-app` cask for the native menu-bar app; the server uses the
+`tailscale` formula for `tailscale serve` and Tailscale SSH.
 
 ## 5. YubiKey for ssh and git signing (no yubikey-agent)
 
@@ -104,10 +105,11 @@ git -C ~/src/jarv/dotfiles remote set-url origin git@github.com:jarv/dotfiles
 ## 6. Tailscale
 
 ```sh
-sudo brew services start tailscale
-sudo tailscale up --accept-dns
-tailscale status
+open -a Tailscale
 ```
+
+Sign in from the menu-bar app. If macOS prompts for approval, enable Tailscale
+under **System Settings > Privacy & Security**.
 
 The `Host llmbox` stanza in `dotfile.ssh.config` means `ssh llmbox` and
 `mosh llmbox` work as soon as both machines are on the tailnet. Add the

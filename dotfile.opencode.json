@@ -13,12 +13,15 @@
       "~/supabase.io/**": "allow",
       "~/.config/**": "allow",
       "~/src/**": "allow",
-      "~/.local/share/mise/**:": "allow",
+      "~/.local/share/mise/**": "allow",
       "/tmp/**": "allow",
+      "/private/tmp/**": "allow",
       "/var/tmp/**": "allow",
+      "/private/var/tmp/**": "allow",
+      "/var/folders/**": "allow",
+      "/private/var/folders/**": "allow",
       "~/gitlab/**": "allow",
-      "~/.agents/skills/**": "allow",
-      "/var/foldders/**": "allow"
+      "~/.agents/skills/**": "allow"
     },
     "read": {
       "*.env": "deny",
@@ -55,17 +58,32 @@
       "git rebase *": "allow",
       "jq *": "allow",
       "* mr-description.md": "allow",
+      "*team-activity-summary/scripts/github-activity.sh*": "allow",
       "xargs *": "allow"
     },
     "edit": "ask",
     "webfetch": "allow"
   },
-  "provider": {},
+  "provider": {
+    "homer": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "homer (Ollama)",
+      "options": {
+        "baseURL": "http://homer:11434/v1"
+      },
+      "models": {
+        "qwen3-coder:30b": {
+          "name": "Qwen3 Coder 30B-A3B",
+          "limit": {
+            "context": 131072,
+            "output": 32768
+          }
+        }
+      }
+    }
+  },
   "share": "disabled",
   "model": "gitlab/duo-chat",
-  "plugin": [
-    "@gitlab/opencode-gitlab-plugin"
-  ],
   "mcp": {
     "notion": {
       "type": "remote",

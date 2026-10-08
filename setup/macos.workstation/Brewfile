@@ -28,7 +28,6 @@ brew "zsh-autosuggestions"
 brew "zsh-syntax-highlighting"
 
 # networking / remote
-brew "tailscale"          # formula, not cask: `tailscale serve`, Tailscale SSH
 brew "mosh"
 brew "nmap"
 brew "telnet"
@@ -100,4 +99,5 @@ cask "nordvpn"
 cask "rar"
 cask "rubymine"
 cask "spotify"
+cask "tailscale-app"      # native menu-bar app; server uses the CLI formula
 cask "wezterm"
