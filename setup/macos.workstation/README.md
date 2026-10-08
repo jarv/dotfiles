@@ -97,6 +97,35 @@ Provision the PIV slot itself with `ykman piv keys generate 9a ...` /
 the Brewfile). Git signing is `gpg.format = ssh` with that pubkey, so commits
 sign through the same agent - nothing else to configure.
 
+### Git signing with 1Password (what `dotfile.git/config` uses today)
+
+`dotfile.git/config` is shared with Linux, so it hardcodes the Linux signer
+(`gpg.ssh.program = /opt/1Password/op-ssh-sign`) and
+`user.signingkey = ~/.ssh/github_personal.pub`. On macOS:
+
+1. 1Password > Settings > Developer: turn on "Use the SSH agent".
+2. Write the public half of the signing key to the file git expects (public
+   keys are not secret; the key name is whatever it is called in 1Password):
+
+   ```sh
+   SSH_AUTH_SOCK=~/Library/Group\ Containers/2BUA8C4S2C.com.1password/t/agent.sock \
+     ssh-add -L | grep ' GitHub Personal$' > ~/.ssh/github_personal.pub
+   ```
+
+3. Opt in to the macOS signer path. Git has no per-OS conditional, so this
+   goes in the untracked `machine.local.gitconfig` that `dotfile.git/config`
+   includes last (`os.macos.gitconfig` is tracked and holds the macOS
+   `op-ssh-sign` path):
+
+   ```sh
+   printf '[include]\n    path = os.macos.gitconfig\n' > ~/.config/git/machine.local.gitconfig
+   git config gpg.ssh.program      # -> /Applications/1Password.app/Contents/MacOS/op-ssh-sign
+   ```
+
+The first signed commit may fail with `1Password: failed to fill whole
+buffer` if 1Password is locked or waiting on an approval prompt; approve it
+and retry.
+
 Then switch the dotfiles remote to ssh:
 
 ```sh

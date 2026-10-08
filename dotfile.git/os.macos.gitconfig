@@ -1,0 +1,5 @@
+# macOS-only overrides. Not loaded by default: dotfile.git/config is shared
+# with Linux, so a macOS machine opts in from its untracked
+# machine.local.gitconfig (see setup/macos.workstation/README.md).
+[gpg "ssh"]
+    program = /Applications/1Password.app/Contents/MacOS/op-ssh-sign
