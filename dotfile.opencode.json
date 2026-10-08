@@ -60,7 +60,24 @@
     "edit": "ask",
     "webfetch": "allow"
   },
-  "provider": {},
+  "provider": {
+    "homer": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "homer (Ollama)",
+      "options": {
+        "baseURL": "http://homer:11434/v1"
+      },
+      "models": {
+        "qwen3-coder:30b": {
+          "name": "Qwen3 Coder 30B-A3B",
+          "limit": {
+            "context": 131072,
+            "output": 32768
+          }
+        }
+      }
+    }
+  },
   "share": "disabled",
   "model": "gitlab/duo-chat",
   "plugin": [

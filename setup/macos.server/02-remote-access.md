@@ -5,23 +5,23 @@ tailnet. SSH accepts keys only.
 
 ## Tailscale (brew formula = open-source `tailscaled`)
 
-The App Store / `.app` version cannot do `tailscale serve` or Tailscale SSH on
-macOS; the brew formula can, and it runs as a root LaunchDaemon so it is up
+Use the brew formula for Tailscale SSH on macOS. It runs as a root
+LaunchDaemon so it is up
 before login.
 
 ```sh
 brew install tailscale          # already in setup/macos.server/Brewfile
 sudo brew services start tailscale
-sudo tailscale up --ssh --hostname llmbox --accept-dns
+sudo tailscale up --ssh --hostname homer --accept-dns
 ```
 
 `tailscale up` prints an auth URL; open it on any device. Then in the
 [admin console](https://login.tailscale.com/admin):
 
-- **DNS > MagicDNS**: on. **HTTPS Certificates**: on (needed by `tailscale serve`).
-- Disable key expiry for `llmbox` (Machines > ... > Disable key expiry) so it
+- **DNS > MagicDNS**: on, so clients can resolve `homer`.
+- Disable key expiry for `homer` (Machines > ... > Disable key expiry) so it
   does not fall off the tailnet after 180 days.
-- Optionally add an ACL so only your own devices can reach `llmbox:22,443`.
+- Optionally add an ACL so only your own devices can reach `homer:22,11434`.
 
 Check:
 
@@ -65,7 +65,7 @@ Put your public key in place **before** restarting sshd with passwords off:
 
 ```sh
 mkdir -p ~/.ssh && chmod 700 ~/.ssh
-# from your client:  ssh-copy-id jarv@llmbox   (works once, while passwords are still on)
+# from your client:  ssh-copy-id jarv@homer   (works once, while passwords are still on)
 chmod 600 ~/.ssh/authorized_keys
 ```
 
@@ -95,34 +95,34 @@ Optional `pf` rule set that drops everything on the physical interfaces except
 what Tailscale needs (UDP 41641) and allows all on `utun*`:
 
 ```sh
-sudo cp files/pf-llmbox.conf /etc/pf.anchors/llmbox
-# add to /etc/pf.conf:   anchor "llmbox" \n load anchor "llmbox" from "/etc/pf.anchors/llmbox"
+sudo cp files/pf-homer.conf /etc/pf.anchors/homer
+# add to /etc/pf.conf:   anchor "homer" \n load anchor "homer" from "/etc/pf.anchors/homer"
 sudo pfctl -f /etc/pf.conf && sudo pfctl -e
 ```
 
-Skip `pf` if you are comfortable with "services bind to 127.0.0.1 and only
-`tailscale serve` exposes them"; that alone already means the LAN sees nothing
-but sshd (and sshd only if you left its ListenAddress open).
+Inference services bind directly to the Tailscale IP, so they are not reachable
+on the LAN interface. `pf` is optional if that restriction meets your needs;
+sshd is still reachable on the LAN if you left its ListenAddress open.
 
 ## Other machines
 
-`dotfile.ssh.config` already has the `Host llmbox` stanza (MagicDNS name,
+`dotfile.ssh.config` already has the `Host homer` stanza (MagicDNS name,
 `User jarv`, `ForwardAgent no`) and the YubiKey PKCS11 provider, so on a
-workstation with the dotfiles symlinked `ssh llmbox` just works. The key
+workstation with the dotfiles symlinked `ssh homer` just works. The key
 offered will be the YubiKey PIV key once it is loaded:
 
 ```sh
 ssh-add -s /usr/lib/ssh-keychain.dylib     # once per boot on the workstation
-ssh-add -L                                 # copy this pubkey into llmbox:~/.ssh/authorized_keys
+ssh-add -L                                 # copy this pubkey into homer:~/.ssh/authorized_keys
 ```
 
-`mosh llmbox` also works over the tailnet (mosh is in `setup/macos.server/Brewfile`) and
+`mosh homer` also works over the tailnet (mosh is in `setup/macos.server/Brewfile`) and
 survives laptop sleep on the client side.
 
 ## Remote reboot
 
 ```sh
-ssh llmbox 'sudo fdesetup authrestart'
+ssh homer 'sudo fdesetup authrestart'
 ```
 
 You will be prompted for the FileVault user password over the ssh session.
@@ -131,7 +131,7 @@ Give it ~60s and `tailscale status` should show it back.
 ## Verify from a client
 
 ```sh
-tailscale ping llmbox
-ssh llmbox uptime
-nmap -Pn llmbox-lan-ip           # from LAN: should show 22 only (or nothing)
+tailscale ping homer
+ssh homer uptime
+nmap -Pn homer-lan-ip           # from LAN: should show 22 only (or nothing)
 ```

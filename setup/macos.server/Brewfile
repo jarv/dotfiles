@@ -2,7 +2,7 @@
 #   brew bundle --file ~/src/jarv/dotfiles/setup/macos.server/Brewfile
 # Deliberately small. Notably NOT included:
 #   cask "tailscale-app"  - conflicts with the tailscale formula, and only the
-#                           formula supports `tailscale serve` / Tailscale SSH
+#                           formula supports Tailscale SSH on macOS
 #   brew "openssh"        - system ssh/sshd everywhere (also dropped from workstation)
 #   yubikey-agent         - no YubiKey on the server
 tap "homebrew/services"
@@ -12,9 +12,8 @@ tap "context-labs/mactop"
 brew "tailscale"
 brew "mosh"
 
-# inference servers (Metal/MLX-linked native builds)
+# inference server (Metal/MLX-linked native build)
 brew "ollama"
-brew "llama.cpp"
 
 # expected by dotfile.zshrc (starship runs before mise activate, so brew)
 brew "starship"
@@ -22,4 +21,13 @@ brew "coreutils"
 
 # monitoring
 brew "htop"
-brew "mactop"
+
+# nvim
+cask "wezterm"
+brew "macvim"
+
+cask "firefox"
+cask "1password"
+cask "1password-cli"
+
+cask "font-caskaydia-mono-nerd-font"

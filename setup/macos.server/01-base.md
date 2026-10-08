@@ -122,18 +122,18 @@ The dotfiles repo has two Brewfiles:
 | File | Use |
 |---|---|
 | `setup/macos.workstation/Brewfile` | full dev laptop dump (ffmpeg, docker, k8s, casks...) - **not** for this box |
-| `setup/macos.server/Brewfile` | tailscale, ollama, llama.cpp, starship, coreutils, mosh, htop, mactop |
+| `setup/macos.server/Brewfile` | tailscale, ollama, starship, coreutils, mosh, htop, mactop |
 
 ```sh
 brew bundle --file ~/src/jarv/dotfiles/setup/macos.server/Brewfile
 ```
 
 `setup/macos.server/Brewfile` intentionally leaves out `cask "tailscale-app"` (conflicts
-with the `tailscale` formula, and only the formula does `tailscale serve` /
-Tailscale SSH). Neither Brewfile installs `openssh`: the system ssh is used everywhere, which is also what makes the YubiKey PKCS11 provider work.
+with the `tailscale` formula, which supports Tailscale SSH on macOS and runs
+as a root LaunchDaemon). Neither Brewfile installs `openssh`: the system ssh is used everywhere, which is also what makes the YubiKey PKCS11 provider work.
 
-Why brew and not mise for these: Ollama and llama.cpp need Metal/MLX-linked
-native builds and Tailscale needs a root LaunchDaemon; brew formulas handle
+Why brew and not mise for these: Ollama needs a Metal/MLX-linked native build
+and Tailscale needs a root LaunchDaemon; brew formulas handle
 both, mise's backends do not.
 
 ## SSH key for the box (so it can push to the dotfiles repo)
