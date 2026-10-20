@@ -1,4 +1,0 @@
-[user]
-    email = john.jarvis@supabase.io
-[gpg "ssh"]
-    program = /usr/bin/ssh-keygen

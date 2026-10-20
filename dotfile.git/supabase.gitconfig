@@ -1,0 +1,7 @@
+# Loaded by the includeIf entries in config for supabase remotes.
+# Signs with the Bitwarden SSH agent key via ssh-keygen instead of 1Password.
+[user]
+    email = john.jarvis@supabase.io
+    signingkey = ~/.config/ssh/github_bitwarden.pub
+[gpg "ssh"]
+    program = /usr/bin/ssh-keygen

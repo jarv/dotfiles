@@ -55,7 +55,7 @@
 [gpg]
     format = ssh
 [gpg "ssh"]
-    program = /opt/1Password/op-ssh-sign
+    program = /Applications/1Password.app/Contents/MacOS/op-ssh-sign
 [init]
     defaultBranch = main
 [credential "https://github.com"]
@@ -65,24 +65,12 @@
 	helper = 
 	helper = !gh auth git-credential
 [includeIf "hasconfig:remote.*.url:git@github.com:supabase/**"]
-    path = signing.github.work.gitconfig
+    path = supabase.gitconfig
 [includeIf "hasconfig:remote.*.url:https://github.com/supabase/**"]
-    path = signing.github.work.gitconfig
+    path = supabase.gitconfig
 [includeIf "hasconfig:remote.*.url:ssh://git@github.com/supabase/**"]
-    path = signing.github.work.gitconfig
-[includeIf "hasconfig:remote.*.url:git@github.com:supabase/**"]
-    path = identity.supabase.gitconfig
-[includeIf "hasconfig:remote.*.url:https://github.com/supabase/**"]
-    path = identity.supabase.gitconfig
-[includeIf "hasconfig:remote.*.url:ssh://git@github.com/supabase/**"]
-    path = identity.supabase.gitconfig
+    path = supabase.gitconfig
 [includeIf "hasconfig:remote.*.url:git@github-supabase:supabase/**"]
-    path = signing.github.work.gitconfig
+    path = supabase.gitconfig
 [includeIf "hasconfig:remote.*.url:ssh://git@github-supabase/supabase/**"]
-    path = signing.github.work.gitconfig
-[includeIf "hasconfig:remote.*.url:git@github-supabase:supabase/**"]
-    path = identity.supabase.gitconfig
-[includeIf "hasconfig:remote.*.url:ssh://git@github-supabase/supabase/**"]
-    path = identity.supabase.gitconfig
-[include]
-    path = machine.local.gitconfig
+    path = supabase.gitconfig
