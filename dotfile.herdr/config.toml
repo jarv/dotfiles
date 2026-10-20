@@ -28,8 +28,8 @@ detach = "prefix+d"
 copy_mode = "prefix+["
 
 # Panes
-split_horizontal = "prefix+h"
-split_vertical = "prefix+v"
+split_horizontal = "prefix+o"
+split_vertical = "prefix+i"
 close_pane = ["prefix+x", "alt+esc"]
 zoom = "prefix+z"
 last_pane = "prefix+;"
