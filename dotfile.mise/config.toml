@@ -74,7 +74,8 @@ gcloud = "497.0.0"
 teleport-community = "latest"
 
 # agents
-opencode = "latest"
+opencode = { version = "latest", allow_builds = ["@opencode/cli"] }
 codex = "latest"
 herdr = "latest"
+glab = "latest"
 claude = "latest"
