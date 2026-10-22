@@ -3,6 +3,25 @@
 Fresh Mac to daily-driver using this dotfiles repo. Terminal only.
 For the always-on LLM box see `../macos.server/`.
 
+## 0. Optional factory reset (before starting)
+
+Skip this on a new Mac or if you want to keep the current installation.
+**This erases your accounts, apps, settings, and local data.** Back up first,
+including unpushed repositories, untracked files, and machine-local configs;
+verify that you can access your password manager and account recovery methods
+from another device. For a managed work Mac, check with IT before erasing it.
+
+On Apple silicon or a T2 Mac running macOS Monterey or later, use **Erase All
+Content and Settings** (on Ventura or later: **System Settings > General >
+Transfer or Reset**; on Monterey: the **System Preferences** menu). Follow the
+Erase Assistant, then activate the Mac and continue with first boot below.
+This returns it to a clean setup while keeping the installed macOS version.
+
+If that option is unavailable, or you need to erase and reinstall macOS, follow
+[Apple's macOS Recovery erase/reinstall instructions](https://support.apple.com/guide/mac-help/erase-and-reinstall-macos-mh27903/mac).
+Set up as a new Mac rather than restoring the whole previous installation if
+the goal is a clean start.
+
 ## 1. First boot
 
 - Admin account `jarv`, FileVault on, skip iCloud extras/Siri/Analytics.
@@ -33,8 +52,24 @@ ln -sf  $D/dotfile.herdr/config.toml ~/.config/herdr/config.toml
 ln -sfn $D/dotfile.wezterm          ~/.config/wezterm
 ln -sfn $D/dotfile.nvim             ~/.config/nvim      # needs ../MiniMax checked out, see below
 ln -sf  $D/dotfile.opencode.json    ~/.config/opencode/opencode.json
+ln -sf  $D/dotfile.opencode.herdr.md ~/.config/opencode/herdr.md
 ln -sf  $D/dotfile.ssh.config       ~/.ssh/config
 ```
+
+On a **work workstation**, replace the personal OpenCode config and opt in to
+the Claude work settings (back up any existing local settings first):
+
+```sh
+ln -sf $D/dotfile.opencode.work.json ~/.config/opencode/opencode.json
+mkdir -p ~/.claude
+ln -sf $D/dotfile.claude.settings.work.json ~/.claude/settings.json
+```
+
+The Claude settings reference `/Users/jarv/.claude/hooks/herdr-agent-state.sh`;
+that hook is not included in this repo. Install it through your Herdr integration
+before using these settings, and check the path if your username is not `jarv`.
+The recent Git config fragments need no separate links: `~/.config/git` already
+links the entire `dotfile.git` directory.
 
 `dotfile.nvim` is a symlink to `../MiniMax/configs/nvim-0.12`, so clone that
 repo next to dotfiles first:
@@ -149,9 +184,13 @@ public key (`ssh-add -L`, with the password-manager agent running) to
 
 ## 7. opencode
 
-Config is the symlinked `dotfile.opencode.json` (permissions, MCP servers,
-gitlab provider, and the `homer` local provider). Nothing to do beyond
-`mise install`. Run `opencode auth login` for the gitlab provider.
+Config is the symlinked `dotfile.opencode.json`, or `dotfile.opencode.work.json`
+if you selected the work settings in step 2. Both load the symlinked `herdr.md`
+instructions. After `mise install`, sign in to the providers you use with
+`opencode auth login`.
+
+The personal config's Playwright MCP entry currently hardcodes a Linux Chromium
+path; adjust it for your macOS browser installation before using that MCP server.
 
 ## 8. Shell
 
