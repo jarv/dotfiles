@@ -27,6 +27,13 @@ detach = "prefix+d"
 # Copy mode
 copy_mode = "prefix+["
 
+# prefix+w navigate mode: j/k walk workspaces (arrows still work).
+# Pane up/down move to shift+j/k so they don't collide.
+navigate_workspace_up = ["up", "k"]
+navigate_workspace_down = ["down", "j"]
+navigate_pane_up = "shift+k"
+navigate_pane_down = "shift+j"
+
 # Panes
 split_horizontal = "prefix+o"
 split_vertical = "prefix+i"
@@ -53,7 +60,7 @@ rename_pane = "prefix+shift+o"
 # Windows -> tabs
 new_tab = "prefix+c"
 rename_tab = "prefix+r"
-close_tab = "prefix+k"
+close_tab = ""  # unbound; prefix+k falls back to the default focus_pane_up
 switch_tab = ["prefix+1..9", "alt+1..9"]
 previous_tab = ["prefix+p", "alt+left"]
 next_tab = ["prefix+n", "alt+right"]
@@ -79,8 +86,8 @@ pane_outer_borders = false
 # tmux had no scrollbar column beside its panes
 pane_scrollbars = false
 
-# kill-window and kill-session never asked
-confirm_close = false
+# ask before a close would remove a whole tab/workspace (tmux never asked)
+confirm_close = true
 
 # automatic-rename gave windows a name without prompting
 prompt_new_tab_name = false
